@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<script>
-
-</script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
 
@@ -53,9 +50,9 @@
         <div class="profile-box">
             <img class="profile-image" src="https://via.placeholder.com/100" alt="John Doe">
             <div class="profile-details">
-                <h3>John Doe</h3>
-                <p>Email: johndoe@example.com</p>
-                <p>Phone: +1 (123) 456-7890</p>
+                <h3 id="name-1"></h3>
+                <p id="email-1"></p>
+                <p id="phone-1"></p>
             </div>
         </div>
 
@@ -67,8 +64,21 @@
                 <p>Phone: +1 (987) 654-3210</p>
             </div>
         </div>
-
-
     </div>
+
+    <script>
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = function() {
+          const myObj = JSON.parse(this.responseText);
+          document.getElementById("name-1").innerHTML = myObj.name;
+          document.getElementById("email-1").innerHTML = "Email: " + myObj.email;
+          document.getElementById("phone-1").innerHTML = "Phone: " + myObj.phone;
+        };
+        xmlhttp.open("GET", "jsonTesting.php");
+        xmlhttp.send();
+    </script>
 </body>
 </html>
+
+
+

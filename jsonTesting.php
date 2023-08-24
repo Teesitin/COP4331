@@ -1,7 +1,8 @@
 <?php
+    $myObj = new stdClass();
     $myObj->name = "John";
-    $myObj->age = 30;
-    $myObj->city = "New York";
+    $myObj->email = "johndoe@example.com";
+    $myObj->phone = "123-456-7890";
 
     $myJSON = json_encode($myObj);
 
