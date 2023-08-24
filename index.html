@@ -43,6 +43,17 @@
         .profile-details {
             margin-top: 10px;
         }
+
+        .profile-details a {
+            text-decoration: none;  /* Removes underline */
+            color: inherit;  /* Takes on the color of the parent element */
+        }
+        
+        /* Add hover effect if you want */
+        .profile-details a:hover {
+            text-decoration: underline;  /* Adds underline on hover */
+        }
+
     </style>
 </head>
 <body>
@@ -50,11 +61,12 @@
         <div class="profile-box">
             <img class="profile-image" src="https://via.placeholder.com/100" alt="John Doe">
             <div class="profile-details">
-                <h3 id="name-1"></h3>
-                <p id="email-1"></p>
-                <p id="phone-1"></p>
+                <h3 id="name-1">Test</h3>
+                <p id="email-1"><a href="mailto:teesitin.russell@gmail.com">teesitin.russell@gmail.com</a></p>
+                <p id="phone-1"><a href="tel:7729407545">7729407545</a></p>
             </div>
         </div>
+        
 
         <div class="profile-box">
             <img class="profile-image" src="https://via.placeholder.com/100" alt="Kelly Doe">
