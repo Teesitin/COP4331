@@ -13,6 +13,7 @@
 
         .center-container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 98vh;
@@ -45,10 +46,11 @@
         }
 
         .profile-details a {
-            text-decoration: none;
-            color: inherit;
+            text-decoration: none; 
+            color: inherit; 
         }
         
+
         .profile-details a:hover {
             text-decoration: underline;
         }
@@ -77,17 +79,18 @@
         </div>
     </div>
 
-    <script>
-        const xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function() {
-          const myObj = JSON.parse(this.responseText);
-          document.getElementById("name-1").innerHTML = myObj.name;
-          document.getElementById("email-1").innerHTML = "Email: " + myObj.email;
-          document.getElementById("phone-1").innerHTML = "Phone: " + myObj.phone;
-        };
-        xmlhttp.open("GET", "jsonTesting.php");
-        xmlhttp.send();
-    </script>
+<script>
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+        const myObj = JSON.parse(this.responseText);
+        document.getElementById("name-1").innerHTML = myObj.name;
+        document.getElementById("email-1").innerHTML = myObj.email;
+        document.getElementById("phone-1").innerHTML = myObj.phone;
+    };
+    xmlhttp.open("GET", "jsonTesting.php");
+    xmlhttp.send();
+</script>
+
 </body>
 </html>
 
