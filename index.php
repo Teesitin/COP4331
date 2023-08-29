@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -58,36 +59,37 @@
     </style>
 </head>
 <body>
+
+<!-- Profiles -->
     <div class="center-container">
+
+
         <div class="profile-box">
             <img class="profile-image" src="https://via.placeholder.com/100" alt="John Doe">
             <div class="profile-details">
                 <h3 id="name-1">Test</h3>
-                <p id="email-1"><a href="mailto:teesitin.russell@gmail.com">teesitin.russell@gmail.com</a></p>
-                <p id="phone-1"><a href="tel:7729407545">7729407545</a></p>
+                <p><a id="email-1" href="mailto:">Error</a></p>
+                <p><a id="phone-1" href="tel:">Error</a></p>
             </div>
         </div>
         
 
-        <div class="profile-box">
-            <img class="profile-image" src="https://via.placeholder.com/100" alt="Kelly Doe">
-            <div class="profile-details">
-                <h3>Kelly Doe</h3>
-                <p>Email: kellydoe@example.com</p>
-                <p>Phone: +1 (987) 654-3210</p>
-            </div>
-        </div>
     </div>
 
 <script>
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
-        const myObj = JSON.parse(this.responseText);
-        document.getElementById("name-1").innerHTML = myObj.name;
-        document.getElementById("email-1").innerHTML = myObj.email;
-        document.getElementById("phone-1").innerHTML = myObj.phone;
+        const myJSON = JSON.parse(this.responseText);
+
+        document.getElementById("name-1").innerHTML = myJSON[0].name;
+        document.getElementById("email-1").innerHTML = myJSON[0].email;
+        document.getElementById("email-1").href = "mailto:" + myJSON[0].email;
+
+        document.getElementById("phone-1").innerHTML = myJSON[0].phone;
+        document.getElementById("phone-1").href = "tel:" + myJSON[0].phone;
+
     };
-    xmlhttp.open("GET", "jsonTesting.php");
+    xmlhttp.open("GET", "people.php");
     xmlhttp.send();
 </script>
 
