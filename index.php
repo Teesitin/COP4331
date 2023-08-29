@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -14,7 +13,6 @@
 
         .center-container {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 98vh;
@@ -22,6 +20,12 @@
             margin: 0;
 
             background-color: rgb(245, 245, 245);
+        }
+
+        @media screen and (max-width: 700px) {
+            .center-container {
+                flex-direction: column;
+            }
         }
 
         .profile-box {
@@ -47,13 +51,13 @@
         }
 
         .profile-details a {
-            text-decoration: none;  /* Removes underline */
-            color: inherit;  /* Takes on the color of the parent element */
+            text-decoration: none; 
+            color: inherit; 
         }
         
-        /* Add hover effect if you want */
+
         .profile-details a:hover {
-            text-decoration: underline;  /* Adds underline on hover */
+            text-decoration: underline;
         }
 
     </style>
@@ -61,40 +65,62 @@
 <body>
 
 <!-- Profiles -->
-    <div class="center-container">
-
-
-        <div class="profile-box">
-            <img class="profile-image" src="https://via.placeholder.com/100" alt="John Doe">
-            <div class="profile-details">
-                <h3 id="name-1">Test</h3>
-                <p><a id="email-1" href="mailto:">Error</a></p>
-                <p><a id="phone-1" href="tel:">Error</a></p>
-            </div>
-        </div>
-        
-
-    </div>
+<div id="profile-container" class="center-container">
+</div>
 
 <script>
+
+// <div class="profile-box">
+//     <img class="profile-image" src="https://via.placeholder.com/100" alt="John Doe">
+//     <div class="profile-details">
+//         <h3 id="name-1">{NAME}</h3>
+//         <p id="email-1"><a href="mailto:teesitin.russell@gmail.com">{EMAIL}</a></p>
+//         <p id="phone-1"><a href="tel:7729407545">{NUMBER}</a></p>
+//     </div>
+// </div>
+
+
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
-        const myJSON = JSON.parse(this.responseText);
+        const people = JSON.parse(this.responseText);
+        const profileContainer = document.getElementById("profile-container");
 
-        document.getElementById("name-1").innerHTML = myJSON[0].name;
-        document.getElementById("email-1").innerHTML = myJSON[0].email;
-        document.getElementById("email-1").href = "mailto:" + myJSON[0].email;
+        people.forEach((person, index) => {
+            const profileBox = document.createElement("div");
+            profileBox.className = "profile-box";
 
-        document.getElementById("phone-1").innerHTML = myJSON[0].phone;
-        document.getElementById("phone-1").href = "tel:" + myJSON[0].phone;
+            const profileImage = document.createElement("img");
+            profileImage.className = "profile-image";
+            profileImage.src = "https://via.placeholder.com/100";
+            profileImage.alt = person.name;
 
+            const profileDetails = document.createElement("div");
+            profileDetails.className = "profile-details";
+
+            const name = document.createElement("h3");
+            name.innerHTML = person.name;
+
+            const email = document.createElement("p");
+            email.innerHTML = `<a href="mailto:${person.email}">${person.email}</a>`;
+
+            const phone = document.createElement("p");
+            phone.innerHTML = `<a href="tel:${person.phone}">${person.phone}</a>`;
+
+            profileDetails.appendChild(name);
+            profileDetails.appendChild(email);
+            profileDetails.appendChild(phone);
+
+            profileBox.appendChild(profileImage);
+            profileBox.appendChild(profileDetails);
+
+            profileContainer.appendChild(profileBox);
+        });
     };
+
     xmlhttp.open("GET", "people.php");
     xmlhttp.send();
 </script>
+    
 
 </body>
 </html>
-
-
-
