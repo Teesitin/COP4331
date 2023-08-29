@@ -71,11 +71,11 @@
 <script>
 
 // <div class="profile-box">
-//     <img class="profile-image" src="https://via.placeholder.com/100" alt="John Doe">
+//     <img class="profile-image" src="https://via.placeholder.com/100" alt="{NAME}">
 //     <div class="profile-details">
 //         <h3 id="name-1">{NAME}</h3>
-//         <p id="email-1"><a href="mailto:teesitin.russell@gmail.com">{EMAIL}</a></p>
-//         <p id="phone-1"><a href="tel:7729407545">{NUMBER}</a></p>
+//         <p id="email-1"><a href="{EMAIL}">{EMAIL}</a></p>
+//         <p id="phone-1"><a href="{NUMBER}">{NUMBER}</a></p>
 //     </div>
 // </div>
 
