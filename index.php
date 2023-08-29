@@ -71,7 +71,7 @@
 <script>
 
 // <div class="profile-box">
-//     <img class="profile-image" src="https://via.placeholder.com/100" alt="{NAME}">
+//     <img class="profile-image" src="../assets/headshots/hs-{id}.webp" alt="{NAME}">
 //     <div class="profile-details">
 //         <h3 id="name-1">{NAME}</h3>
 //         <p id="email-1"><a href="{EMAIL}">{EMAIL}</a></p>
@@ -91,7 +91,7 @@
 
             const profileImage = document.createElement("img");
             profileImage.className = "profile-image";
-            profileImage.src = "../assets/headshots/hs-" +person.id +".jpg";
+            profileImage.src = "../assets/headshots/hs-" +person.id +".webp";
             profileImage.alt = person.name;
 
             const profileDetails = document.createElement("div");
