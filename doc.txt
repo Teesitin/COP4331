@@ -1,6 +1,6 @@
 Congratulations! You've made it all the way here!
 
-Main Steps:
+~ Set Up ~
 
 1. Set up DigitalOcean with GitHub
    - Tutorial Video: https://www.youtube.com/watch?v=lzqV8bYjCP4&ab_channel=TheCodeBeast
@@ -17,3 +17,35 @@ Main Steps:
 4. Join GitHub Repository
    - Repo Link: https://github.com/Teesitin/COP4331
    - Action: Create a GitHub account and become a repository member.
+
+
+~ Issues ~
+
+1. Naming Convention - Pick one or some
+   - camelCase
+   - PascalCase
+   - snake_case
+   - SHOUTING_SNAKE_CASE
+   - kebab-case
+
+2. Folder Structures - Pick one
+   - Horizontal
+
+      food
+      └─ color 
+      |   └─ green             
+      |      └─ granny-smith 
+      |
+      └─ texture 
+         └─ crunchy             
+            └─ chips
+
+   - Vertical
+
+      food
+      └─ apples 
+         └─ granny-smith              
+            ├─ color
+            ├─ texture
+            └─ sourness
+         
