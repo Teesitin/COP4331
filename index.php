@@ -91,7 +91,7 @@
 
             const profileImage = document.createElement("img");
             profileImage.className = "profile-image";
-            profileImage.src = "../assets/headshots/hs-1.jpg";
+            profileImage.src = "../assets/headshots/hs-" +person.id +".jpg";
             profileImage.alt = person.name;
 
             const profileDetails = document.createElement("div");
