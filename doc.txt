@@ -49,3 +49,13 @@ Congratulations! You've made it all the way here!
             ├─ texture
             └─ sourness
          
+
+
+~ Docs, Docs, Docs ~
+
+Themes - https://colorhunt.co/palette/579bb1e1d7c6ece8ddf8f4ea
+JS and CSS - https://developer.mozilla.org/en-US/
+Flex - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+php - https://www.php.net/docs.php
+lingo - web-development/50-web-development-buzzwords-that-all-new-programmers-should
+
