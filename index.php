@@ -102,7 +102,7 @@
         <img class="profile-image" 
              src="../assets/headshots/hs-<?php echo $person['id']; ?>.webp" 
              alt="<?php echo $person['name']; ?>"
-             onerror="this.onerror=null; this.src='../assets/100.png';">
+             onerror="this.onerror=null; this.src='../assets/100.webp';">
         <div class="profile-details">
             <h3 id="name-1"><?php echo $person['name']; ?></h3>
             <p id="email-1"><a href="mailto:<?php echo $person['email']; ?>"><?php echo $person['email']; ?></a></p>
