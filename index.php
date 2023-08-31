@@ -1,3 +1,8 @@
+<?php
+    $themejson = file_get_contents('theme.json');
+    $themeArray = json_decode($themejson, true);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -9,6 +14,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            background-color: #<?php echo $themeArray[0]['primary']; ?>;
         }
 
         .center-container {
@@ -16,11 +22,9 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            height: 98vh;
+            height: 100%;
             width: 100%;
             margin: 0;
-
-            background-color: rgb(245, 245, 245);
         }
 
         @media screen and (max-width: 700px) {
@@ -37,6 +41,8 @@
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: 15px;
+
+            background-color: #<?php echo $themeArray[0]['sub-1']; ?>;
         }
 
         .profile-image {
@@ -59,6 +65,23 @@
 
         .profile-details a:hover {
             text-decoration: underline;
+        }
+
+        .profile-details button{
+            background-color: #<?php echo $themeArray[0]['secondary']; ?>;
+            width: 150px;
+            height: 35px;
+            border-color: transparent;
+            border-radius: 5px;
+            margin: 25px;
+            font-weight: bold;
+            font-size: 15px;
+            transition: transform 1s ease;
+            cursor: pointer;
+        }
+
+        .profile-details button:hover{
+            transform: scale(1.1);
         }
 
     </style>
@@ -84,6 +107,7 @@
             <h3 id="name-1"><?php echo $person['name']; ?></h3>
             <p id="email-1"><a href="mailto:<?php echo $person['email']; ?>"><?php echo $person['email']; ?></a></p>
             <p id="phone-1"><a href="tel:<?php echo $person['phone']; ?>"><?php echo $person['phone']; ?></a></p>
+            <button>Stats</button>
         </div>
     </div>
 
