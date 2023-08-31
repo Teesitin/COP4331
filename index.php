@@ -13,6 +13,7 @@
 
         .center-container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             height: 98vh;
@@ -64,63 +65,33 @@
 </head>
 <body>
 
+
 <!-- Profiles -->
 <div id="profile-container" class="center-container">
+
+<?php
+    $jsonString = file_get_contents('people.json');
+    $dataArray = json_decode($jsonString, true);
+
+    foreach ($dataArray as $person) {
+        ?>
+    <div class="profile-box">
+        <img class="profile-image" 
+             src="../assets/headshots/hs-<?php echo $person['id']; ?>.webp" 
+             alt="<?php echo $person['name']; ?>"
+             onerror="this.onerror=null; this.src='https://via.placeholder.com/100';">
+        <div class="profile-details">
+            <h3 id="name-1"><?php echo $person['name']; ?></h3>
+            <p id="email-1"><a href="mailto:<?php echo $person['email']; ?>"><?php echo $person['email']; ?></a></p>
+            <p id="phone-1"><a href="tel:<?php echo $person['phone']; ?>"><?php echo $person['phone']; ?></a></p>
+        </div>
+    </div>
+
+    <?php
+    }
+?>
+
 </div>
-
-<script>
-
-// <div class="profile-box">
-//     <img class="profile-image" src="../assets/headshots/hs-{id}.webp" alt="{NAME}">
-//     <div class="profile-details">
-//         <h3 id="name-1">{NAME}</h3>
-//         <p id="email-1"><a href="{EMAIL}">{EMAIL}</a></p>
-//         <p id="phone-1"><a href="{NUMBER}">{NUMBER}</a></p>
-//     </div>
-// </div>
-
-
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function() {
-        const people = JSON.parse(this.responseText);
-        const profileContainer = document.getElementById("profile-container");
-
-        people.forEach((person, index) => {
-            const profileBox = document.createElement("div");
-            profileBox.className = "profile-box";
-
-            const profileImage = document.createElement("img");
-            profileImage.className = "profile-image";
-            profileImage.src = "../assets/headshots/hs-" +person.id +".webp";
-            profileImage.alt = person.name;
-
-            const profileDetails = document.createElement("div");
-            profileDetails.className = "profile-details";
-
-            const name = document.createElement("h3");
-            name.innerHTML = person.name;
-
-            const email = document.createElement("p");
-            email.innerHTML = `<a href="mailto:${person.email}">${person.email}</a>`;
-
-            const phone = document.createElement("p");
-            phone.innerHTML = `<a href="tel:${person.phone}">${person.phone}</a>`;
-
-            profileDetails.appendChild(name);
-            profileDetails.appendChild(email);
-            profileDetails.appendChild(phone);
-
-            profileBox.appendChild(profileImage);
-            profileBox.appendChild(profileDetails);
-
-            profileContainer.appendChild(profileBox);
-        });
-    };
-
-    xmlhttp.open("GET", "people.php");
-    xmlhttp.send();
-</script>
     
-
 </body>
 </html>
