@@ -19,6 +19,16 @@
 
         .center-container {
             display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            margin: auto;
+        }
+
+        .profile-container {
+            max-width: 1200px;
+            display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
@@ -28,9 +38,13 @@
         }
 
         @media screen and (max-width: 700px) {
-            .center-container {
-                flex-direction: column;
-            }
+            
+            .profile-box {
+                width: 70%;
+                padding: 15px;
+                margin: 15px;
+                font-size: 15px;
+            }   
         }
 
         .profile-box {
@@ -90,30 +104,31 @@
 
 
 <!-- Profiles -->
-<div id="profile-container" class="center-container">
+<div class="center-container">
+    <div id="profile-container" class="profile-container">
+        <?php
+            $jsonString = file_get_contents('people.json');
+            $dataArray = json_decode($jsonString, true);
 
-<?php
-    $jsonString = file_get_contents('people.json');
-    $dataArray = json_decode($jsonString, true);
+            foreach ($dataArray as $person) {
+                ?>
+            <div class="profile-box">
+                <img class="profile-image" 
+                    src="../assets/headshots/hs-<?php echo $person['id']; ?>.webp" 
+                    alt="<?php echo $person['name']; ?>"
+                    onerror="this.onerror=null; this.src='../assets/100.webp';">
+                <div class="profile-details">
+                    <h3 id="name-1"><?php echo $person['name']; ?></h3>
+                    <p id="email-1"><a href="mailto:<?php echo $person['email']; ?>"><?php echo $person['email']; ?></a></p>
+                    <p id="phone-1"><a href="tel:<?php echo $person['phone']; ?>"><?php echo $person['phone']; ?></a></p>
+                    <button>Stats</button>
+                </div>
+            </div>
 
-    foreach ($dataArray as $person) {
+            <?php
+            }
         ?>
-    <div class="profile-box">
-        <img class="profile-image" 
-             src="../assets/headshots/hs-<?php echo $person['id']; ?>.webp" 
-             alt="<?php echo $person['name']; ?>"
-             onerror="this.onerror=null; this.src='../assets/100.webp';">
-        <div class="profile-details">
-            <h3 id="name-1"><?php echo $person['name']; ?></h3>
-            <p id="email-1"><a href="mailto:<?php echo $person['email']; ?>"><?php echo $person['email']; ?></a></p>
-            <p id="phone-1"><a href="tel:<?php echo $person['phone']; ?>"><?php echo $person['phone']; ?></a></p>
-            <button>Stats</button>
-        </div>
     </div>
-
-    <?php
-    }
-?>
 
 </div>
     
