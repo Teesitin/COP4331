@@ -10,7 +10,7 @@
 
 
 <head>
-    <title>User Profile</title>
+    <title>User Database</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;

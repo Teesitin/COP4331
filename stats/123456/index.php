@@ -24,6 +24,9 @@
     //Set User
     $userId = 123456;
     $userInfo = getInfoById($peopleArray, $userId);
+
+    //Echo Data
+    echo $userInfo["name"];
 ?>
 
 <style>
@@ -39,7 +42,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
     <head>
-        <title>User Profile</title>
+        <title><?php echo $userInfo[0]; ?></title>
     </head>
 
     <body>
