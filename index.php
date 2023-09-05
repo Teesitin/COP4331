@@ -21,8 +21,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            width: 100vw;
+
             margin: auto;
         }
 
@@ -98,9 +97,26 @@
             transform: scale(1.1);
         }
 
+        .logo{
+            width: 256px;
+            height: auto;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
     </style>
 </head>
 <body>
+
+<!-- Logo -->
+<div class="logo-container">
+    <img class="logo" src='../assets/branding/sprockets-transparent.webp'>
+</div>
 
 
 <!-- Profiles -->
