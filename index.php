@@ -8,36 +8,36 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
-
 <head>
     <title>User Database</title>
+    <link rel="icon" type="image/webp" href='../assets/branding/sprockets-fav-white.webp'/>
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #<?php echo $themeArray[0]['primary']; ?>;
-        }
-
-        .center-container {
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+        }
 
+        .main-container {
+            width: 1200px;
+            display: block;
             margin: auto;
+            text-align: center;
         }
 
         .profile-container {
-            max-width: 1200px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            height: 100%;
-            width: 100%;
-            margin: 0;
+            margin: 0 auto;
         }
 
         @media screen and (max-width: 700px) {
-            
             .profile-box {
                 width: 70%;
                 padding: 15px;
@@ -47,14 +47,12 @@
         }
 
         .profile-box {
-            background: white;
-            border-radius: 20px; 
             width: 300px;
-            text-align: center;
+
+            border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: 15px;
-
             background-color: #<?php echo $themeArray[0]['sub-1']; ?>;
         }
 
@@ -71,20 +69,19 @@
         }
 
         .profile-details a {
-            text-decoration: none; 
-            color: inherit; 
+            text-decoration: none;
+            color: inherit;
         }
-        
 
         .profile-details a:hover {
             text-decoration: underline;
         }
 
-        .profile-details button{
+        button {
             background-color: #<?php echo $themeArray[0]['secondary']; ?>;
             width: 150px;
             height: 35px;
-            border-color: transparent;
+            border: none;
             border-radius: 5px;
             margin: 25px;
             font-weight: bold;
@@ -93,34 +90,48 @@
             cursor: pointer;
         }
 
-        .profile-details button:hover{
+        button:hover {
             transform: scale(1.1);
         }
 
-        .logo{
+        .logo {
             width: 512px;
             height: auto;
-            margin: 25px;
+            margin: 25px auto;
         }
 
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .controls-container{
+            width: 85%;
+            height: auto;
+
+            border-radius: 20px; 
+            box-shadow: 0px 4px 6px #00000029;
+            padding: 15px;
+            margin: auto;
+            background-color: #<?php echo $themeArray[0]['sub-1']; ?>;
+
+
         }
+
 
     </style>
 </head>
 <body>
 
-<!-- Logo -->
-<div class="logo-container">
+<div class="main-container">
+    <!-- Logo -->
     <img class="logo" src='../assets/branding/sprockets-transparent-rectangle.webp'>
-</div>
 
 
-<!-- Profiles -->
-<div class="center-container">
+    <!-- Controls Container -->
+    <div class="controls-container">
+        <button class="control-button">Add User</button>
+        <button class="control-button">Modify User</button>
+        <button class="control-button">Remove User</button>
+    </div>
+
+
+    <!-- Profiles -->
     <div id="profile-container" class="profile-container">
         <?php
             $jsonString = file_get_contents('people.json');
@@ -145,8 +156,7 @@
             }
         ?>
     </div>
-
 </div>
-    
+
 </body>
 </html>
