@@ -98,8 +98,9 @@
         }
 
         .logo{
-            width: 256px;
+            width: 512px;
             height: auto;
+            margin: 25px;
         }
 
         .logo-container {
@@ -108,14 +109,13 @@
             align-items: center;
         }
 
-
     </style>
 </head>
 <body>
 
 <!-- Logo -->
 <div class="logo-container">
-    <img class="logo" src='../assets/branding/sprockets-transparent.webp'>
+    <img class="logo" src='../assets/branding/sprockets-transparent-rectangle.webp'>
 </div>
 
 
