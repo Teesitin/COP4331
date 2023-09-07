@@ -4,17 +4,30 @@
 ?>
 
 <!DOCTYPE html>
-<html>
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Title and Favicon -->
     <title>User Database</title>
     <link rel="icon" type="image/webp" href='../assets/branding/sprockets-fav-white.webp'/>
 
+    <!-- Google Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- CSS -->
     <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #<?php echo $themeArray[0]['primary']; ?>;
@@ -109,11 +122,55 @@
         }
 
 
+        /* Menu */
+
+        .menu-button {
+            background-color: #<?php echo $themeArray[0]['secondary']; ?>;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+
+            position: fixed;
+            right: 0;
+            bottom: 0;
+
+            z-index: 11;
+        }
+
+        .menu-modal {
+            position: fixed;
+            right: 100px;
+            bottom: 150px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 10;
+        }
+
+        .menu-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            text-align: center;
+        }
+
+
+        /* Break Points */
+
         @media screen and (max-width: 1096px) {
             .controls-container{
             width: 660px;
             }
 
+            button{
+                width: 125px;
+                height: 35px;
+                margin: 15px;
+            }
         }
 
         @media screen and (max-width: 770px) {
@@ -131,8 +188,6 @@
                 padding: 15px;
                 margin: 15px;
                 font-size: 15px;
-
-                outline: red solid 2px;
             }   
 
             button{
@@ -143,10 +198,34 @@
         }
 
 
+    /* Animations */
+    @keyframes menu-animate-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+
+            opacity: 1;
+        }
+    }
+
+    @keyframes menu-animate-out {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+
+
+
+
+
     </style>
 </head>
 <body>
-
 <div class="main-container">
     <!-- Logo -->
     <img class="logo" src='../assets/branding/sprockets-transparent-rectangle.webp'>
@@ -186,6 +265,49 @@
         ?>
     </div>
 </div>
+
+
+<!-- Menu Button -->
+<button id="menuButton" class="menu-button">
+    <span class="material-symbols-outlined">more_horiz</span>
+</button>
+
+<!-- Menu  -->
+<div id="menuModal" class="menu-modal">
+    <div class="menu-content">
+        <h2>Menu Option 1</h2>
+        <h2>Menu Option 2</h2>
+    </div>
+</div>
+
+
+
+<!-- JS -->
+<script>
+    var menuButton = document.getElementById('menuButton');
+    var menuModal = document.getElementById('menuModal');
+
+    var menuOpened = false;
+
+    menuButton.addEventListener('click', function() {
+        if(menuOpened){
+            menuModal.style.animation = "menu-animate-out 0.5s";
+
+            setTimeout(function() {
+                menuModal.style.display = "none";
+            }, 499);
+
+            menuOpened = !menuOpened;
+        }
+        else {
+            menuModal.style.display = "block";
+            menuModal.style.animation = "menu-animate-in 0.5s";
+            menuOpened = !menuOpened;
+        }
+    });
+</script>
+
+
 
 </body>
 </html>
