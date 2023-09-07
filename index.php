@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>User Database</title>
     <link rel="icon" type="image/webp" href='../assets/branding/sprockets-fav-white.webp'/>
 
@@ -37,18 +39,9 @@
             margin: 0 auto;
         }
 
-        @media screen and (max-width: 700px) {
-            .profile-box {
-                width: 70%;
-                padding: 15px;
-                margin: 15px;
-                font-size: 15px;
-            }   
-        }
 
         .profile-box {
             width: 300px;
-
             border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
@@ -94,14 +87,18 @@
             transform: scale(1.1);
         }
 
+        button:active {
+            transform: scale(1.1);
+        }        
+
         .logo {
             width: 512px;
             height: auto;
-            margin: 25px auto;
+            padding: 25px;
         }
 
         .controls-container{
-            width: 85%;
+            width: 1020px;
             height: auto;
 
             border-radius: 20px; 
@@ -109,8 +106,40 @@
             padding: 15px;
             margin: auto;
             background-color: #<?php echo $themeArray[0]['sub-1']; ?>;
+        }
 
 
+        @media screen and (max-width: 1096px) {
+            .controls-container{
+            width: 660px;
+            }
+
+        }
+
+        @media screen and (max-width: 770px) {
+
+            .logo{
+                width: 70%;
+            }
+
+            .controls-container{
+                width: 70%;
+            }
+
+            .profile-box {
+                width: 70%;
+                padding: 15px;
+                margin: 15px;
+                font-size: 15px;
+
+                outline: red solid 2px;
+            }   
+
+            button{
+                width: 125px;
+                height: 35px;
+                margin: 7px;
+            }
         }
 
 
@@ -122,14 +151,15 @@
     <!-- Logo -->
     <img class="logo" src='../assets/branding/sprockets-transparent-rectangle.webp'>
 
-
     <!-- Controls Container -->
     <div class="controls-container">
         <button class="control-button">Add User</button>
         <button class="control-button">Modify User</button>
         <button class="control-button">Remove User</button>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <button class="control-button">Contact IT</button>
+        </a>
     </div>
-
 
     <!-- Profiles -->
     <div id="profile-container" class="profile-container">
@@ -138,7 +168,7 @@
             $dataArray = json_decode($jsonString, true);
 
             foreach ($dataArray as $person) {
-                ?>
+        ?>
             <div class="profile-box">
                 <img class="profile-image" 
                     src="../assets/headshots/hs-<?php echo $person['id']; ?>.webp" 
@@ -151,8 +181,7 @@
                     <button>Stats</button>
                 </div>
             </div>
-
-            <?php
+        <?php
             }
         ?>
     </div>
