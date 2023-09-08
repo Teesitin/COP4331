@@ -144,25 +144,35 @@
             z-index: 11;
         }
 
+        .menu-blackout{
+            display:absolute;
+            background-color: rgb(256,256,256);
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 120;
+        }
+
         .menu-modal {
             display: none;
 
             position: fixed;
-            right: 100px;
-            bottom: 150px;
-            width: 100px;
-            height: 100px;
-            background-color: rgba(0,0,0,0.8);
+            right: 0px;
+            bottom: 75px;
+            width: 200px;
+            height: auto;
+            background-color: transparent;
             z-index: 10;
+
+            outline: 2px solid blue;
         }
 
-        .menu-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 300px;
+        .menu-content-button {
+            width: 100%;
             text-align: center;
+
+            outline: 2px solid red;
         }
 
 
@@ -281,10 +291,15 @@
 
 <!-- Menu  -->
 <div id="menuModal" class="menu-modal">
-    <div class="menu-content">
-        <h2>Menu Option 1</h2>
-        <h2>Menu Option 2</h2>
+    <div class="menu-content-button">
+        <button>Item 1</button>
+        <button>Item 2</button>
+        <button>Item 3</button>
+        <button>Item 4</button>
     </div>
+</div>
+
+<div id="menuBlackout" class="menu-blackout">
 </div>
 
 
@@ -293,6 +308,7 @@
 <script>
     var menuButton = document.getElementById('menuButton');
     var menuModal = document.getElementById('menuModal');
+    var menuBlackout = document.getElementById('menuBlackout');
 
     var menuOpened = false;
 
@@ -302,6 +318,7 @@
 
             setTimeout(function() {
                 menuModal.style.display = "none";
+                menuBlackout.style.display = "none";
             }, 499);
 
             menuOpened = !menuOpened;
@@ -310,6 +327,7 @@
             menuModal.style.display = "block";
             menuModal.style.animation = "menu-animate-in 0.5s";
             menuOpened = !menuOpened;
+            menuBlackout.style.display = "fixed";
         }
     });
 </script>
