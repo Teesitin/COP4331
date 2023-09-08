@@ -136,7 +136,6 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
-            display: none;
 
             position: fixed;
             right: 0;
@@ -146,6 +145,8 @@
         }
 
         .menu-modal {
+            display: none;
+
             position: fixed;
             right: 100px;
             bottom: 150px;
