@@ -1,6 +1,7 @@
 <?php
     $themejson = file_get_contents('theme.json');
     $themeArray = json_decode($themejson, true);
+    $themeID = 0;
 ?>
 
 <!DOCTYPE html>
@@ -30,11 +31,12 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #<?php echo $themeArray[0]['primary']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['primary']; ?>;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
+            color: #<?php echo $themeArray[$themeID]['text']; ?>;
         }
 
         .main-container {
@@ -59,7 +61,7 @@
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: 15px;
-            background-color: #<?php echo $themeArray[0]['sub-1']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['sub-1']; ?>;
         }
 
         .profile-image {
@@ -72,6 +74,7 @@
 
         .profile-details {
             margin-top: 10px;
+
         }
 
         .profile-details a {
@@ -84,7 +87,7 @@
         }
 
         button {
-            background-color: #<?php echo $themeArray[0]['secondary']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['secondary']; ?>;
             width: 150px;
             height: 35px;
             border: none;
@@ -94,6 +97,8 @@
             font-size: 15px;
             transition: transform 1s ease;
             cursor: pointer;
+            color: #<?php echo $themeArray[$themeID]['text']; ?>;
+            
         }
 
         button:hover {
@@ -118,14 +123,14 @@
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: auto;
-            background-color: #<?php echo $themeArray[0]['sub-1']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['sub-1']; ?>;
         }
 
 
         /* Menu */
 
         .menu-button {
-            background-color: #<?php echo $themeArray[0]['secondary']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['secondary']; ?>;
             border: none;
             border-radius: 50%;
             width: 50px;

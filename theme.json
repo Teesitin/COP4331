@@ -3,8 +3,18 @@
       "primary": "579BB1",
       "secondary": "E1D7C6",
       "sub-1": "ECE8DD",
-      "sub-2": "F8F4EA"
+      "sub-2": "F8F4EA",
+      "text": "000000"
+    },
+
+    {
+      "primary": "272829", 
+      "secondary": "61677A", 
+      "sub-1": "D8D9DA",  
+      "sub-2": "FFF6E0",
+      "text": "000000"
     }
+
 
 ]
   

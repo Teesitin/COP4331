@@ -53,9 +53,18 @@ Congratulations! You've made it all the way here!
 
 ~ Docs, Docs, Docs ~
 
+Front End
 Themes - https://colorhunt.co/palette/579bb1e1d7c6ece8ddf8f4ea
+Colors - https://uicolors.app/create
 JS and CSS - https://developer.mozilla.org/en-US/
 Flex - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-php - https://www.php.net/docs.php
-lingo - web-development/50-web-development-buzzwords-that-all-new-programmers-should
+Tailwind - https://uicolors.app/create
+
+Back End
+PHP - https://www.php.net/docs.php
+Linux Commands - https://www.digitalocean.com/community/tutorials/linux-commands
+MySQL - https://dev.mysql.com/doc/
+
+Misc
+Lingo - https://careerfoundry.com/en/blog/web-development/50-web-development-buzzwords-that-all-new-programmers-should-learn/
 
