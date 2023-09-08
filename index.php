@@ -136,6 +136,7 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
+            display: none;
 
             position: fixed;
             right: 0;
