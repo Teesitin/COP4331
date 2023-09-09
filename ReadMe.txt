@@ -48,6 +48,18 @@ Congratulations! You've made it all the way here!
             ├─ color
             ├─ texture
             └─ sourness
+
+3. Branch Naming - A General Guide to Tagging
+   - Styling: Dedicated to styling the look and feel of the page or an element
+      - "Styling-SideMenu"
+   - Scaffolding: Dedicated to structuring out a page
+      - "Scaffolding-DefaultEmployeeTemplate"
+   - Fix: Dedicated to fixing a bug
+      - "Fix-MenuButtonHiding"
+   - Feature: Dedicated to make new elements or components
+      - "Feature-EmployeeAutoAssignID"
+   
+   *Putting tags on branches is important when needing to find a problem in the timeline*
          
 
 

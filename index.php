@@ -4,6 +4,14 @@
     $themeID = 0;
 ?>
 
+<script>
+    var themeArray = <?php echo json_encode($themeArray); ?>;
+
+    console.log(themeArray);
+</script>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,36 +152,49 @@
             z-index: 11;
         }
 
-        .menu-blackout{
-            display:absolute;
-            background-color: rgb(256,256,256);
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 120;
-        }
-
         .menu-modal {
             display: none;
-
             position: fixed;
-            right: 0px;
-            bottom: 75px;
-            width: 200px;
-            height: auto;
-            background-color: transparent;
-            z-index: 10;
+            top: 0;
+            left: 0;    
+            width: 100%;
+            height: 100%;        
 
-            outline: 2px solid blue;
+            background-color: rgba(0,0,0,.8);
+            z-index: 10;
+            
+            backdrop-filter: blur(3px);
+        }
+
+        .menu-container{
+            position:fixed;
+            bottom: 75px;
+            right: 0;
+
+            width: 75%;
+            height: 500px;
+            padding: 20px;
+
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+
+            background-color: #<?php echo $themeArray[$themeID]['sub-1']; ?>;
+            font-weight: bold;
+            letter-spacing: 3px;
         }
 
         .menu-content-button {
-            width: 100%;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
 
-            outline: 2px solid red;
         }
+
+        .menu-content-button button {
+
+        }
+
 
 
         /* Break Points */
@@ -212,6 +233,12 @@
                 height: 35px;
                 margin: 7px;
             }
+
+
+            .menu-content-button button {
+                
+            }
+
         }
 
 
@@ -291,25 +318,47 @@
 
 <!-- Menu  -->
 <div id="menuModal" class="menu-modal">
-    <div class="menu-content-button">
-        <button>Item 1</button>
-        <button>Item 2</button>
-        <button>Item 3</button>
-        <button>Item 4</button>
-    </div>
-</div>
 
-<div id="menuBlackout" class="menu-blackout">
+    <div class="menu-container" >
+
+        Theme
+        <div class="menu-content-button">
+            <button id="themeLight">Light</button>
+            <button id="themeDark">Dark</button>
+        </div>
+
+        Accessibility
+        <div class="menu-content-button">
+            <button>On</button>
+            <button>Off</button>
+        </div>
+
+        Language
+        <div class="menu-content-button">
+            <button>English</button>
+            <button>Spanish</button>
+        </div>
+
+        Option 4
+        <div class="menu-content-button">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+        </div>
+
+    </div>
 </div>
 
 
 
 <!-- JS -->
 <script>
+
+    //Menu Operation
     var menuButton = document.getElementById('menuButton');
     var menuModal = document.getElementById('menuModal');
-    var menuBlackout = document.getElementById('menuBlackout');
-
     var menuOpened = false;
 
     menuButton.addEventListener('click', function() {
@@ -318,8 +367,7 @@
 
             setTimeout(function() {
                 menuModal.style.display = "none";
-                menuBlackout.style.display = "none";
-            }, 499);
+            }, 490);
 
             menuOpened = !menuOpened;
         }
@@ -327,9 +375,16 @@
             menuModal.style.display = "block";
             menuModal.style.animation = "menu-animate-in 0.5s";
             menuOpened = !menuOpened;
-            menuBlackout.style.display = "fixed";
         }
     });
+
+
+    //Theme
+
+
+
+
+
 </script>
 
 
