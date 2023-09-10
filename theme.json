@@ -1,20 +1,50 @@
 [
     {
-      "primary": "579BB1",
-      "secondary": "E1D7C6",
-      "sub-1": "ECE8DD",
-      "sub-2": "F8F4EA",
-      "text": "000000"
+      "name": "Sprockets Day",
+      "background": "579BB1",
+      "containers": "ECE8DD",
+      "container-border": "transparent",
+      "text": "000000",
+      "buttons": "E1D7C6",
+      "button-border": "transparent",
+      "button-text": "000000",
+      "logo": "sprockets-transparent-rectangle.webp"
     },
 
     {
-      "primary": "272829", 
-      "secondary": "61677A", 
-      "sub-1": "D8D9DA",  
-      "sub-2": "FFF6E0",
-      "text": "000000"
+      "name": "Sprockets Night",
+      "background": "001F3F", 
+      "containers": "0D63A5",  
+      "container-border": "transparent",
+      "text": "ffffff",
+      "buttons": "FFD717", 
+      "button-border": "transparent",
+      "button-text": "000000",
+      "logo": "sprockets-white-rectangle.webp"
+    },
+
+    {
+      "name": "DualHue",
+      "background": "333333", 
+      "containers": "fcfcfc",  
+      "container-border": "transparent",
+      "text": "000000",
+      "buttons": "a6a6a6", 
+      "button-border": "transparent",
+      "button-text": "000000",
+      "logo": "sprockets-white-rectangle.webp"
+    },
+
+    {
+      "name": "High Contrast",
+      "background": "0f0f0f", 
+      "containers": "0f0f0f", 
+      "container-border": "c300ff",
+      "text": "c300ff",
+      "buttons": "0f0f0f",
+      "button-border": "c300ff",
+      "button-text": "c300ff",
+      "logo": "sprockets-white-rectangle.webp"
     }
-
-
 ]
   
