@@ -1,7 +1,7 @@
 <?php
     $themejson = file_get_contents('theme.json');
     $themeArray = json_decode($themejson, true);
-    $themeID = 2;
+    $themeID = 3;
 ?>
 
 <script>
@@ -70,6 +70,7 @@
             padding: 15px;
             margin: 15px;
             background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
+            outline: 2px solid #<?php echo $themeArray[$themeID]['container-border']; ?>;
         }
 
         .profile-image {
@@ -96,6 +97,7 @@
 
         button {
             background-color: #<?php echo $themeArray[$themeID]['buttons']; ?>;
+            outline: 2px solid #<?php echo $themeArray[$themeID]['button-border']; ?>;
             width: 150px;
             height: 35px;
             border: none;
