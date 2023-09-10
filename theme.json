@@ -1,24 +1,29 @@
 [
     {
-      "primary": "579BB1",
-      "secondary": "E1D7C6",
-      "sub-1": "ECE8DD",
-      "sub-2": "F8F4EA",
+      "background": "579BB1",
+      "buttons": "E1D7C6",
+      "containers": "ECE8DD",
       "text": "000000",
       "button-text": "000000",
-      "logo": "sprockets-black-rectangle.webp"
+      "logo": "sprockets-transparent-rectangle.webp"
     },
 
     {
-      "primary": "001F3F", 
-      "secondary": "FFD717", 
-      "sub-1": "0D63A5",  
-      "sub-2": "FFD717",
+      "background": "001F3F", 
+      "buttons": "FFD717", 
+      "containers": "0D63A5",  
       "text": "ffffff",
       "button-text": "000000",
       "logo": "sprockets-white-rectangle.webp"
+    },
+
+    {
+      "background": "333333", 
+      "buttons": "a6a6a6", 
+      "containers": "fcfcfc",  
+      "text": "000000",
+      "button-text": "000000",
+      "logo": "sprockets-white-rectangle.webp"
     }
-
-
 ]
   

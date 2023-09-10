@@ -1,7 +1,7 @@
 <?php
     $themejson = file_get_contents('theme.json');
     $themeArray = json_decode($themejson, true);
-    $themeID = 1;
+    $themeID = 2;
 ?>
 
 <script>
@@ -21,7 +21,7 @@
     
     <!-- Title and Favicon -->
     <title>User Database</title>
-    <link rel="icon" type="image/webp" href='../assets/branding/<?php echo $themeArray[$themeID]['logo']; ?>'/>
+    <link rel="icon" type="image/webp" href='../assets/branding/sprockets-fav-white.webp'/>
 
     <!-- Google Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #<?php echo $themeArray[$themeID]['primary']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['background']; ?>;
             margin: 0;
             padding: 0;
             display: flex;
@@ -69,7 +69,7 @@
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: 15px;
-            background-color: #<?php echo $themeArray[$themeID]['sub-1']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
         }
 
         .profile-image {
@@ -95,7 +95,7 @@
         }
 
         button {
-            background-color: #<?php echo $themeArray[$themeID]['secondary']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['buttons']; ?>;
             width: 150px;
             height: 35px;
             border: none;
@@ -131,14 +131,14 @@
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: auto;
-            background-color: #<?php echo $themeArray[$themeID]['sub-1']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
         }
 
 
         /* Menu */
 
         .menu-button {
-            background-color: #<?php echo $themeArray[$themeID]['secondary']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['buttons']; ?>;
             border: none;
             border-radius: 50%;
             width: 50px;
@@ -178,7 +178,7 @@
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
 
-            background-color: #<?php echo $themeArray[$themeID]['sub-1']; ?>;
+            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
             font-weight: bold;
             letter-spacing: 3px;
         }
@@ -272,7 +272,7 @@
 <body>
 <div class="main-container">
     <!-- Logo -->
-    <img class="logo" src='../assets/branding/sprockets-transparent-rectangle.webp'>
+    <img class="logo" src='../assets/branding/<?php echo $themeArray[$themeID]['logo']; ?>'>
 
     <!-- Controls Container -->
     <div class="controls-container">
