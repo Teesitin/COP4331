@@ -170,10 +170,10 @@
 
         .menu-container{
             position:fixed;
-            bottom: 75px;
+            bottom: 100px;
             right: 0;
 
-            width: 75%;
+            width: 500px;
             height: 500px;
             padding: 20px;
 
@@ -237,8 +237,21 @@
             }
 
 
-            .menu-content-button button {
-                
+            .menu-container{
+                position:fixed;
+                bottom: 100px;
+                right: 0;
+
+                width: 75%;
+                height: 500px;
+                padding: 20px;
+
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 20px;
+
+                background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
+                font-weight: bold;
+                letter-spacing: 3px;
             }
 
         }
