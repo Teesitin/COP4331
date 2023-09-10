@@ -1,12 +1,12 @@
 <?php
     $themejson = file_get_contents('theme.json');
     $themeArray = json_decode($themejson, true);
-    $themeID = 3;
+    $themeID = 0;
 ?>
 
 <script>
     var themeArray = <?php echo json_encode($themeArray); ?>;
-
+    console.log("hello");
     console.log(themeArray);
 </script>
 
