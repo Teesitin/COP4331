@@ -1,7 +1,7 @@
 <?php
     $themejson = file_get_contents('theme.json');
     $themeArray = json_decode($themejson, true);
-    $themeID = 0;
+    $themeID = 1;
 ?>
 
 <script>
@@ -21,7 +21,7 @@
     
     <!-- Title and Favicon -->
     <title>User Database</title>
-    <link rel="icon" type="image/webp" href='../assets/branding/sprockets-fav-white.webp'/>
+    <link rel="icon" type="image/webp" href='../assets/branding/<?php echo $themeArray[$themeID]['logo']; ?>'/>
 
     <!-- Google Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -105,7 +105,7 @@
             font-size: 15px;
             transition: transform 1s ease;
             cursor: pointer;
-            color: #<?php echo $themeArray[$themeID]['text']; ?>;
+            color: #<?php echo $themeArray[$themeID]['button-text']; ?>;
             
         }
 

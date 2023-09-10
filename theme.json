@@ -4,15 +4,19 @@
       "secondary": "E1D7C6",
       "sub-1": "ECE8DD",
       "sub-2": "F8F4EA",
-      "text": "000000"
+      "text": "000000",
+      "button-text": "000000",
+      "logo": "sprockets-black-rectangle.webp"
     },
 
     {
-      "primary": "272829", 
-      "secondary": "61677A", 
-      "sub-1": "D8D9DA",  
-      "sub-2": "FFF6E0",
-      "text": "000000"
+      "primary": "001F3F", 
+      "secondary": "FFD717", 
+      "sub-1": "0D63A5",  
+      "sub-2": "FFD717",
+      "text": "ffffff",
+      "button-text": "000000",
+      "logo": "sprockets-white-rectangle.webp"
     }
 
 
