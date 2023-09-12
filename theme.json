@@ -20,7 +20,7 @@
       "buttons": "FFD717", 
       "button-border": "transparent",
       "button-text": "000000",
-      "logo": "sprockets-white-rectangle.webp"
+      "logo": "co-white-rectangle.webp"
     },
 
     {
@@ -32,7 +32,7 @@
       "buttons": "a6a6a6", 
       "button-border": "transparent",
       "button-text": "000000",
-      "logo": "sprockets-white-rectangle.webp"
+      "logo": "co-white-rectangle.webp"
     },
 
     {
@@ -44,7 +44,7 @@
       "buttons": "0f0f0f",
       "button-border": "c300ff",
       "button-text": "c300ff",
-      "logo": "sprockets-white-rectangle.webp"
+      "logo": "co-white-rectangle.webp"
     }
 ]
   
