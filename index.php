@@ -21,7 +21,7 @@
     
     <!-- Title and Favicon -->
     <title>User Database</title>
-    <link rel="icon" type="image/webp" href='../assets/branding/sprockets-fav-white.webp'/>
+    <link rel="icon" type="image/webp" href='../assets/branding2/co-white-fav.webp'/>
 
     <!-- Google Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -287,7 +287,7 @@
 <body>
 <div class="main-container">
     <!-- Logo -->
-    <img class="logo" src='../assets/branding/<?php echo $themeArray[$themeID]['logo']; ?>'>
+    <img class="logo" src='../assets/branding2/<?php echo $themeArray[$themeID]['logo']; ?>'>
 
     <!-- Controls Container -->
     <div class="controls-container">
