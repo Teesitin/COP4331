@@ -338,7 +338,7 @@
 
         Theme
         <div class="menu-content-button">
-            <button id="themeLight">Light</button>
+            <button id="themeLight">Bright</button>
             <button id="themeDark">Dark</button>
         </div>
 
