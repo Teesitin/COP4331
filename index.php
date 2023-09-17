@@ -338,14 +338,14 @@
 
         Theme
         <div class="menu-content-button">
-            <button id="themeLight">Bright</button>
-            <button id="themeDark">Dark</button>
+            <button id="themeLight">Brightbright</button>
+            <button id="themeDark">Darkmode</button>
         </div>
 
         Accessibility
         <div class="menu-content-button">
-            <button>On</button>
-            <button>Off</button>
+            <button>OFF</button>
+            <button>ON</button>
         </div>
 
         Language
