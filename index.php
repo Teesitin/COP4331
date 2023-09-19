@@ -51,6 +51,27 @@
             'opsz' 24
         }
 
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--containers);
+            border-radius: 6px;
+            opacity: 0.6;
+        }
+
+        .menu-container::-webkit-scrollbar-thumb {
+            background-color: grey;
+            border-radius: 6px;
+            opacity: 0.6;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: var(--background);
@@ -148,6 +169,8 @@
             width: 1020px;
             height: auto;
 
+            
+
             border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
@@ -202,20 +225,17 @@
             background-color: var(--containers);
             font-weight: bold;
             letter-spacing: 3px;
+
+            overflow-y: auto;
+
         }
 
         .menu-content-button {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100px;
-
+            flex-wrap: wrap;
         }
-
-        .menu-content-button button {
-
-        }
-
 
 
         /* Break Points */
@@ -225,11 +245,6 @@
             width: 660px;
             }
 
-            button{
-                width: 125px;
-                height: 35px;
-                margin: 15px;
-            }
         }
 
         @media screen and (max-width: 770px) {
@@ -240,6 +255,9 @@
 
             .controls-container{
                 width: 70%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .profile-box {
@@ -248,19 +266,12 @@
                 margin: 15px;
             }   
 
-            button{
-                width: 125px;
-                height: 35px;
-                margin: 7px;
-            }
-
-
             .menu-container{
                 position:fixed;
                 bottom: 100px;
                 right: 0;
 
-                width: 75%;
+                width: 80%;
                 height: 500px;
                 padding: 20px;
 
@@ -270,6 +281,13 @@
                 background-color: var(--containers);
                 font-weight: bold;
                 letter-spacing: 3px;
+            }
+
+            button {
+                width: 100px;
+                height: 50px;
+                margin: 20px;
+                padding: 5px;
             }
 
         }
@@ -364,8 +382,8 @@
 
         Accessibility
         <div class="menu-content-button">
-            <button>On</button>
-            <button>Off</button>
+            <button onclick="toggleAccessibility(true)">On</button>
+            <button onclick="toggleAccessibility(false)">Off</button>
         </div>
 
         Language
@@ -391,7 +409,11 @@
 <!-- JS -->
 <script>
 
-    //Menu Operation
+//General
+    const root = document.documentElement;
+
+
+//Menu Operation
     var menuButton = document.getElementById('menuButton');
     var menuModal = document.getElementById('menuModal');
     var menuOpened = false;
@@ -404,24 +426,24 @@
                 menuModal.style.display = "none";
             }, 490);
 
+            document.body.style.overflow = "auto";
             menuOpened = !menuOpened;
         }
         else {
             menuModal.style.display = "block";
             menuModal.style.animation = "menu-animate-in 0.5s";
             menuOpened = !menuOpened;
+            document.body.style.overflow = "hidden";
         }
     });
 
 
-    //Theme Switching
+//Theme
     var logo = document.getElementById('logo');
 
     function switchTheme(themeID) {
         var theme = themeArray[themeID];
         console.log(theme);
-
-        const root = document.documentElement;
 
         root.style.setProperty('--background', theme['background']);
         root.style.setProperty('--containers', theme['containers']);
@@ -432,6 +454,19 @@
         root.style.setProperty('--button-text', theme['button-text']);
 
         logo.src = '../assets/branding2/' + theme['logo'];
+    }
+
+
+//Accessibility
+    function toggleAccessibility(enable) {
+        if(enable){
+            root.style.setProperty('--global-font-size', '1.3rem');
+            root.style.setProperty('--button-font-size', '1.306rem');         
+        }
+        else {
+            root.style.setProperty('--global-font-size', '1rem');
+            root.style.setProperty('--button-font-size', '1.02rem');  
+        }
     }
 
 
