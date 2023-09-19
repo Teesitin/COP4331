@@ -38,9 +38,10 @@
             --button-border: transparent;
             --button-text: #000000;
 
-            /* Font Sizes */
+            /* Sizes */
             --global-font-size: 1rem;
             --button-font-size: 1.02rem;
+            --profile-box-width: 300px;
         }
 
         .material-symbols-outlined {
@@ -100,7 +101,7 @@
 
 
         .profile-box {
-            width: 300px;
+            width: var(--profile-box-width);
             border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
@@ -285,9 +286,8 @@
 
             button {
                 width: 100px;
-                height: 50px;
-                margin: 20px;
-                padding: 5px;
+                height: auto;
+
             }
 
         }
@@ -461,11 +461,13 @@
     function toggleAccessibility(enable) {
         if(enable){
             root.style.setProperty('--global-font-size', '1.3rem');
-            root.style.setProperty('--button-font-size', '1.306rem');         
+            root.style.setProperty('--button-font-size', '1.306rem');   
+            root.style.setProperty('--profile-box-width', '480px');      
         }
         else {
             root.style.setProperty('--global-font-size', '1rem');
-            root.style.setProperty('--button-font-size', '1.02rem');  
+            root.style.setProperty('--button-font-size', '1.02rem');
+            root.style.setProperty('--profile-box-width', '300px');  
         }
     }
 
