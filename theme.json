@@ -1,6 +1,6 @@
 [
     {
-      "name": "Sprockets Day",
+      "name": "Online Day",
       "background": "579BB1",
       "containers": "ECE8DD",
       "container-border": "transparent",
@@ -12,7 +12,7 @@
     },
 
     {
-      "name": "Sprockets Night",
+      "name": "Online Night",
       "background": "001F3F", 
       "containers": "0D63A5",  
       "container-border": "transparent",

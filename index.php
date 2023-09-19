@@ -29,6 +29,16 @@
 
     <!-- CSS -->
     <style>
+        :root {
+            --background: #579BB1;
+            --container: #ECE8DD;
+            --container-border: transparent;
+            --text: #000000;
+            --buttons: #E1D7C6;
+            --button-border: transparent;
+            --button-text: #000000;
+        }
+
         .material-symbols-outlined {
             font-variation-settings:
             'FILL' 0,
