@@ -6,7 +6,6 @@
 
 <script>
     var themeArray = <?php echo json_encode($themeArray); ?>;
-    console.log("hello");
     console.log(themeArray);
 </script>
 
@@ -30,13 +29,18 @@
     <!-- CSS -->
     <style>
         :root {
+            /* Colors */
             --background: #579BB1;
-            --container: #ECE8DD;
+            --containers: #ECE8DD;
             --container-border: transparent;
             --text: #000000;
             --buttons: #E1D7C6;
             --button-border: transparent;
             --button-text: #000000;
+
+            /* Font Sizes */
+            --global-font-size: 1rem;
+            --button-font-size: 1.02rem;
         }
 
         .material-symbols-outlined {
@@ -49,12 +53,13 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #<?php echo $themeArray[$themeID]['background']; ?>;
+            background-color: var(--background);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
-            color: #<?php echo $themeArray[$themeID]['text']; ?>;
+            color: var(--text);
+            font-size: var(--global-font-size);
         }
 
         .main-container {
@@ -79,8 +84,8 @@
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: 15px;
-            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
-            outline: 2px solid #<?php echo $themeArray[$themeID]['container-border']; ?>;
+            background-color: var(--containers);
+            outline: 2px solid var(--container-border);
         }
 
         .profile-image {
@@ -106,18 +111,22 @@
         }
 
         button {
-            background-color: #<?php echo $themeArray[$themeID]['buttons']; ?>;
-            outline: 2px solid #<?php echo $themeArray[$themeID]['button-border']; ?>;
-            width: 150px;
-            height: 35px;
+            background-color: var(--buttons);
+            outline: 2px solid var(--button-border);
+            width: 125px;
+            height: auto;
+
             border: none;
             border-radius: 5px;
+
             margin: 25px;
+            padding: 10px;
+
             font-weight: bold;
-            font-size: 15px;
+            font-size: var(--button-font-size);
             transition: transform 1s ease;
             cursor: pointer;
-            color: #<?php echo $themeArray[$themeID]['button-text']; ?>;
+            color: var(--button-text);
             
         }
 
@@ -143,14 +152,14 @@
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: auto;
-            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
+            background-color: var(--containers);
         }
 
 
         /* Menu */
 
         .menu-button {
-            background-color: #<?php echo $themeArray[$themeID]['buttons']; ?>;
+            background-color: var(--buttons);
             border: none;
             border-radius: 50%;
             width: 50px;
@@ -190,7 +199,7 @@
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
 
-            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
+            background-color: var(--containers);
             font-weight: bold;
             letter-spacing: 3px;
         }
@@ -237,7 +246,6 @@
                 width: 70%;
                 padding: 15px;
                 margin: 15px;
-                font-size: 15px;
             }   
 
             button{
@@ -259,7 +267,7 @@
                 border-top-left-radius: 20px;
                 border-bottom-left-radius: 20px;
 
-                background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
+                background-color: var(--containers);
                 font-weight: bold;
                 letter-spacing: 3px;
             }
@@ -297,7 +305,7 @@
 <body>
 <div class="main-container">
     <!-- Logo -->
-    <img class="logo" src='../assets/branding2/<?php echo $themeArray[$themeID]['logo']; ?>'>
+    <img class="logo" id="logo" src='../assets/branding2/co-color-rectangle.webp'>
 
     <!-- Controls Container -->
     <div class="controls-container">
@@ -348,8 +356,10 @@
 
         Theme
         <div class="menu-content-button">
-            <button id="themeLight">Light</button>
-            <button id="themeDark">Dark</button>
+            <button id="themeLight" onclick="switchTheme(0)">Online Day</button>
+            <button id="themeLight" onclick="switchTheme(1)">Online Night</button>
+            <button id="themeLight" onclick="switchTheme(2)">Dual Hue</button>
+            <button id="themeLight" onclick="switchTheme(3)">High Contrast</button>
         </div>
 
         Accessibility
@@ -404,10 +414,25 @@
     });
 
 
-    //Theme
+    //Theme Switching
+    var logo = document.getElementById('logo');
 
+    function switchTheme(themeID) {
+        var theme = themeArray[themeID];
+        console.log(theme);
 
+        const root = document.documentElement;
 
+        root.style.setProperty('--background', theme['background']);
+        root.style.setProperty('--containers', theme['containers']);
+        root.style.setProperty('--container-border', theme['container-border']);
+        root.style.setProperty('--text', theme['text']);
+        root.style.setProperty('--buttons', theme['buttons']);
+        root.style.setProperty('--button-border', theme['button-border']);
+        root.style.setProperty('--button-text', theme['button-text']);
+
+        logo.src = '../assets/branding2/' + theme['logo'];
+    }
 
 
 </script>
