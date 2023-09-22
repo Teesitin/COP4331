@@ -289,7 +289,7 @@
             button {
                 width: 100px;
                 height: auto;
-
+                word-break: break-word;
             }
 
         }
@@ -317,7 +317,26 @@
 
 
 
+    #google_translate_element {
+       margin: 25px;
+    }
 
+    .goog-te-combo{
+        background-color: var(--buttons);
+
+        border: none;
+        border-radius: 5px;
+
+        margin: 25px;
+        padding: 10px;
+    }
+
+    .goog-te-gadget{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+    }
 
 
     </style>
@@ -365,7 +384,7 @@
 
 
 <!-- Menu Button -->
-<button id="menuButton" class="menu-button">
+<button id="menuButton" class="menu-button notranslate">
     <span class="material-symbols-outlined">more_horiz</span>
 </button>
 
