@@ -25,6 +25,8 @@
     <!-- Google Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
     <!-- CSS -->
     <style>
@@ -388,8 +390,7 @@
 
         Language
         <div class="menu-content-button">
-            <button>English</button>
-            <button>Spanish</button>
+            <div id="google_translate_element"></div>
         </div>
 
         Option 4
@@ -411,6 +412,10 @@
 
 //General
     const root = document.documentElement;
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
 
 
 //Menu Operation
