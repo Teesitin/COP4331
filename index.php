@@ -6,7 +6,6 @@
 
 <script>
     var themeArray = <?php echo json_encode($themeArray); ?>;
-    console.log("hello");
     console.log(themeArray);
 </script>
 
@@ -29,6 +28,22 @@
 
     <!-- CSS -->
     <style>
+        :root {
+            /* Colors */
+            --background: #579BB1;
+            --containers: #ECE8DD;
+            --container-border: transparent;
+            --text: #000000;
+            --buttons: #E1D7C6;
+            --button-border: transparent;
+            --button-text: #000000;
+
+            /* Sizes */
+            --global-font-size: 1rem;
+            --button-font-size: 1.02rem;
+            --profile-box-width: 300px;
+        }
+
         .material-symbols-outlined {
             font-variation-settings:
             'FILL' 0,
@@ -37,14 +52,36 @@
             'opsz' 24
         }
 
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--containers);
+            border-radius: 6px;
+            opacity: 0.6;
+        }
+
+        .menu-container::-webkit-scrollbar-thumb {
+            background-color: grey;
+            border-radius: 6px;
+            opacity: 0.6;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #<?php echo $themeArray[$themeID]['background']; ?>;
+            background-color: var(--background);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
-            color: #<?php echo $themeArray[$themeID]['text']; ?>;
+            color: var(--text);
+            font-size: var(--global-font-size);
         }
 
         .main-container {
@@ -64,13 +101,13 @@
 
 
         .profile-box {
-            width: 300px;
+            width: var(--profile-box-width);
             border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: 15px;
-            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
-            outline: 2px solid #<?php echo $themeArray[$themeID]['container-border']; ?>;
+            background-color: var(--containers);
+            outline: 2px solid var(--container-border);
         }
 
         .profile-image {
@@ -96,18 +133,22 @@
         }
 
         button {
-            background-color: #<?php echo $themeArray[$themeID]['buttons']; ?>;
-            outline: 2px solid #<?php echo $themeArray[$themeID]['button-border']; ?>;
-            width: 150px;
-            height: 35px;
+            background-color: var(--buttons);
+            outline: 2px solid var(--button-border);
+            width: 125px;
+            height: auto;
+
             border: none;
             border-radius: 5px;
+
             margin: 25px;
+            padding: 10px;
+
             font-weight: bold;
-            font-size: 15px;
+            font-size: var(--button-font-size);
             transition: transform 1s ease;
             cursor: pointer;
-            color: #<?php echo $themeArray[$themeID]['button-text']; ?>;
+            color: var(--button-text);
             
         }
 
@@ -129,18 +170,20 @@
             width: 1020px;
             height: auto;
 
+            
+
             border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: auto;
-            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
+            background-color: var(--containers);
         }
 
 
         /* Menu */
 
         .menu-button {
-            background-color: #<?php echo $themeArray[$themeID]['buttons']; ?>;
+            background-color: var(--buttons);
             border: none;
             border-radius: 50%;
             width: 50px;
@@ -180,23 +223,20 @@
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
 
-            background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
+            background-color: var(--containers);
             font-weight: bold;
             letter-spacing: 3px;
+
+            overflow-y: auto;
+
         }
 
         .menu-content-button {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100px;
-
+            flex-wrap: wrap;
         }
-
-        .menu-content-button button {
-
-        }
-
 
 
         /* Break Points */
@@ -206,11 +246,6 @@
             width: 660px;
             }
 
-            button{
-                width: 125px;
-                height: 35px;
-                margin: 15px;
-            }
         }
 
         @media screen and (max-width: 770px) {
@@ -221,37 +256,38 @@
 
             .controls-container{
                 width: 70%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .profile-box {
                 width: 70%;
                 padding: 15px;
                 margin: 15px;
-                font-size: 15px;
             }   
-
-            button{
-                width: 125px;
-                height: 35px;
-                margin: 7px;
-            }
-
 
             .menu-container{
                 position:fixed;
                 bottom: 100px;
                 right: 0;
 
-                width: 75%;
+                width: 80%;
                 height: 500px;
                 padding: 20px;
 
                 border-top-left-radius: 20px;
                 border-bottom-left-radius: 20px;
 
-                background-color: #<?php echo $themeArray[$themeID]['containers']; ?>;
+                background-color: var(--containers);
                 font-weight: bold;
                 letter-spacing: 3px;
+            }
+
+            button {
+                width: 100px;
+                height: auto;
+
             }
 
         }
@@ -287,7 +323,7 @@
 <body>
 <div class="main-container">
     <!-- Logo -->
-    <img class="logo" src='../assets/branding2/<?php echo $themeArray[$themeID]['logo']; ?>'>
+    <img class="logo" id="logo" src='../assets/branding2/co-color-rectangle.webp'>
 
     <!-- Controls Container -->
     <div class="controls-container">
@@ -338,14 +374,16 @@
 
         Theme
         <div class="menu-content-button">
-            <button id="themeLight">Light</button>
-            <button id="themeDark">Dark</button>
+            <button id="themeLight" onclick="switchTheme(0)">Online Day</button>
+            <button id="themeLight" onclick="switchTheme(1)">Online Night</button>
+            <button id="themeLight" onclick="switchTheme(2)">Dual Hue</button>
+            <button id="themeLight" onclick="switchTheme(3)">High Contrast</button>
         </div>
 
         Accessibility
         <div class="menu-content-button">
-            <button>On</button>
-            <button>Off</button>
+            <button onclick="toggleAccessibility(true)">On</button>
+            <button onclick="toggleAccessibility(false)">Off</button>
         </div>
 
         Language
@@ -371,7 +409,11 @@
 <!-- JS -->
 <script>
 
-    //Menu Operation
+//General
+    const root = document.documentElement;
+
+
+//Menu Operation
     var menuButton = document.getElementById('menuButton');
     var menuModal = document.getElementById('menuModal');
     var menuOpened = false;
@@ -384,20 +426,50 @@
                 menuModal.style.display = "none";
             }, 490);
 
+            document.body.style.overflow = "auto";
             menuOpened = !menuOpened;
         }
         else {
             menuModal.style.display = "block";
             menuModal.style.animation = "menu-animate-in 0.5s";
             menuOpened = !menuOpened;
+            document.body.style.overflow = "hidden";
         }
     });
 
 
-    //Theme
+//Theme
+    var logo = document.getElementById('logo');
+
+    function switchTheme(themeID) {
+        var theme = themeArray[themeID];
+        console.log(theme);
+
+        root.style.setProperty('--background', theme['background']);
+        root.style.setProperty('--containers', theme['containers']);
+        root.style.setProperty('--container-border', theme['container-border']);
+        root.style.setProperty('--text', theme['text']);
+        root.style.setProperty('--buttons', theme['buttons']);
+        root.style.setProperty('--button-border', theme['button-border']);
+        root.style.setProperty('--button-text', theme['button-text']);
+
+        logo.src = '../assets/branding2/' + theme['logo'];
+    }
 
 
-
+//Accessibility
+    function toggleAccessibility(enable) {
+        if(enable){
+            root.style.setProperty('--global-font-size', '1.3rem');
+            root.style.setProperty('--button-font-size', '1.306rem');   
+            root.style.setProperty('--profile-box-width', '480px');      
+        }
+        else {
+            root.style.setProperty('--global-font-size', '1rem');
+            root.style.setProperty('--button-font-size', '1.02rem');
+            root.style.setProperty('--profile-box-width', '300px');  
+        }
+    }
 
 
 </script>
