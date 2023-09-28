@@ -1,4 +1,6 @@
 <?php
+$userData=getRequestInfo();
+
 $connection=new mysqli("hostname","user","password","database");
 if( $connection->connect_error )
 	{
