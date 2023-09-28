@@ -1,12 +1,28 @@
 <?php
-class WUser {
+$connection=new mysqli("hostname","user","password","database");
+if( $connection->connect_error )
+	{
+		returnWithError( $connection->connect_error );
+	}
+    else{
+
+    }
+    function getRequestInfo()
+	{
+		return json_decode(file_get_contents('php://input'), true);
+	}
+/*class WUser {
     // Class properties (variables)
-    public $id;
+    
+    
     public $firstName;
     public $lastName;
     public $username;
     public $profilemg;
     public $password;
+    $ID = 0;
+	$firstName1 = "";
+	$lastName2 = "";
     public function setUser($newid,$newfname,$newlname,$newuser_name,$newprofilemg,$newpassword) {
         while(!(is_int($newid)))
         {
@@ -27,10 +43,10 @@ class WUser {
     //public
 
     // Class methods (functions)
-    /*public function myMethod() {
+    public function myMethod() {
         // Method code here
-    }*/
-}
+    }
+}*/
 class contact
 {
     public $id;
