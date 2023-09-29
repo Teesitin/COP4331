@@ -25,6 +25,8 @@
     <!-- Google Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
     <!-- CSS -->
     <style>
@@ -170,14 +172,16 @@
             width: 1020px;
             height: auto;
 
-            
-
             border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: auto;
+            margin-bottom: 15px;
+            margin-top: 15px;
             background-color: var(--containers);
         }
+
+
 
 
         /* Menu */
@@ -287,7 +291,7 @@
             button {
                 width: 100px;
                 height: auto;
-
+                word-break: break-word;
             }
 
         }
@@ -315,7 +319,42 @@
 
 
 
+    #google_translate_element {
+       margin: 25px;
+    }
 
+    .goog-te-combo{
+        background-color: var(--buttons);
+
+        border: none;
+        border-radius: 5px;
+
+        margin: 25px;
+        padding: 10px;
+    }
+
+    .goog-te-gadget{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .contacts-search-bar{
+        border: transparent;
+        border-radius: 9999px;
+
+        width:80%;
+        height: 50px;
+        padding: 15px;
+        margin-left: 10px;
+
+        font-size: 1rem;
+    }
+
+    .contacts-search-bar:active{
+        
+    }
 
 
     </style>
@@ -333,6 +372,12 @@
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
             <button class="control-button">Contact IT</button>
         </a>
+    </div>
+
+    <!-- Search -->
+    <div class="controls-container">
+        Search User
+        <input class="contacts-search-bar" type="text">
     </div>
 
     <!-- Profiles -->
@@ -363,7 +408,7 @@
 
 
 <!-- Menu Button -->
-<button id="menuButton" class="menu-button">
+<button id="menuButton" class="menu-button notranslate">
     <span class="material-symbols-outlined">more_horiz</span>
 </button>
 
@@ -388,8 +433,7 @@
 
         Language
         <div class="menu-content-button">
-            <button>English</button>
-            <button>Spanish</button>
+            <div id="google_translate_element"></div>
         </div>
 
         Option 4
@@ -411,6 +455,10 @@
 
 //General
     const root = document.documentElement;
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
 
 
 //Menu Operation
