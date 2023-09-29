@@ -4,51 +4,39 @@ $userData=getRequestInfo();
 $connection=new mysqli("hostname","user","password","database");
 if( $connection->connect_error )
 	{
-		returnWithError( $connection->connect_error );
+		 returnWithError( $connection->connect_error );
 	}
     else{
+        //option one
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $stmt = $connnection->prepare("SELECT ID,firstName,lastName FROM User WHERE Login=? AND Password =?");// this is a hold
+        $stmt->bind_param("ss", $inData["login"], $inData["password"]);
+		$stmt->execute();
+		$result = $stmt->get_result();
+        
+            // Code inside this block will execute if the request method is POST
+        }
+        
+        //control or optionn 2
+        
+
 
     }
     function getRequestInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
 	}
-/*class WUser {
-    // Class properties (variables)
-    
-    
-    public $firstName;
-    public $lastName;
-    public $username;
-    public $profilemg;
-    public $password;
-    $ID = 0;
-	$firstName1 = "";
-	$lastName2 = "";
-    public function setUser($newid,$newfname,$newlname,$newuser_name,$newprofilemg,$newpassword) {
-        while(!(is_int($newid)))
-        {
-            echo "tpye a number for the userID, please!";
-            $this->id=trim(fgets(STDIN));
-        }
-        
-        $this->firstName = $newfname;
-        $this->lastName = $newlname;
-        $this->username = $newuser_name;
-        $this->profilemg = $newprofilemg;
-        $this->password = $newpassword;
-        
-    }
-    
-    
+    function returnWithError( $err )
+	{
+		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
+    function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
+	}
 
-    //public
-
-    // Class methods (functions)
-    public function myMethod() {
-        // Method code here
-    }
-}*/
 class contact
 {
     public $id;

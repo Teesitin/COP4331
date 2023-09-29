@@ -473,7 +473,12 @@
 
 
 </script>
-
+/* form to login in he website*/
+<form action="process_form.php" method="post">
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit">Submit</button>
+</form>
 
 
 </body>
