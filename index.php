@@ -172,14 +172,16 @@
             width: 1020px;
             height: auto;
 
-            
-
             border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
             padding: 15px;
             margin: auto;
+            margin-bottom: 15px;
+            margin-top: 15px;
             background-color: var(--containers);
         }
+
+
 
 
         /* Menu */
@@ -338,6 +340,22 @@
         gap: 5px;
     }
 
+    .contacts-search-bar{
+        border: transparent;
+        border-radius: 9999px;
+
+        width:80%;
+        height: 50px;
+        padding: 15px;
+        margin-left: 10px;
+
+        font-size: 1rem;
+    }
+
+    .contacts-search-bar:active{
+        
+    }
+
 
     </style>
 </head>
@@ -354,6 +372,12 @@
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
             <button class="control-button">Contact IT</button>
         </a>
+    </div>
+
+    <!-- Search -->
+    <div class="controls-container">
+        Search User
+        <input class="contacts-search-bar" type="text">
     </div>
 
     <!-- Profiles -->
