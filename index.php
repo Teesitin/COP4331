@@ -131,7 +131,6 @@
 
         .profile-details {
             margin-top: 10px;
-
         }
 
         .profile-details a {
@@ -376,6 +375,12 @@
     .user-control-button {
         border-radius: 9999px;
         width: auto;
+        margin: 10px;
+    }
+
+    .user-control-container {
+        display: flex;
+        justify-content: space-evenly;
     }
 
 
@@ -415,9 +420,11 @@
                     <p id="email-1"><a href="mailto:<?php echo $person['email']; ?>"><?php echo $person['email']; ?></a></p>
                     <p id="phone-1"><a href="tel:<?php echo $person['phone']; ?>"><?php echo $person['phone']; ?></a></p>
 
-                    <button class="user-control-button"><span class="material-symbols-outlined">call</span></button>
-                    <button class="user-control-button"><span class="material-symbols-outlined">edit</span></button>
-                    <button class="user-control-button"><span class="material-symbols-outlined">person_remove</span></button>
+                    <div class="user-control-container">
+                        <button class="user-control-button"><span class="material-symbols-outlined">call</span></button>
+                        <button class="user-control-button"><span class="material-symbols-outlined">edit</span></button>
+                        <button class="user-control-button"><span class="material-symbols-outlined">person_remove</span></button>
+                    </div>
                 </div>
             </div>
         <?php
