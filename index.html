@@ -104,7 +104,7 @@
         // Theme
         let themeArray = [];
 
-        fetch('../theme.json')
+        fetch('../data/theme.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
@@ -149,7 +149,7 @@
         }
 
         // People
-        fetch('../people.json')
+        fetch('../data/people.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);

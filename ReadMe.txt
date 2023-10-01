@@ -10,7 +10,7 @@ Congratulations! You've made it all the way here!
    - Installation Guide: https://www.sitepoint.com/how-to-install-php-on-windows/
    - Navigate to the "Installing PHP" section.
 
-3. Get Started with Trello
+3. Get Started with Trello or Jira
    - Board Link: https://trello.com/b/wqXX6F8p/lamp
    - Action: Create an account and become a board member.
 
