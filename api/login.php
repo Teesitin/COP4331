@@ -24,7 +24,7 @@ if( $connection->connect_error )
             exit();
 		}*/
 		if ($row = $result->fetch_assoc()) {
-			$user = returnWithInfo($row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg']);
+			$user = returnWithInfo($row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg'],$row['username']);
 			sendResultInfoAsJson($user); // Send the JSON data as the HTTP response
 			//	tHIS Json data will be use in the retreiveC php
 			exit();
@@ -64,8 +64,8 @@ if( $connection->connect_error )
 		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","profilelmg":"' . $profilelmg . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}*/
-	function returnWithInfo($firstName, $lastName, $id, $profileImg) {
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","profileImg":"' . $profileImg . '","error":""}';
+	function returnWithInfo($firstName, $lastName, $id, $profileImg,$username) {
+		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","profileImg":"' . $profileImg . '","username":"' . $username . '",,"error":""}';
 		return $retValue; // Return the JSON data
 	}
 	
