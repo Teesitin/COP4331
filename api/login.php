@@ -17,13 +17,23 @@ if( $connection->connect_error )
 		$result = $stmt->get_result();
         //If statement  where the user log in exist
 		if( $row = $result->fetch_assoc()  )
-		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg'], $row['username']);
+		/*{
+			//returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg'], $row['username']);
+		    $user = returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg'], $row['username']);;
+            header("Location: Retreive.php?user=" . urlencode($user));
+            exit();
+		}*/
+		if ($row = $result->fetch_assoc()) {
+			$user = returnWithInfo($row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg']);
+			sendResultInfoAsJson($user); // Send the JSON data as the HTTP response
+			//	tHIS Json data will be use in the retreiveC php
+			exit();
 		}
 		else
 		{
 			returnWithError("No Records Found");
 		}
+		
 		
             
         
@@ -39,16 +49,26 @@ if( $connection->connect_error )
 		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-    function sendResultInfoAsJson( $obj )
+    /*function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-		echo $obj;
+		//echo $obj;
+		return $obj;
+	}*/
+	function sendResultInfoAsJson($obj) {
+		header('Content-type: application/json');
+		echo $obj; // Echo the JSON data to send it as the HTTP response
 	}
-    function returnWithInfo( $firstName, $lastName, $id , $profilelmg )
+    /*function returnWithInfo( $firstName, $lastName, $id , $profilelmg )
 	{
 		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","profilelmg":"' . $profilelmg . '","error":""}';
 		sendResultInfoAsJson( $retValue );
+	}*/
+	function returnWithInfo($firstName, $lastName, $id, $profileImg) {
+		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","profileImg":"' . $profileImg . '","error":""}';
+		return $retValue; // Return the JSON data
 	}
+	
 
 class contact
 {
