@@ -8,7 +8,7 @@ if( $connection->connect_error )
 	}
     else{
         //option one
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+       
             $username = $_POST['username'];
             $password = $_POST['password'];
             $stmt = $connection->prepare("SELECT ID,firstName,lastName FROM User WHERE Login=? AND Password =?");// this is a hold
@@ -24,9 +24,9 @@ if( $connection->connect_error )
 		{
 			returnWithError("No Records Found");
 		}
-        
+		
             // Code inside this block will execute if the request method is POST
-        }
+        
         /*$username = $_POST['username'];
 $password = $_POST['password'];
 
