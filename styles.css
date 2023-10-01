@@ -124,7 +124,7 @@ button {
 
     font-weight: bold;
     font-size: var(--button-font-size);
-    transition: transform 1s ease;
+    transition: transform .25s ease;
     cursor: pointer;
     color: var(--button-text);
     

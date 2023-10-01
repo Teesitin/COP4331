@@ -101,7 +101,8 @@
             }
         });
 
-        // Theme
+    // Theme
+        //Get Theme
         let themeArray = [];
 
         fetch('../data/theme.json')
@@ -118,10 +119,26 @@
                 console.error('There has been a problem with your fetch operation:', error);
             });
 
+        // Check Theme
+        function checkAndSwitchTheme() {
+            const savedThemeID = localStorage.getItem('themeID');
+
+            if(savedThemeID !== null) {
+                switchTheme(savedThemeID);
+            } 
+            else {
+                localStorage.setItem('themeID', 0);
+            }
+        }
+
+    
+        
+        // Set Theme
         var logo = document.getElementById('logo');
 
         function switchTheme(themeID) {
             var theme = themeArray[themeID];
+            localStorage.setItem('themeID', themeID);
             console.log(theme);
 
             root.style.setProperty('--background', theme['background']);
@@ -135,19 +152,36 @@
             logo.src = '../assets/branding2/' + theme['logo'];
         }
 
-        // Accessibility
+    // Accessibility
         function toggleAccessibility(enable) {
             if (enable) {
                 root.style.setProperty('--global-font-size', '1.3rem');
                 root.style.setProperty('--button-font-size', '1.306rem');
                 root.style.setProperty('--profile-box-width', '480px');
+                localStorage.setItem('accessibility', true);
             } else {
                 root.style.setProperty('--global-font-size', '1rem');
                 root.style.setProperty('--button-font-size', '1.02rem');
                 root.style.setProperty('--profile-box-width', '300px');
+                localStorage.setItem('accessibility', false);
             }
         }
 
+        // Check Accessibility
+        function checkAndSwitchAccessibility() {
+            const savedAccessibility = localStorage.getItem('accessibility');
+
+            if(savedAccessibility !== null) {
+                toggleAccessibility(savedAccessibility === "true"); 
+            } 
+            else {
+                localStorage.setItem('accessibility', false);
+            }
+        }
+
+
+
+    //People    
         // Get People
         let peopleData = [];
 
@@ -204,6 +238,14 @@
 
             profileContainer.innerHTML = profilesHTML;
         }
+
+
+        //Wait for Full Dom
+        window.onload = function() {
+            checkAndSwitchTheme();
+            checkAndSwitchAccessibility();
+        }
+        
     </script>
 </body>
 </html>

@@ -1,16 +1,3 @@
-<?php
-    $themejson = file_get_contents('../theme.json');
-    $themeArray = json_decode($themejson, true);
-    $themeID = 0;
-?>
-
-<script>
-    var themeArray = <?php echo json_encode($themeArray); ?>;
-    console.log(themeArray);
-</script>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,8 +109,8 @@
             border: transparent;
             border-radius: 9999px;
 
-            width:500px;
-            height: 50px;
+            width: 500px;
+            height: 25px;
 
 
             padding: 15px;
@@ -275,6 +262,42 @@
 
         logo.src = '../assets/branding2/' + theme['logo'];
     }
+
+
+        //Get Theme
+        let themeArray = [];
+
+        fetch('../data/theme.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                themeArray = data;
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+
+        // Get People
+        let peopleData = [];
+
+        fetch('../data/people.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                peopleData = data;
+                displayProfiles(peopleData); // Initial display of profiles
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
 
 </script>
 
