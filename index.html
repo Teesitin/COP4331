@@ -158,12 +158,28 @@
                 root.style.setProperty('--global-font-size', '1.3rem');
                 root.style.setProperty('--button-font-size', '1.306rem');
                 root.style.setProperty('--profile-box-width', '480px');
+                localStorage.setItem('accessibility', true);
             } else {
                 root.style.setProperty('--global-font-size', '1rem');
                 root.style.setProperty('--button-font-size', '1.02rem');
                 root.style.setProperty('--profile-box-width', '300px');
+                localStorage.setItem('accessibility', false);
             }
         }
+
+        // Check Accessibility
+        function checkAndSwitchAccessibility() {
+            const savedAccessibility = localStorage.getItem('accessibility');
+
+            if(savedAccessibility !== null) {
+                toggleAccessibility(savedAccessibility === "true"); 
+            } 
+            else {
+                localStorage.setItem('accessibility', false);
+            }
+        }
+
+
 
     //People    
         // Get People
@@ -227,6 +243,7 @@
         //Wait for Full Dom
         window.onload = function() {
             checkAndSwitchTheme();
+            checkAndSwitchAccessibility();
         }
         
     </script>
