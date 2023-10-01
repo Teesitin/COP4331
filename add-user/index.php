@@ -169,7 +169,7 @@
             border: none;
             border-radius: 9999px;
             margin: 25px;
-            padding: 10px;
+            padding: 15px;
             font-weight: bold;
             font-size: var(--button-font-size);
             transition: transform 1s ease;
@@ -185,7 +185,7 @@
             transform: scale(1.1);
         }
 
-        .submit-button {
+        button {
             background-color: var(--buttons);
             outline: 2px solid var(--button-border);
             width: 125px;
@@ -201,11 +201,11 @@
             color: var(--button-text);
         }
 
-        .submit-button:hover {
+        button:hover {
             transform: scale(1.1);
         }
 
-        .submit-button:active {
+        button:active {
             transform: scale(1.1);
         }
 
@@ -231,10 +231,10 @@
 
             <div class="custom-file-upload">
                 <input type="file" id="file-upload" name="fileupload" />
-                <button><span class="material-symbols-outlined">background_replace</span></button>
+                <button onclick="document.getElementById('file-upload').click();">Upload Picture</button>
             </div>
 
-
+            <button class="button" onclick="window.location.href='/';">Cancel</button>
             <button class="submit-button">Submit</button>
 
 
@@ -247,6 +247,16 @@
 
 <!-- JS -->
 <script>
+
+
+
+
+
+
+
+
+
+
 
 //Theme
     var logo = document.getElementById('logo');

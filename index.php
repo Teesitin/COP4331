@@ -393,7 +393,7 @@
 
     <!-- Controls Container -->
     <div class="controls-container">
-        <button class="control-button"><span class="material-symbols-outlined">person_add</span></button>
+        <button class="control-button" onclick="window.location.href='/add-user';"><span class="material-symbols-outlined">person_add</span></button>
 
 
         <!-- Search -->
