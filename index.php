@@ -46,6 +46,8 @@
             --profile-box-width: 300px;
         }
 
+        /* Icons */
+
         .material-symbols-outlined {
             font-variation-settings:
             'FILL' 0,
@@ -53,6 +55,13 @@
             'GRAD' 0,
             'opsz' 24
         }
+
+
+
+
+
+
+
 
         ::-webkit-scrollbar {
             width: 12px;
@@ -171,6 +180,10 @@
         .controls-container{
             width: 1020px;
             height: auto;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             border-radius: 20px; 
             box-shadow: 0px 4px 6px #00000029;
@@ -294,6 +307,10 @@
                 word-break: break-word;
             }
 
+            .contacts-search-bar{
+                width: 100%;
+            }
+
         }
 
 
@@ -356,6 +373,11 @@
         
     }
 
+    .user-control-button {
+        border-radius: 9999px;
+        width: auto;
+    }
+
 
     </style>
 </head>
@@ -366,19 +388,14 @@
 
     <!-- Controls Container -->
     <div class="controls-container">
-        <button class="control-button">Add User</button>
-        <button class="control-button">Modify User</button>
-        <button class="control-button">Remove User</button>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-            <button class="control-button">Contact IT</button>
-        </a>
+        <button class="control-button"><span class="material-symbols-outlined">person_add</span></button>
+
+
+        <!-- Search -->
+        <input class="contacts-search-bar" type="text" placeholder="Search User">
+
     </div>
 
-    <!-- Search -->
-    <div class="controls-container">
-        Search User
-        <input class="contacts-search-bar" type="text">
-    </div>
 
     <!-- Profiles -->
     <div id="profile-container" class="profile-container">
@@ -397,7 +414,10 @@
                     <h3 id="name-1"><?php echo $person['name']; ?></h3>
                     <p id="email-1"><a href="mailto:<?php echo $person['email']; ?>"><?php echo $person['email']; ?></a></p>
                     <p id="phone-1"><a href="tel:<?php echo $person['phone']; ?>"><?php echo $person['phone']; ?></a></p>
-                    <button>Stats</button>
+
+                    <button class="user-control-button"><span class="material-symbols-outlined">call</span></button>
+                    <button class="user-control-button"><span class="material-symbols-outlined">edit</span></button>
+                    <button class="user-control-button"><span class="material-symbols-outlined">person_remove</span></button>
                 </div>
             </div>
         <?php
@@ -436,14 +456,6 @@
             <div id="google_translate_element"></div>
         </div>
 
-        Option 4
-        <div class="menu-content-button">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-        </div>
 
     </div>
 </div>
