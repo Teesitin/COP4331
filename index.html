@@ -101,7 +101,8 @@
             }
         });
 
-        // Theme
+    // Theme
+        //Get Theme
         let themeArray = [];
 
         fetch('../data/theme.json')
@@ -118,10 +119,26 @@
                 console.error('There has been a problem with your fetch operation:', error);
             });
 
+        // Check Theme
+        function checkAndSwitchTheme() {
+            const savedThemeID = localStorage.getItem('themeID');
+
+            if(savedThemeID !== null) {
+                switchTheme(savedThemeID);
+            } 
+            else {
+                localStorage.setItem('themeID', 0);
+            }
+        }
+
+    
+        
+        // Set Theme
         var logo = document.getElementById('logo');
 
         function switchTheme(themeID) {
             var theme = themeArray[themeID];
+            localStorage.setItem('themeID', themeID);
             console.log(theme);
 
             root.style.setProperty('--background', theme['background']);
@@ -135,7 +152,7 @@
             logo.src = '../assets/branding2/' + theme['logo'];
         }
 
-        // Accessibility
+    // Accessibility
         function toggleAccessibility(enable) {
             if (enable) {
                 root.style.setProperty('--global-font-size', '1.3rem');
@@ -148,6 +165,7 @@
             }
         }
 
+    //People    
         // Get People
         let peopleData = [];
 
@@ -204,6 +222,13 @@
 
             profileContainer.innerHTML = profilesHTML;
         }
+
+
+        //Wait for Full Dom
+        window.onload = function() {
+            checkAndSwitchTheme();
+        }
+        
     </script>
 </body>
 </html>
