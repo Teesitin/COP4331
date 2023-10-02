@@ -247,41 +247,22 @@
     }
 
 
-        //Get Theme
-        let themeArray = [];
+//Get Theme
+let themeArray = [];
 
-        fetch('../data/theme.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                themeArray = data;
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-
-        // Get People
-        let peopleData = [];
-
-        fetch('../data/people.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                peopleData = data;
-                displayProfiles(peopleData); // Initial display of profiles
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-
+fetch('../data/theme.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        themeArray = data;
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
 </script>
 
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Title and Favicon -->
-    <title>Add User</title>
+    <title>Modify User</title>
     <link rel="icon" type="image/webp" href='../assets/branding2/co-white-fav.webp'/>
 
     <!-- Google Fonts and Icons -->
@@ -196,9 +196,6 @@
             transform: scale(1.1);
         }
 
-
-
-
     </style>
 </head>
 <body>
@@ -206,9 +203,7 @@
     <!-- Logo -->
     <img class="logo" id="logo" src='../assets/branding2/co-color-rectangle.webp'>
 
-
     <div class="add-user-container">
-
             <div>
                 <input type="text" name="first" placeholder="First Name" required>
                 <input type="text" name="last" placeholder="Last Name" required>
@@ -223,9 +218,6 @@
 
             <button class="button" onclick="window.location.href='/';">Cancel</button>
             <button class="submit-button">Submit</button>
-
-
-
     </div>
 
 </div>
@@ -234,17 +226,6 @@
 
 <!-- JS -->
 <script>
-
-
-
-
-
-
-
-
-
-
-
 //Theme
     var logo = document.getElementById('logo');
 
@@ -281,25 +262,77 @@
                 console.error('There has been a problem with your fetch operation:', error);
             });
 
-        // Get People
-        let peopleData = [];
 
+// Get User
+    // Extract userId from the URL parameters
+    let urlParams = new URLSearchParams(window.location.search);
+    let userId = urlParams.get('userID');
+
+    // Function to fetch user data based on userId
+    function getUserData(userId) {
         fetch('../data/people.json')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+                    throw new Error('Network response was not ok: ' + response.statusText);
                 }
                 return response.json();
             })
             .then(data => {
-                peopleData = data;
+                const userData = data.find(user => user.id === userId);
+                if (userData) {
+                    displayInfo(userData);
+                } else {
+                    console.error('User not found');
+                }
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
             });
+    }
+
+    // Function to display user info in the input fields
+    function displayInfo(data) {
+        document.querySelector('input[name="first"]').value = data.firstName;
+        document.querySelector('input[name="last"]').value = data.lastName;
+        document.querySelector('input[name="email"]').value = data.email;
+        document.querySelector('input[name="phone"]').value = data.phone;
+    }
+
+    // Call getUserData function if userId is available
+    if (userId) {
+        getUserData(userId);
+    } else {
+        console.error('No userID parameter in the URL');
+    }
+
+// Set User
+    document.querySelector('.submit-button').addEventListener('click', () => {
+        const updatedData = {
+            firstName: document.querySelector('input[name="first"]').value,
+            lastName: document.querySelector('input[name="last"]').value,
+            email: document.querySelector('input[name="email"]').value,
+            phone: document.querySelector('input[name="phone"]').value
+        };
+
+        console.log(updatedData);
+
+        fetch('http://localhost:8000/data/people.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+        })
+        .then(response => response.json())
+        .then(() => {
+            // window.location.href = '/';
+        });
+    });
+
+
+
 
 </script>
-
 
 
 </body>
