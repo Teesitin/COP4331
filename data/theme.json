@@ -8,7 +8,9 @@
       "buttons": "#E1D7C6",
       "button-border": "transparent",
       "button-text": "#000000",
-      "logo": "co-color-rectangle.webp"
+      "logo": "co-color-rectangle.webp",
+      "search-bar": "white",
+      "search-bar-border": "transparent"
     },
 
     {
@@ -20,7 +22,9 @@
       "buttons": "#FFD717", 
       "button-border": "transparent",
       "button-text": "#000000",
-      "logo": "co-white-rectangle.webp"
+      "logo": "co-white-rectangle.webp",
+      "search-bar": "white",
+      "search-bar-border": "transparent"
     },
 
     {
@@ -32,7 +36,9 @@
       "buttons": "#a6a6a6", 
       "button-border": "transparent",
       "button-text": "#000000",
-      "logo": "co-white-rectangle.webp"
+      "logo": "co-white-rectangle.webp",
+      "search-bar": "#ededed",
+      "search-bar-border": "transparent"
     },
 
     {
@@ -44,7 +50,9 @@
       "buttons": "#0f0f0f",
       "button-border": "#c300ff",
       "button-text": "#c300ff",
-      "logo": "co-white-rectangle.webp"
+      "logo": "co-white-rectangle.webp",
+      "search-bar": "transparent",
+      "search-bar-border": "#c300ff"
     }
 ]
   
