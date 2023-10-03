@@ -322,12 +322,7 @@
 </head>
 
 <body>
-//login call action 
-<form action="login.php" method="post">
-    <input type="text" name="username" placeholder= $obj>
-    <input type="password" name="password" placeholder="Password">
-    <button type="submit">Submit</button>
-</form>
+
 
 <div class="main-container">
     <!-- Logo -->
