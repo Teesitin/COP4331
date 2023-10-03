@@ -34,11 +34,9 @@
             </button>
 
             <!-- Toggle Table -->
-            <button class="control-button" onclick="toggleView()">
-                <span class="material-symbols-outlined">menu</span>
+            <button id="toggleButton" class="control-button" onclick="toggleView()">
+                <span id="toggleIcon" class="material-symbols-outlined">style</span>
             </button>
-            
-            
         </div>
 
         <!-- Profiles -->
@@ -96,268 +94,308 @@
 
 
 
-    <!-- JS -->
-    <script>
-        // General
-        const root = document.documentElement;
-
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-        }
-
-        // Menu Modal
-        var menuButton = document.getElementById('menuButton');
-        var menuModal = document.getElementById('menuModal');
-        var menuOpened = false;
-
-        menuButton.addEventListener('click', function() {
-            if (menuOpened) {
-                menuModal.style.animation = "menu-animate-out 0.5s";
-                setTimeout(function() {
-                    menuModal.style.display = "none";
-                }, 490);
-                document.body.style.overflow = "auto";
-                menuOpened = !menuOpened;
-            } else {
-                menuModal.style.display = "block";
-                menuModal.style.animation = "menu-animate-in 0.5s";
-                menuOpened = !menuOpened;
-                document.body.style.overflow = "hidden";
-            }
-        });
 
 
-        // Delete Modal Animation Logic
-        var deleteModalOpened = false;
-        var deleteModal = document.getElementById('deleteConfirmationModal');
+<!-- JS -->
+<script>
+// General
+    const root = document.documentElement;
 
-        function openDeleteConfirmationModal(userId, userName) {
-            userIdToDelete = userId;  // Store the user ID
-
-            document.getElementById('userNameToDelete').innerText = userName;
-
-
-            if (!deleteModalOpened) {
-                deleteModal.style.display = "block";
-                deleteModal.style.animation = "menu-animate-in 0.5s";
-                deleteModalOpened = !deleteModalOpened;
-                document.body.style.overflow = "hidden";
-            }
-        }
-
-        function closeDeleteConfirmationModal() {
-            if (deleteModalOpened) {
-                deleteModal.style.animation = "menu-animate-out 0.5s";
-                setTimeout(function() {
-                    deleteModal.style.display = "none";
-                }, 490);
-                document.body.style.overflow = "auto";
-                deleteModalOpened = !deleteModalOpened;
-            }
-        }
-
-        function confirmDelete() {
-            // Your delete logic here
-            closeDeleteConfirmationModal();
-        }
-
-
-
-    // Theme
-        //Get Theme
-        let themeArray = [];
-
-        fetch('../data/theme.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                themeArray = data;
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-
-        // Check Theme
-        function checkAndSwitchTheme() {
-            const savedThemeID = localStorage.getItem('themeID');
-
-            if(savedThemeID !== null) {
-                switchTheme(savedThemeID);
-            } 
-            else {
-                localStorage.setItem('themeID', 0);
-            }
-        }
-
-    
-        
-        // Set Theme
-        var logo = document.getElementById('logo');
-
-        function switchTheme(themeID) {
-            var theme = themeArray[themeID];
-            localStorage.setItem('themeID', themeID);
-            console.log(theme);
-
-            root.style.setProperty('--background', theme['background']);
-            root.style.setProperty('--containers', theme['containers']);
-            root.style.setProperty('--container-border', theme['container-border']);
-            root.style.setProperty('--text', theme['text']);
-            root.style.setProperty('--buttons', theme['buttons']);
-            root.style.setProperty('--button-border', theme['button-border']);
-            root.style.setProperty('--button-text', theme['button-text']);
-
-            logo.src = '../assets/branding2/' + theme['logo'];
-        }
-
-    // Accessibility
-        function toggleAccessibility(enable) {
-            if (enable) {
-                root.style.setProperty('--global-font-size', '1.3rem');
-                root.style.setProperty('--button-font-size', '1.306rem');
-                root.style.setProperty('--profile-box-width', '480px');
-                localStorage.setItem('accessibility', true);
-            } else {
-                root.style.setProperty('--global-font-size', '1rem');
-                root.style.setProperty('--button-font-size', '1.02rem');
-                root.style.setProperty('--profile-box-width', '300px');
-                localStorage.setItem('accessibility', false);
-            }
-        }
-
-        // Check Accessibility
-        function checkAndSwitchAccessibility() {
-            const savedAccessibility = localStorage.getItem('accessibility');
-
-            if(savedAccessibility !== null) {
-                toggleAccessibility(savedAccessibility === "true"); 
-            } 
-            else {
-                localStorage.setItem('accessibility', false);
-            }
-        }
-
-
-
-    //People    
-        // Get People
-        let peopleData = [];
-
-        fetch('../data/people.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                peopleData = data;
-                displayProfiles(peopleData); // Initial display of profiles
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-
-
-
-        // Filter People
-        function filterProfiles() {
-            const searchInput = document.querySelector('.contacts-search-bar').value.toLowerCase();
-            const filteredProfiles = peopleData.filter(person => {
-                return person.firstName.toLowerCase().startsWith(searchInput) || person.lastName.toLowerCase().startsWith(searchInput);
-            });
-            displayProfiles(filteredProfiles);
-        }
-
-
-        //Wait for Full Dom
-        window.onload = function() {
-            checkAndSwitchTheme();
-            checkAndSwitchAccessibility();
-        }
-
-
-// Table View
-let tableView = false; // A flag to check if table view is active
-
-function toggleView() {
-    tableView = !tableView; // toggle the view mode
-    displayProfiles(peopleData); // Re-display profiles in the new mode
-}
-
-function displayProfiles(profiles) {
-    const profileContainer = document.getElementById('profile-container');
-    let contentHTML = ""; // Use a single variable for both table and grid views
-
-    if(tableView) {
-        // Display in table view
-        contentHTML = `
-            <table>
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-
-        profiles.forEach(person => {
-            contentHTML += `
-                <tr>
-                    <td><img class="profile-image-table" src="../assets/headshots/hs-${person.id}.webp" alt="${person.firstName}" onerror="this.onerror=null; this.src='../assets/100.webp';"></td>
-                    <td>${person.firstName} ${person.lastName}</td>
-                    <td><a href="mailto:${person.email}">${person.email}</a></td>
-                    <td><a href="tel:${person.phone}">${person.phone}</a></td>
-                    <td>
-                        <button onclick="window.location.href='/modify-user?userID=${person.id}';"><span class="material-symbols-outlined">edit</span></button>
-                        <button onclick="openDeleteConfirmationModal(${person.id}, '${person.firstName} ${person.lastName}')"><span class="material-symbols-outlined">person_remove</span></button>
-                    </td>
-                </tr>
-            `;
-        });
-
-        contentHTML += '</tbody></table>';
-    } else {
-        // The existing grid view display code
-        profiles.forEach(person => {
-            contentHTML += `
-                <div class="profile-box">
-                    <img class="profile-image" 
-                        src="../assets/headshots/hs-${person.id}.webp" 
-                        alt="${person.firstName}"
-                        onerror="this.onerror=null; this.src='../assets/100.webp';">
-                    <div class="profile-details">
-                        <h3 id="name-${person.id}">${person.firstName} ${person.lastName}</h3>
-                        <p id="email-${person.id}"><a href="mailto:${person.email}">${person.email}</a></p>
-                        <p id="phone-${person.id}"><a href="tel:${person.phone}">${person.phone}</a></p>
-                        <div class="user-control-container">
-                            <button class="user-control-button"><span class="material-symbols-outlined">call</span></button>
-                            <button class="user-control-button" onclick="window.location.href='/modify-user?userID=${person.id}';"><span class="material-symbols-outlined">edit</span></button>
-                            <button class="user-control-button" onclick="openDeleteConfirmationModal(${person.id}, '${person.firstName} ${person.lastName}')"><span class="material-symbols-outlined">person_remove</span></button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     }
 
-    profileContainer.innerHTML = contentHTML;  // Set the container's innerHTML to the constructed HTML
+// Menu Modal //
+    var menuButton = document.getElementById('menuButton');
+    var menuModal = document.getElementById('menuModal');
+    var menuOpened = false;
+
+    menuButton.addEventListener('click', function() {
+        if (menuOpened) {
+            menuModal.style.animation = "menu-animate-out 0.5s";
+            setTimeout(function() {
+                menuModal.style.display = "none";
+            }, 490);
+            document.body.style.overflow = "auto";
+            menuOpened = !menuOpened;
+        } else {
+            menuModal.style.display = "block";
+            menuModal.style.animation = "menu-animate-in 0.5s";
+            menuOpened = !menuOpened;
+            document.body.style.overflow = "hidden";
+        }
+    });
+
+
+    // Delete Modal Animation Logic
+    var deleteModalOpened = false;
+    var deleteModal = document.getElementById('deleteConfirmationModal');
+
+    function openDeleteConfirmationModal(userId, userName) {
+        userIdToDelete = userId;  // Store the user ID
+
+        document.getElementById('userNameToDelete').innerText = userName;
+
+
+        if (!deleteModalOpened) {
+            deleteModal.style.display = "block";
+            deleteModal.style.animation = "menu-animate-in 0.5s";
+            deleteModalOpened = !deleteModalOpened;
+            document.body.style.overflow = "hidden";
+        }
+    }
+
+    function closeDeleteConfirmationModal() {
+        if (deleteModalOpened) {
+            deleteModal.style.animation = "menu-animate-out 0.5s";
+            setTimeout(function() {
+                deleteModal.style.display = "none";
+            }, 490);
+            document.body.style.overflow = "auto";
+            deleteModalOpened = !deleteModalOpened;
+        }
+    }
+
+    function confirmDelete() {
+        // Your delete logic here
+        closeDeleteConfirmationModal();
+    }
+
+
+
+// Themes //
+    //Get Theme
+    let themeArray = [];
+
+    fetch('../data/theme.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            themeArray = data;
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+
+    // Check Theme
+    function checkAndSwitchTheme() {
+        const savedThemeID = localStorage.getItem('themeID');
+
+        if(savedThemeID !== null) {
+            switchTheme(savedThemeID);
+        } 
+        else {
+            localStorage.setItem('themeID', 0);
+        }
+    }
+
+
+    
+    // Set Theme
+    var logo = document.getElementById('logo');
+
+    function switchTheme(themeID) {
+        var theme = themeArray[themeID];
+        localStorage.setItem('themeID', themeID);
+        console.log(theme);
+
+        root.style.setProperty('--background', theme['background']);
+        root.style.setProperty('--containers', theme['containers']);
+        root.style.setProperty('--container-border', theme['container-border']);
+        root.style.setProperty('--text', theme['text']);
+        root.style.setProperty('--buttons', theme['buttons']);
+        root.style.setProperty('--button-border', theme['button-border']);
+        root.style.setProperty('--button-text', theme['button-text']);
+
+        logo.src = '../assets/branding2/' + theme['logo'];
+    }
+
+// Accessibility //
+
+    function toggleAccessibility(enable) {
+        if (enable) {
+            root.style.setProperty('--global-font-size', '1.3rem');
+            root.style.setProperty('--button-font-size', '1.306rem');
+            root.style.setProperty('--profile-box-width', '480px');
+            localStorage.setItem('accessibility', true);
+        } else {
+            root.style.setProperty('--global-font-size', '1rem');
+            root.style.setProperty('--button-font-size', '1.02rem');
+            root.style.setProperty('--profile-box-width', '300px');
+            localStorage.setItem('accessibility', false);
+        }
+    }
+
+    // Check Accessibility
+    function checkAndSwitchAccessibility() {
+        const savedAccessibility = localStorage.getItem('accessibility');
+
+        if(savedAccessibility !== null) {
+            toggleAccessibility(savedAccessibility === "true"); 
+        } 
+        else {
+            localStorage.setItem('accessibility', false);
+        }
+    }
+
+// People //
+
+    //Get People    
+    let peopleData = [];
+
+    fetch('../data/people.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            peopleData = data;
+            displayProfiles(peopleData); // Initial display of profiles
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+
+    // Filter People
+    function filterProfiles() {
+        const searchInput = document.querySelector('.contacts-search-bar').value.toLowerCase();
+        const filteredProfiles = peopleData.filter(person => {
+            return person.firstName.toLowerCase().startsWith(searchInput) || person.lastName.toLowerCase().startsWith(searchInput);
+        });
+        displayProfiles(filteredProfiles);
+    }
+
+// Table and Card Toggle //
+
+    let tableView = false;
+    let currentlyLoadedView = '';
+    const toggleButton = document.querySelector('#toggleButton');
+
+    function toggleView() {
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (window.innerWidth >= 768 && currentlyLoadedView !== 'table') {
+            tableView = true;
+            toggleIcon.innerHTML = 'menu'; // Set to 'menu' when in table view
+            displayProfiles(peopleData);
+            currentlyLoadedView = 'table';
+            localStorage.setItem('preferredView', 'table');
+        } else if (window.innerWidth > 768 && currentlyLoadedView !== 'card') {
+            tableView = false;
+            toggleIcon.innerHTML = 'style'; // Set to 'style' when in card view
+            displayProfiles(peopleData);
+            currentlyLoadedView = 'card';
+            localStorage.setItem('preferredView', 'card');
+        }
+    }
+
+    function adjustViewBasedOnScreenSize() {
+        const preferredView = localStorage.getItem('preferredView') || 'card';
+
+        // Check if the screen size is less than 768 pixels
+        if (window.innerWidth < 768) {
+            toggleButton.classList.add('hidden');
+
+            if (currentlyLoadedView !== 'card') {
+                tableView = false; // Force card view for small screens
+                displayProfiles(peopleData);
+                currentlyLoadedView = 'card';
+            }
+
+        } else {
+            toggleButton.classList.remove('hidden');
+
+            if (currentlyLoadedView !== preferredView) {
+                tableView = (preferredView === 'table'); // Use user's preference for larger screens
+                displayProfiles(peopleData);
+                currentlyLoadedView = preferredView;
+            }
+        }
+    }
+
+    function displayProfiles(profiles) {
+        const profileContainer = document.getElementById('profile-container');
+        let contentHTML = "";
+        currentlyLoadedView = tableView ? 'table' : 'card';
+
+        if(tableView) {
+            // Table View 
+            contentHTML = `
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            </div>
+            `;
+
+            profiles.forEach(person => {
+                contentHTML += `
+                    <tr>
+                        <td><img class="profile-image-table" src="../assets/headshots/hs-${person.id}.webp" alt="${person.firstName}" onerror="this.onerror=null; this.src='../assets/100.webp';"></td>
+                        <td>${person.firstName} ${person.lastName}</td>
+                        <td><a href="mailto:${person.email}">${person.email}</a></td>
+                        <td><a href="tel:${person.phone}">${person.phone}</a></td>
+                        <td>
+                            <button onclick="window.location.href='/modify-user?userID=${person.id}';"><span class="material-symbols-outlined">edit</span></button>
+                            <button onclick="openDeleteConfirmationModal(${person.id}, '${person.firstName} ${person.lastName}')"><span class="material-symbols-outlined">person_remove</span></button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            contentHTML += '</tbody></table>';
+        } else {
+            // Grid View
+            profiles.forEach(person => {
+                contentHTML += `
+                    <div class="profile-box">
+                        <img class="profile-image" 
+                            src="../assets/headshots/hs-${person.id}.webp" 
+                            alt="${person.firstName}"
+                            onerror="this.onerror=null; this.src='../assets/100.webp';">
+                        <div class="profile-details">
+                            <h3 id="name-${person.id}">${person.firstName} ${person.lastName}</h3>
+                            <p id="email-${person.id}"><a href="mailto:${person.email}">${person.email}</a></p>
+                            <p id="phone-${person.id}"><a href="tel:${person.phone}">${person.phone}</a></p>
+                            <div class="user-control-container">
+                                <button class="user-control-button"><span class="material-symbols-outlined">call</span></button>
+                                <button class="user-control-button" onclick="window.location.href='/modify-user?userID=${person.id}';"><span class="material-symbols-outlined">edit</span></button>
+                                <button class="user-control-button" onclick="openDeleteConfirmationModal(${person.id}, '${person.firstName} ${person.lastName}')"><span class="material-symbols-outlined">person_remove</span></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        profileContainer.innerHTML = contentHTML;
+    }
+
+// Adjust view on page load and whenever the window is resized
+window.addEventListener('resize', adjustViewBasedOnScreenSize);
+
+//Wait for Full Dom
+window.onload = function() {
+    checkAndSwitchTheme();
+    checkAndSwitchAccessibility();
+
+    currentlyLoadedView = tableView ? 'table' : 'grid';
+    adjustViewBasedOnScreenSize();
 }
-
-
-
-
-
-
-        
-    </script>
+</script>
 </body>
 </html>

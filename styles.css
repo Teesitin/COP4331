@@ -215,6 +215,11 @@
     .controls-container {
       width: 660px;
     }
+
+    .table-container {
+        width: 660px !important; 
+    }
+
   }
   
   @media screen and (max-width: 770px) {
@@ -234,6 +239,8 @@
       padding: 15px;
       margin: 15px;
     }
+
+    
   
     .menu-container {
       position: fixed;
@@ -333,6 +340,10 @@
     justify-content: space-evenly;
   }
   
+  .hidden {
+    display: none !important;
+}
+
 
 /* Table */
 
@@ -366,3 +377,9 @@ tbody td {
     border-radius: 50%;
 }
 
+
+.table-container {
+    margin: auto;
+    overflow-x: scroll;
+    width: 1050px; 
+}
