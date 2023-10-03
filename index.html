@@ -24,12 +24,21 @@
 
         <!-- Controls Container -->
         <div class="controls-container">
+
+            <!-- Search -->
+            <input class="contacts-search-bar" type="text" placeholder="Search User" onkeyup="filterProfiles()">
+
+            <!-- Add User -->
             <button class="control-button" onclick="window.location.href='/add-user';">
                 <span class="material-symbols-outlined">person_add</span>
             </button>
 
-            <!-- Search -->
-            <input class="contacts-search-bar" type="text" placeholder="Search User" onkeyup="filterProfiles()">
+            <!-- Toggle Table -->
+            <button class="control-button" onclick="toggleView()">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            
+            
         </div>
 
         <!-- Profiles -->
@@ -265,42 +274,89 @@
         }
 
 
-
-        // Display People
-        function displayProfiles(profiles) {
-            const profileContainer = document.getElementById('profile-container');
-
-            let profilesHTML = '';
-            profiles.forEach(person => {
-                profilesHTML += `
-                    <div class="profile-box">
-                        <img class="profile-image" 
-                            src="../assets/headshots/hs-${person.id}.webp" 
-                            alt="${person.firstName}"
-                            onerror="this.onerror=null; this.src='../assets/100.webp';">
-                        <div class="profile-details">
-                            <h3 id="name-${person.id}">${person.firstName} ${person.lastName}</h3>
-                            <p id="email-${person.id}"><a href="mailto:${person.email}">${person.email}</a></p>
-                            <p id="phone-${person.id}"><a href="tel:${person.phone}">${person.phone}</a></p>
-                            <div class="user-control-container">
-                                <button class="user-control-button"><span class="material-symbols-outlined">call</span></button>
-                                <button class="user-control-button" onclick="window.location.href='/modify-user?userID=${person.id}';"><span class="material-symbols-outlined">edit</span></button>
-                                <button class="user-control-button" onclick="openDeleteConfirmationModal(${person.id}, '${person.firstName} ${person.lastName}')"><span class="material-symbols-outlined">person_remove</span></button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            profileContainer.innerHTML = profilesHTML;
-        }
-
-
         //Wait for Full Dom
         window.onload = function() {
             checkAndSwitchTheme();
             checkAndSwitchAccessibility();
         }
+
+
+// Table View
+let tableView = false; // A flag to check if table view is active
+
+function toggleView() {
+    tableView = !tableView; // toggle the view mode
+    displayProfiles(peopleData); // Re-display profiles in the new mode
+}
+
+function displayProfiles(profiles) {
+    const profileContainer = document.getElementById('profile-container');
+    let contentHTML = ""; // Use a single variable for both table and grid views
+
+    if(tableView) {
+        // Display in table view
+        contentHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        profiles.forEach(person => {
+            contentHTML += `
+                <tr>
+                    <td><img class="profile-image-table" src="../assets/headshots/hs-${person.id}.webp" alt="${person.firstName}" onerror="this.onerror=null; this.src='../assets/100.webp';"></td>
+                    <td>${person.firstName} ${person.lastName}</td>
+                    <td><a href="mailto:${person.email}">${person.email}</a></td>
+                    <td><a href="tel:${person.phone}">${person.phone}</a></td>
+                    <td>
+                        <button onclick="window.location.href='/modify-user?userID=${person.id}';"><span class="material-symbols-outlined">edit</span></button>
+                        <button onclick="openDeleteConfirmationModal(${person.id}, '${person.firstName} ${person.lastName}')"><span class="material-symbols-outlined">person_remove</span></button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        contentHTML += '</tbody></table>';
+    } else {
+        // The existing grid view display code
+        profiles.forEach(person => {
+            contentHTML += `
+                <div class="profile-box">
+                    <img class="profile-image" 
+                        src="../assets/headshots/hs-${person.id}.webp" 
+                        alt="${person.firstName}"
+                        onerror="this.onerror=null; this.src='../assets/100.webp';">
+                    <div class="profile-details">
+                        <h3 id="name-${person.id}">${person.firstName} ${person.lastName}</h3>
+                        <p id="email-${person.id}"><a href="mailto:${person.email}">${person.email}</a></p>
+                        <p id="phone-${person.id}"><a href="tel:${person.phone}">${person.phone}</a></p>
+                        <div class="user-control-container">
+                            <button class="user-control-button"><span class="material-symbols-outlined">call</span></button>
+                            <button class="user-control-button" onclick="window.location.href='/modify-user?userID=${person.id}';"><span class="material-symbols-outlined">edit</span></button>
+                            <button class="user-control-button" onclick="openDeleteConfirmationModal(${person.id}, '${person.firstName} ${person.lastName}')"><span class="material-symbols-outlined">person_remove</span></button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    profileContainer.innerHTML = contentHTML;  // Set the container's innerHTML to the constructed HTML
+}
+
+
+
+
+
+
         
     </script>
 </body>
