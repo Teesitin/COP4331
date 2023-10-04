@@ -8,22 +8,17 @@ class User
   private $username = "contact_man";
   private $password = "BxFj&Y4qd!Y6Mw";
   private $database = "cm_db";
-  private $db;
+  protected $db;
   
-  private function connect()
+  public function __construct()
   {
     // Create connection
-      $db = new mysqli($servername, $username, $password, $database);
+    $db = new mysqli($servername, $username, $password, $database);
 
-      // Check connection
-      if ($db->connect_error) {
-        die("Connection failed: " . $db->connect_error);
-      }
-  }
-
-  function createTable()
-  {
-    connect();
+    // Check connection
+    if ($db->connect_error) {
+      die("Connection failed: " . $db->connect_error);
+    }
 
     // User table
     $sql = "CREATE TABLE IF NOT EXISTS User(
