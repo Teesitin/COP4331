@@ -39,9 +39,17 @@ class User
       }
   }
 
-  function set_password($string)
+  function set_password($password, $userName)
   {
-    
+    connect();
+
+    $sql = "UPDATE User SET password = $password WHERE ID = $userName";
+
+    if ($db->query($sql) === TRUE) {
+        echo "Password updated successfully";
+      } else {
+        echo "Error setting password: " . $db->error;
+      }
   }
 
   function verify_password($string)
