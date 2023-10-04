@@ -46,8 +46,7 @@ class Contact
       $homePhone = $this->db->real_escape_string($homePhone);
       $email = $this->db->real_escape_string($email);
 
-      $sql = "INSERT INTO " . $this->table . " (firstName, lastName, mobilePhone, homePhone, email) 
-      VALUES ('$firstName', '$lastName', '$mobilePhone', '$homePhone', '$email')";
+      $sql = "INSERT INTO " . $this->table . " (firstName, lastName, mobilePhone, homePhone, email) VALUES ('$firstName', '$lastName', '$mobilePhone', '$homePhone', '$email')";
 
       if ($this->db->query($sql) === TRUE) {
           echo "Contact created successfully";
