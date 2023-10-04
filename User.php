@@ -8,7 +8,7 @@ class User
   private $username = "contact_man";
   private $password = "BxFj&Y4qd!Y6Mw";
   private $database = "cm_db";
-  protected $db;
+  public $db;
   
   public function __construct()
   {
@@ -41,8 +41,6 @@ class User
 
   function set_password($password, $userName)
   {
-    connect();
-
     $sql = "UPDATE User SET password = $password WHERE ID = $userName";
 
     if ($db->query($sql) === TRUE) {
