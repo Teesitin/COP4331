@@ -99,8 +99,6 @@
 <!-- JS -->
 <script>
 // General
-    const root = document.documentElement;
-
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     }
@@ -165,6 +163,7 @@
 
 // Themes //
     //Get Theme
+    const root = document.documentElement;
     let themeArray = [];
 
     fetch('../data/theme.json')

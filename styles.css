@@ -112,7 +112,7 @@
     padding: 10px;
     font-weight: bold;
     font-size: var(--button-font-size);
-    transition: transform .25s ease;
+    transition: transform .15s ease;
     cursor: pointer;
     color: var(--button-text);
   }
@@ -227,6 +227,10 @@
   }
   
   @media screen and (max-width: 770px) {
+    .main-container {
+      width: 100%;
+    }
+
     .logo {
       width: 70%;
     }
@@ -338,9 +342,6 @@
   /* User Control */
   .user-control-button {
     border-radius: 9999px;
-    width: auto;
-    height: auto;
-    margin: 10px;
   }
   
   .user-control-container {

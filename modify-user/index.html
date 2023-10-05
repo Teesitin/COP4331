@@ -14,79 +14,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
 
     <!-- CSS -->
     <style>
-        :root {
-            /* Colors */
-            --background: #579BB1;
-            --containers: #ECE8DD;
-            --container-border: transparent;
-            --text: #000000;
-            --buttons: #E1D7C6;
-            --button-border: transparent;
-            --button-text: #000000;
-
-            /* Sizes */
-            --global-font-size: 1rem;
-            --button-font-size: 1.02rem;
-            --profile-box-width: 300px;
-        }
-
-        /* Icons */
-
-        .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24
-        }
-
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--containers);
-            border-radius: 6px;
-            opacity: 0.6;
-        }
-
-        .menu-container::-webkit-scrollbar-thumb {
-            background-color: grey;
-            border-radius: 6px;
-            opacity: 0.6;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: transparent;
-        }
-
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            color: var(--text);
-            font-size: var(--global-font-size);
-        }
-
         .main-container {
             width: 1200px;
             display: block;
             padding: 25px;
             margin: auto;
             text-align: center;
-        }
-
-        .logo {
-            width: 512px;
-            height: auto;
-            padding: 25px;
         }
 
         .add-user-container{
@@ -171,31 +109,6 @@
         .custom-file-upload button:active {
             transform: scale(1.1);
         }
-
-        button {
-            background-color: var(--buttons);
-            outline: 2px solid var(--button-border);
-            width: 125px;
-            height: 50px;
-            border: none;
-            border-radius: 5px;
-            margin: 25px;
-            padding: 5px;
-            font-weight: bold;
-            font-size: var(--button-font-size);
-            transition: transform 1s ease;
-            cursor: pointer;
-            color: var(--button-text);
-        }
-
-        button:hover {
-            transform: scale(1.1);
-        }
-
-        button:active {
-            transform: scale(1.1);
-        }
-
     </style>
 </head>
 <body>
@@ -226,11 +139,44 @@
 
 <!-- JS -->
 <script>
-//Theme
+
+// Themes //
+    //Get Theme
+    const root = document.documentElement;
+    let themeArray = [];
+
+    fetch('../data/theme.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            themeArray = data;
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+
+    // Check Theme
+    function checkAndSwitchTheme() {
+        const savedThemeID = localStorage.getItem('themeID');
+
+        if(savedThemeID !== null) {
+            switchTheme(savedThemeID);
+        } 
+        else {
+            localStorage.setItem('themeID', 0);
+        }
+    }
+
+    // Set Theme
     var logo = document.getElementById('logo');
 
     function switchTheme(themeID) {
         var theme = themeArray[themeID];
+        localStorage.setItem('themeID', themeID);
         console.log(theme);
 
         root.style.setProperty('--background', theme['background']);
@@ -240,98 +186,46 @@
         root.style.setProperty('--buttons', theme['buttons']);
         root.style.setProperty('--button-border', theme['button-border']);
         root.style.setProperty('--button-text', theme['button-text']);
+        root.style.setProperty('--search-bar', theme['search-bar']);
+        root.style.setProperty('--search-bar-border', theme['search-bar-border']);
 
         logo.src = '../assets/branding2/' + theme['logo'];
     }
 
+// Accessibility //
 
-        //Get Theme
-        let themeArray = [];
-
-        fetch('../data/theme.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                themeArray = data;
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-
-
-// Get User
-    // Extract userId from the URL parameters
-    let urlParams = new URLSearchParams(window.location.search);
-    let userId = urlParams.get('userID');
-
-    // Function to fetch user data based on userId
-    function getUserData(userId) {
-        fetch('../data/people.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok: ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                const userData = data.find(user => user.id === userId);
-                if (userData) {
-                    displayInfo(userData);
-                } else {
-                    console.error('User not found');
-                }
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
+    function toggleAccessibility(enable) {
+        if (enable) {
+            root.style.setProperty('--global-font-size', '1.3rem');
+            root.style.setProperty('--button-font-size', '1.306rem');
+            root.style.setProperty('--profile-box-width', '480px');
+            localStorage.setItem('accessibility', true);
+            switchTheme(3);
+        } else {
+            root.style.setProperty('--global-font-size', '1rem');
+            root.style.setProperty('--button-font-size', '1.02rem');
+            root.style.setProperty('--profile-box-width', '300px');
+            localStorage.setItem('accessibility', false);
+        }
     }
 
-    // Function to display user info in the input fields
-    function displayInfo(data) {
-        document.querySelector('input[name="first"]').value = data.firstName;
-        document.querySelector('input[name="last"]').value = data.lastName;
-        document.querySelector('input[name="email"]').value = data.email;
-        document.querySelector('input[name="phone"]').value = data.phone;
+    // Check Accessibility
+    function checkAndSwitchAccessibility() {
+        const savedAccessibility = localStorage.getItem('accessibility');
+
+        if(savedAccessibility !== null) {
+            toggleAccessibility(savedAccessibility === "true"); 
+        } 
+        else {
+            localStorage.setItem('accessibility', false);
+        }
     }
 
-    // Call getUserData function if userId is available
-    if (userId) {
-        getUserData(userId);
-    } else {
-        console.error('No userID parameter in the URL');
-    }
-
-// Set User
-    document.querySelector('.submit-button').addEventListener('click', () => {
-        const updatedData = {
-            firstName: document.querySelector('input[name="first"]').value,
-            lastName: document.querySelector('input[name="last"]').value,
-            email: document.querySelector('input[name="email"]').value,
-            phone: document.querySelector('input[name="phone"]').value
-        };
-
-        console.log(updatedData);
-
-        fetch('http://localhost:8000/data/people.json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedData),
-        })
-        .then(response => response.json())
-        .then(() => {
-            // window.location.href = '/';
-        });
-    });
-
-
-
-
+//Wait for Full Dom
+window.onload = function() {
+    checkAndSwitchTheme();
+    checkAndSwitchAccessibility();
+}
 </script>
 
 
