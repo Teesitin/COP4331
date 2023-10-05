@@ -264,6 +264,10 @@
 
     // Filter People
     function filterProfiles() {
+
+
+
+        
         const searchInput = document.querySelector('.contacts-search-bar').value.toLowerCase();
         const filteredProfiles = peopleData.filter(person => {
             return person.firstName.toLowerCase().startsWith(searchInput) || person.lastName.toLowerCase().startsWith(searchInput);
