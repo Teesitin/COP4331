@@ -30,29 +30,7 @@ if( $connection->connect_error )
 
 
     }
-    function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
-    function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-    function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-    function returnWithInfo( $firstName, $lastName, $id , $profilelmg )
-	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","profilelmg":"' . $profilelmg . '","error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
+   
 
-class contact
-{
-    
-    
-}
+
 ?>
