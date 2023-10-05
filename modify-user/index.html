@@ -127,14 +127,29 @@
             <div class="custom-file-upload">
                 <input type="file" id="file-upload" name="fileupload" />
                 <button onclick="document.getElementById('file-upload').click();">Upload Picture</button>
+
             </div>
-
-            <button class="button" onclick="window.location.href='/';">Cancel</button>
-            <button class="submit-button">Update</button>
+            
+            <div>
+                <button onclick="window.location.href='/contacts';">Cancel</button>
+                <button id="deleteButton">Remove User</button>
+                <button class="submit-button">Update</button>
+            </div>
     </div>
-
 </div>
 
+    <!-- Delete Menu -->
+    <div id="deleteConfirmationModal" class="menu-modal">
+        <div class="menu-container-delete">
+            <div class="menu-content-delete" style="text-align: center;">
+                <span>Are you sure you want to delete
+                    <span id="userNameToDelete"></span>?
+                </span>
+                <button onclick="confirmDelete()">Delete User</button>
+                <button onclick="closeDeleteConfirmationModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
 
 
 <!-- JS -->
@@ -175,6 +190,9 @@
         document.querySelector('input[name="last"]').value = data.lastName;
         document.querySelector('input[name="email"]').value = data.email;
         document.querySelector('input[name="phone"]').value = data.phone;
+
+        const deleteButton = document.getElementById('deleteButton');
+        deleteButton.setAttribute('onclick', `openDeleteConfirmationModal('${data.id}', '${data.firstName} ${data.lastName}')`);
     }
 
     // Call getUserData function if userId is available
@@ -294,6 +312,50 @@
             localStorage.setItem('accessibility', false);
         }
     }
+
+
+    // Delete Modal Animation Logic
+    var deleteModalOpened = false;
+    var deleteModal = document.getElementById('deleteConfirmationModal');
+
+    function openDeleteConfirmationModal(userId, userName) {
+        userIdToDelete = userId;  // Store the user ID
+
+        document.getElementById('userNameToDelete').innerText = userName;
+
+
+        if (!deleteModalOpened) {
+            deleteModal.style.display = "block";
+            deleteModal.style.animation = "menu-animate-in 0.5s";
+            deleteModalOpened = !deleteModalOpened;
+            document.body.style.overflow = "hidden";
+        }
+    }
+
+    function closeDeleteConfirmationModal() {
+        if (deleteModalOpened) {
+            deleteModal.style.animation = "menu-animate-out 0.5s";
+            setTimeout(function() {
+                deleteModal.style.display = "none";
+            }, 490);
+            document.body.style.overflow = "auto";
+            deleteModalOpened = !deleteModalOpened;
+        }
+    }
+
+    function confirmDelete() {
+        // Your delete logic here
+        closeDeleteConfirmationModal();
+    }
+
+
+
+
+
+
+
+
+
 
 //Wait for Full Dom
 window.onload = function() {
