@@ -1,5 +1,5 @@
 <?php
-$userData=getRequestInfo();
+$inData=getRequestInfo();
 
 $connection=new mysqli("hostname","user","password","database");
 if( $connection->connect_error )
@@ -19,31 +19,12 @@ if( $connection->connect_error )
 		if( $row = $result->fetch_assoc()  )
 		{
 			//returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg'], $row['username'],$row['contacs']);
-		    $user = returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'],$row['password'], $row['profilelmg'], $row['username']);;
-            header("Location: Retreive.php?user=" . urlencode($user));
-            exit();
-		}
-		/*if ($row = $result->fetch_assoc()) {
-			if ($result->num_rows > 0) {
-				echo "<table border='1'>";
-				echo "<tr><th>ID</th><th>Name</th><th>Lastname</th><th>Email</th><th>Phone</th></tr>";
-				while ($row = $result->fetch_assoc()) {
-					echo "<tr>";
-					echo "<td>" . $row["id"] . "</td>";
-					echo "<td>" . $row["name"] . "</td>";
-					echo "<td>" . $row["lastname"] . "</td>";
-					echo "<td>" . $row["email"] . "</td>";
-					echo "<td>" . $row["phone"] . "</td>";
-					echo "</tr>";
-				}
-				echo "</table>";
-			} else {
-				echo "No contacts found.";
-			}*/
-			/*$user = returnWithInfo($row['firstName'], $row['lastName'], $row['ID'],$row['password'], $row['profilelmg'],$row['username']);
-			sendResultInfoAsJson($user); // Send the JSON data as the HTTP response
-			//	tHIS Json data will be use in the retreiveC php*/
+		    $user = returnWithInfo( $row['Name'], $row['ID'], $row['leads'],$row['closed'], $row['sales'], $row['hours'],$row['phone'],$row['email']);
 			
+            $userDataJSON= json_encode($user);
+			header("Location: Retreive.php?user=" . urlencode($userDataJSON));
+            exit();
+		}	
 		
 		else
 		{
@@ -65,23 +46,14 @@ if( $connection->connect_error )
 		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-    /*function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		//echo $obj;
-		return $obj;
-	}*/
+
 	function sendResultInfoAsJson($obj) {
 		header('Content-type: application/json');
 		echo $obj; // Echo the JSON data to send it as the HTTP response
 	}
-    /*function returnWithInfo( $firstName, $lastName, $id , $profilelmg )
-	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","profilelmg":"' . $profilelmg . '","error":""}';
-		sendResultInfoAsJson( $retValue );
-	}*/
-	function returnWithInfo($firstName, $lastName, $id,$password, $profileImg,$username) {
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","password":"' . $password . '","profileImg":"' . $profileImg . '","username":"' . $username . '",,"error":""}';
+
+	function returnWithInfo($Name,$id,$leads, $closed,$sales,$hours,$phone,$email) {
+		$retValue = '{"id":' . $id . ',"firstName":"' . $Name . '","leads":"' . $leads . '","closed":"' . $closed . '","sales":"' . $sales . '","hours":"' . $hours . '","phone":"' . $phone . '","email":"' . $email .'","error":""}';
 		return $retValue; // Return the JSON data
 	}
 	
