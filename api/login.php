@@ -22,7 +22,7 @@ if( $connection->connect_error )
 		    $user = returnWithInfo( $row['Name'], $row['ID'], $row['leads'],$row['closed'], $row['sales'], $row['hours'],$row['phone'],$row['email']);
 			
             $userDataJSON= json_encode($user);
-			header("Location: Retreive.php?user=" . urlencode($userDataJSON));
+			header("Location: menu.php?user=" . urlencode($userDataJSON));
             exit();
 		}	
 		
