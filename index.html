@@ -58,7 +58,7 @@
                         <button id="themeLight" onclick="switchTheme(0)">Online Day</button>
                         <button id="themeLight" onclick="switchTheme(1)">Online Night</button>
                         <button id="themeLight" onclick="switchTheme(2)">Dual Hue</button>
-                        <button id="themeLight" onclick="switchTheme(3)">High Contrast</button>
+                        <button id="themeLight" onclick="switchTheme(3)">Access<wbr>ibility</button>
                     </div>
                 </div>
                 <div>
@@ -222,6 +222,7 @@
             root.style.setProperty('--button-font-size', '1.306rem');
             root.style.setProperty('--profile-box-width', '480px');
             localStorage.setItem('accessibility', true);
+            switchTheme(3);
         } else {
             root.style.setProperty('--global-font-size', '1rem');
             root.style.setProperty('--button-font-size', '1.02rem');
