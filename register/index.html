@@ -68,7 +68,7 @@
             border: 2px solid var(--search-bar-border);
             background-color: var(--search-bar);
             color: var(--text);
-            
+
             border-radius: 9999px;
 
             width: 500px;
@@ -246,7 +246,13 @@
 
 //Wait for Full Dom
 window.onload = function() {
-    checkAndSwitchTheme();
+    try {
+        checkAndSwitchTheme();
+    }
+    catch(err) {
+        checkAndSwitchTheme();
+    }
+    
     checkAndSwitchAccessibility();
 }
 
