@@ -1,7 +1,42 @@
 <?php
-$inData=getRequestInfo();
+include('request_handler.php');
+include('user_controller.php');
+include('User.php');
+include('db.php');
+//$inData=getRequestInfo();
 
-$connection=new mysqli("hostname","user","password","database");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Perform authentication here
+	//$connection = new $db;
+ $SQL = "SELECT * FROM user WHERE userName = ?";
+ $stmt = $db->prepare($SQL);
+ $stmt->bind_param("s", $username);
+ $stmt->execute();
+ $result = $stmt->get_result();
+ if ($result->num_rows > 0) {
+    $userData = $result->fetch_assoc();
+	if(verify_password($userData["password"])==1)
+	{
+
+	}
+ } 
+ else {
+    echo 'the user name typed does not exits.Sign up please.';
+	$user = new User();
+    $user = create($user);
+	echo 'User created';
+
+ }
+}
+
+
+
+
+
+/*$connection=new mysqli("hostname","user","password","database");
 if( $connection->connect_error )
 	{
 		 returnWithError( $connection->connect_error );
@@ -30,33 +65,14 @@ if( $connection->connect_error )
 		{
 			returnWithError("No Records Found");
 		}
-	}
+	}*/
 
 
 
 
 
 
-    function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
-    function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-
-	function sendResultInfoAsJson($obj) {
-		header('Content-type: application/json');
-		echo $obj; // Echo the JSON data to send it as the HTTP response
-	}
-
-	function returnWithInfo($Name,$id,$leads, $closed,$sales,$hours,$phone,$email) {
-		$retValue = '{"id":' . $id . ',"firstName":"' . $Name . '","leads":"' . $leads . '","closed":"' . $closed . '","sales":"' . $sales . '","hours":"' . $hours . '","phone":"' . $phone . '","email":"' . $email .'","error":""}';
-		return $retValue; // Return the JSON data
-	}
-
+    
 
 
 ?>

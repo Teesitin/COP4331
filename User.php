@@ -13,14 +13,15 @@ class User
   public $password;
   
   // hashes a password and stores it in the user object
-  function set_password($string)
+  function set_password($string)//add $password
   {
     $password = password_hash($string, PASSWORD_DEFAULT);
+    //return $password;
   }
 
   // verifies if password passed is equal to password stored in db
   // returns 1 if both passwords are equal, returns 0 otherwise
-  function verify_password($string)
+  function verify_password($string)//$password
   {
     $hashed_string = password_hash($string, PASSWORD_DEFAULT);
 
