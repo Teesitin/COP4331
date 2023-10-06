@@ -1,58 +1,33 @@
-<!-- Establishing Connection-->
 <?php
 
 class User
 {
-  // Change these fields if testing on local mysql server
-  private $servername = "localhost";
-  private $username = "contact_man";
-  private $password = "BxFj&Y4qd!Y6Mw";
-  private $database = "cm_db";
-  public $db;
+  public $ID;
+  public $firstName;
+  public $lastName ;
+  public $userName; 
+	public $profileImg; 
+  public $dateCreated;
+  public $dateLastLoggedIn;
+  public $password;
   
-  public function __construct()
+  function set_password($string)
   {
-    // Create connection
-    $db = new mysqli($servername, $username, $password, $database);
-
-    // Check connection
-    if ($db->connect_error) {
-      die("Connection failed: " . $db->connect_error);
-    }
-
-    // User table
-    $sql = "CREATE TABLE IF NOT EXISTS User(
-    ID INT(6) PRIMARY KEY,
-    firstName VARCHAR(50),
-    lastName VARCHAR(50),
-    userName VARCHAR(50),
-    profileImg VARCHAR(256),
-    dateCreated DATETIME,
-    dateLastLoggedIn DATETIME,
-    'password' VARCHAR(256)
-    )";
-  
-    if ($db->query($sql) === TRUE) {
-      echo "Table User created successfully";
-      } else {
-      echo "Error creating table: " . $db->error;
-      }
+    
   }
 
-  function set_password($password, $userName)
-  {
-    $sql = "UPDATE User SET password = $password WHERE ID = $userName";
-
-    if ($db->query($sql) === TRUE) {
-        echo "Password updated successfully";
-      } else {
-        echo "Error setting password: " . $db->error;
-      }
-  }
-
+  // verifies if password passed is equal to password stored in db
+  // returns 1 if both passwords are equal, returns 0 otherwise
   function verify_password($string)
   {
+    $hashed_string = password_hash($string, PASSWORD_DEFAULT);
 
+    if ($hashed_string == $password){
+      return 1;
+    }
+    else{
+      return 0;
+    }
   }
 
 }
