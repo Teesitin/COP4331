@@ -11,9 +11,10 @@ class User
   public $dateLastLoggedIn;
   public $password;
   
+  // hashes a password and stores it in the user object
   function set_password($string)
   {
-    
+    $password = password_hash($string, PASSWORD_DEFAULT);
   }
 
   // verifies if password passed is equal to password stored in db
@@ -29,7 +30,6 @@ class User
       return 0;
     }
   }
-
 }
 
-?>
+?> 

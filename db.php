@@ -21,7 +21,7 @@
     lastName VARCHAR(50),
     userName VARCHAR(50),
     profileImg VARCHAR(256),
-    dateCreated DATETIME,
+    dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
     dateLastLoggedIn DATETIME,
     'password' VARCHAR(256)
     )";

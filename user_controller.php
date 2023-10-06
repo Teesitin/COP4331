@@ -4,16 +4,15 @@
 	include('db.php');
 	
 	// creates new user and stores it in db
-	function create($firstName, $lastName, $userName, 
-					$profileImg, $dateCreated, $dateLastLoggedIn, $password)
+	function create($user)
 	{
-		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+		$user->set_password($user->password);
 
 		$stmt = $db->prepare("INSERT INTO User (firstName, lastName, userName, 
-						profileImg, dateCreated, dateLastLoggedIn, 'password') VALUES (?,?,?,?,?,?,?)");
+						profileImg, dateLastLoggedIn, 'password') VALUES (?,?,?,?,?,?)");
 
-		$stmt->bind_param("sssssss", $firstName, $lastName, $userName, $profileImg, 
-						$dateCreated, $dateLastLoggedIn, $hashed_password);
+		$stmt->bind_param("ssssss", $user->firstName, $user->lastName, $user->userName, $user->profileImg, 
+						 $user->dateLastLoggedIn, $user->password);
 
 		$stmt->execute();	
 	}
@@ -57,15 +56,16 @@
 		return $user;
 	}
 
-	// updates the userName of a user with a certain ID 
+	// updates the info of a user with a certain ID (also requires the user obj to be sent)
 	// returns 1 if updated succesfully, returns 0 otherwise
-	function update($ID, $firstName, $lastName, $userName, $profileImg, 
-							$dateCreated, $dateLastLoggedIn, $password)
+	function update($user)
 	{
+		$user->set_password($user->password);
+		
 		$sql = "UPDATE User 
-				SET firstName = $firstName, lastName = $lastName, userName = $userName,  profileImg = $profileImg,
-				dateCreated = $dateCreated, dateLastLoggedIn = $dateLastLoggedIn, 'password' = $password			
-				WHERE ID = $ID";
+				SET firstName = $user->firstName, lastName = $user->lastName, userName = $user->userName, 
+				profileImg = $user->profileImg, dateLastLoggedIn = $user->dateLastLoggedIn, 'password' = $user->password			
+				WHERE ID = $user->ID";
 
 		if ($db->query($sql) === TRUE) {
 			echo "User updated successfully";
