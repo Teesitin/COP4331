@@ -1,59 +1,79 @@
 <?php
 
-	require_once('User.php');
-	require_once('generateUniqueID.php');
-	$user = new User;
-
+	include('User.php');
+	include('db.php');
+	
+	// creates new user and stores it in db
 	function create($firstName, $lastName, $userName, 
 					$profileImg, $dateCreated, $dateLastLoggedIn, $password)
 	{
-		$ID = generateUniqueID();
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-		$sql = "INSERT INTO User (ID, firstName, lastName, userName, 
-		profileImg, dateCreated, dateLastLoggedIn, 'password')
-		Values ($ID, $firstName, $lastName, $userName, 
-		$profileImg, $dateCreated, $dateLastLoggedIn, $password)";
-		
-		
-		if ($user->db->query($sql) === TRUE) {
-			echo "New user created successfully";
-		  } else {
-			die("Error: " . $sql . "<br>" . $user->db->error);
-		  }
+		$stmt = $db->prepare("INSERT INTO User (firstName, lastName, userName, 
+						profileImg, dateCreated, dateLastLoggedIn, 'password') VALUES (?,?,?,?,?,?,?)");
 
-		  //update to people.json goes here
+		$stmt->bind_param("sssssss", $firstName, $lastName, $userName, $profileImg, 
+						$dateCreated, $dateLastLoggedIn, $hashed_password);
+
+		$stmt->execute();	
 	}
 
-	function delete($ID)
+	// deletes user from db, user is selected through their username
+	// returns 1 if deleted succesfully, returns 0 otherwise
+	function delete($userName)
 	{
-		$sql = "DELETE FROM User WHERE ID = $ID";
+		$sql = "DELETE FROM User WHERE userName = $userName";
 
-		if ($user->db->query($sql) === TRUE) {
+		if ($db->query($sql) === TRUE) {
 			echo "User deleted successfully";
+			return 1;
 		  } else {
-			die("Error: " . $sql . "<br>" . $user->db->error);
+			echo "Error: " . $sql . "<br>" . $db->error;
+			return 0;
 		  }
 
-		  //update to people.json goes here
-
 	}
 
-	function read($ID)
+	// gets the info from user and stores it in user object to send to API
+	function read($userName)
 	{
-		$result = $user->db->query("SELECT * FROM User WHERE ID = $ID");
+		$user = new User;
 
-		if($result === FALSE){
-			die("Error: " . $result);
-		}
+		$sql = "SELECT * FROM User WHERE userName = $userName";
 
-		$data[] = $result->fetch_assoc();
+		$result = $db->query($sql);
 
-		return json_encode($data);
+		$lst = $result->fetch_assoc();
+
+		$user->ID = $lst["ID"];
+  		$user->firstName = $lst["firstName"];
+  		$user->lastName = $lst["lastName"];
+  		$user->userName = $lst["userName"]; 
+		$user->profileImg = $lst["profileImg"]; 
+  		$user->dateCreated = $lst["dateCreated"];
+  		$user->dateLastLoggedIn = $lst["dateLastLoggedIn"];
+  		$user->password = $lst["password"];
+
+		return $user;
 	}
 
-	function update_jason()
+	// updates the userName of a user with a certain ID 
+	// returns 1 if updated succesfully, returns 0 otherwise
+	function update($ID, $firstName, $lastName, $userName, $profileImg, 
+							$dateCreated, $dateLastLoggedIn, $password)
 	{
+		$sql = "UPDATE User 
+				SET firstName = $firstName, lastName = $lastName, userName = $userName,  profileImg = $profileImg,
+				dateCreated = $dateCreated, dateLastLoggedIn = $dateLastLoggedIn, 'password' = $password			
+				WHERE ID = $ID";
 
+		if ($db->query($sql) === TRUE) {
+			echo "User updated successfully";
+			return 1;
+  		} else {
+			echo "Error: " . $sql . "<br>" . $db->error;
+			return 0;
+  		}
 	}
 
 ?>
