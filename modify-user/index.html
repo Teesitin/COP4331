@@ -15,7 +15,7 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 
     <!-- CSS -->
     <style>
@@ -44,13 +44,15 @@
         }
 
         input{
-            border: transparent;
-            border-radius: 9999px;
+            border: 2px solid var(--search-bar-border);
+            background-color: var(--search-bar);
+            color: var(--text);
 
             width: 500px;
             height: 25px;
 
-
+            border-radius: 9999px;
+            
             padding: 15px;
             margin: 10px;
 
@@ -127,18 +129,110 @@
             <div class="custom-file-upload">
                 <input type="file" id="file-upload" name="fileupload" />
                 <button onclick="document.getElementById('file-upload').click();">Upload Picture</button>
+
             </div>
-
-            <button class="button" onclick="window.location.href='/';">Cancel</button>
-            <button class="submit-button">Submit</button>
+            
+            <div>
+                <button onclick="window.location.href='/contacts';">Cancel</button>
+                <button id="deleteButton">Remove User</button>
+                <button class="submit-button">Update</button>
+            </div>
     </div>
-
 </div>
 
+    <!-- Delete Menu -->
+    <div id="deleteConfirmationModal" class="menu-modal">
+        <div class="menu-container-delete">
+            <div class="menu-content-delete" style="text-align: center;">
+                <span>Are you sure you want to delete
+                    <span id="userNameToDelete"></span>?
+                </span>
+                <button onclick="confirmDelete()">Delete User</button>
+                <button onclick="closeDeleteConfirmationModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
 
 
 <!-- JS -->
 <script>
+
+
+
+// Get User
+    // Extract userId from the URL parameters
+    let urlParams = new URLSearchParams(window.location.search);
+    let userId = urlParams.get('userID');
+
+    // Function to fetch user data based on userId
+    function getUserData(userId) {
+        fetch('../data/people.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const userData = data.find(user => user.id === userId);
+                if (userData) {
+                    displayInfo(userData);
+                } else {
+                    console.error('User not found');
+                }
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    }
+
+    // Function to display user info in the input fields
+    function displayInfo(data) {
+        document.querySelector('input[name="first"]').value = data.firstName;
+        document.querySelector('input[name="last"]').value = data.lastName;
+        document.querySelector('input[name="email"]').value = data.email;
+        document.querySelector('input[name="phone"]').value = data.phone;
+
+        const deleteButton = document.getElementById('deleteButton');
+        deleteButton.setAttribute('onclick', `openDeleteConfirmationModal('${data.id}', '${data.firstName} ${data.lastName}')`);
+    }
+
+    // Call getUserData function if userId is available
+    if (userId) {
+        getUserData(userId);
+    } else {
+        console.error('No userID parameter in the URL');
+    }
+
+// Set User
+    document.querySelector('.submit-button').addEventListener('click', () => {
+        const updatedData = {
+            firstName: document.querySelector('input[name="first"]').value,
+            lastName: document.querySelector('input[name="last"]').value,
+            email: document.querySelector('input[name="email"]').value,
+            phone: document.querySelector('input[name="phone"]').value
+        };
+
+        console.log(updatedData);
+
+        fetch('http://localhost:8000/data/people.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+        })
+        .then(response => response.json())
+        .then(() => {
+            // window.location.href = '/';
+        });
+    });
+
+
+
+
+
+
 
 // Themes //
     //Get Theme
@@ -220,6 +314,50 @@
             localStorage.setItem('accessibility', false);
         }
     }
+
+
+    // Delete Modal Animation Logic
+    var deleteModalOpened = false;
+    var deleteModal = document.getElementById('deleteConfirmationModal');
+
+    function openDeleteConfirmationModal(userId, userName) {
+        userIdToDelete = userId;  // Store the user ID
+
+        document.getElementById('userNameToDelete').innerText = userName;
+
+
+        if (!deleteModalOpened) {
+            deleteModal.style.display = "block";
+            deleteModal.style.animation = "menu-animate-in 0.5s";
+            deleteModalOpened = !deleteModalOpened;
+            document.body.style.overflow = "hidden";
+        }
+    }
+
+    function closeDeleteConfirmationModal() {
+        if (deleteModalOpened) {
+            deleteModal.style.animation = "menu-animate-out 0.5s";
+            setTimeout(function() {
+                deleteModal.style.display = "none";
+            }, 490);
+            document.body.style.overflow = "auto";
+            deleteModalOpened = !deleteModalOpened;
+        }
+    }
+
+    function confirmDelete() {
+        // Your delete logic here
+        closeDeleteConfirmationModal();
+    }
+
+
+
+
+
+
+
+
+
 
 //Wait for Full Dom
 window.onload = function() {

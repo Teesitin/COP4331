@@ -16,7 +16,7 @@
 
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 
     <!-- CSS -->
     <style>
@@ -45,7 +45,10 @@
         }
 
         input{
-            border: transparent;
+            border: 2px solid var(--search-bar-border);
+            background-color: var(--search-bar);
+            color: var(--text);
+            
             border-radius: 9999px;
 
             width: 500px;
@@ -134,7 +137,7 @@
                 <button onclick="document.getElementById('file-upload').click();">Upload Picture</button>
             </div>
 
-            <button class="button" onclick="window.location.href='/';">Cancel</button>
+            <button class="button" onclick="window.location.href='/contacts';">Cancel</button>
             <button class="submit-button">Submit</button>
 
 

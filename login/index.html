@@ -15,7 +15,7 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 
 
     <!-- CSS -->
@@ -65,7 +65,10 @@
         }
 
         input{
-            border: transparent;
+            border: 2px solid var(--search-bar-border);
+            background-color: var(--search-bar);
+            color: var(--text);
+            
             border-radius: 9999px;
 
             width: 500px;
@@ -141,7 +144,10 @@
     <form action="../api/login.php" method="post" class="user-login-container">
         <input type="text" name="username" placeholder="Username" required>
         <input type="text" name="password" placeholder="Password" required>
-        <button class="submit-button">Login</button>
+        <div>
+            <button id="register-button">Register</button>
+            <button id="login-button">Login</button>
+        </div>
     </form>
 </div>
 
