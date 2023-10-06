@@ -397,12 +397,19 @@ window.addEventListener('resize', adjustViewBasedOnScreenSize);
 
 //Wait for Full Dom
 window.onload = function() {
-    checkAndSwitchTheme();
+    try {
+        checkAndSwitchTheme();
+    }
+    catch(err) {
+        checkAndSwitchTheme();
+    }
+    
     checkAndSwitchAccessibility();
-
     currentlyLoadedView = tableView ? 'table' : 'grid';
     adjustViewBasedOnScreenSize();
 }
+
+
 </script>
 </body>
 </html>

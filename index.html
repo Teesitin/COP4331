@@ -237,9 +237,16 @@
 
 //Wait for Full Dom
 window.onload = function() {
-    checkAndSwitchTheme();
+    try {
+        checkAndSwitchTheme();
+    }
+    catch(err) {
+        checkAndSwitchTheme();
+    }
+    
     checkAndSwitchAccessibility();
 }
+
 
 
 </script>
