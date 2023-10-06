@@ -18,7 +18,7 @@ function getRequestInfo()
 	function returnWithInfo( $obj )
 	{
 		$obj= json_encode($obj);
-        returnWithInfo($obj);
+        sendResultInfoAsJson($obj);
 		
 	}
 ?>
