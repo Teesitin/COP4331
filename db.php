@@ -33,21 +33,20 @@
   }
 
   // Contact table
-  $sql = "CREATE TABLE IF NOT EXISTS User(
+  $sql = "CREATE TABLE IF NOT EXISTS Contacts(
     ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    userID VARCHAR(50),
     firstName VARCHAR(50),
     lastName VARCHAR(50),
-    userName VARCHAR(50),
-    profileImg VARCHAR(256),
-    dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
-    dateLastLoggedIn DATETIME,
-    'password' VARCHAR(256)
-    )";
+    mobilePhone VARCHAR(15),
+    homePhone VARCHAR(15),
+    email VARCHAR(50)
+  )";
 
   if ($db->query($sql) === TRUE) {
-  echo "Table Contacts created successfully";
+    echo ". Table created successfully";
   } else {
-  echo "Error creating table: " . $db->error;
+    echo "Error creating table: " . $db->error;
   }
 
 ?>

@@ -2,8 +2,8 @@
 
 class Contact
 {
-  // ID of user who created the contact
   public $ID;
+  public $userID;
   public $firstName;
   public $lastName;
   public $mobilePhone;
