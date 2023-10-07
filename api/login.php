@@ -1,78 +1,32 @@
 <?php
-include('request_handler.php');
-include('user_controller.php');
-include('User.php');
-include('db.php');
-//$inData=getRequestInfo();
+require('handlers/request_handler.php');
+require('../user_controller.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+$inData=getRequestInfo();
 
-    // Perform authentication here
-	//$connection = new $db;
- $SQL = "SELECT * FROM user WHERE userName = ?";
- $stmt = $db->prepare($SQL);
- $stmt->bind_param("s", $username);
- $stmt->execute();
- $result = $stmt->get_result();
- if ($result->num_rows > 0) {
-    $userData = $result->fetch_assoc();
-	if(verify_password($userData["password"])==1)
-	{
+if ($inData) {
+	try {
+		$user = read($inData["userName"]);
 
-	}
- } 
- else {
-    echo 'the user name typed does not exits.Sign up please.';
-	$user = new User();
-    $user = create($user);
-	echo 'User created';
+		if ($user) {
+			if ($user->verify_password($inData["password"]) == 1) {
+				$user->dateLastLoggedIn = date('Y-m-d H:i:s');
+				update($user);
+				returnWithInfo($user);
 
- }
-}
-
-
-
-
-
-/*$connection=new mysqli("hostname","user","password","database");
-if( $connection->connect_error )
-	{
-		 returnWithError( $connection->connect_error );
-	}
-    else{
-        //option one
-
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $stmt = $connection->prepare("SELECT ID,firstName,lastName FROM User WHERE Login=? AND Password =?");// this is a hold
-        $stmt->bind_param("ss", $inData["login"], $inData["password"]);
-		$stmt->execute();
-		$result = $stmt->get_result();
-        //If statement  where the user log in exist
-		if( $row = $result->fetch_assoc()  )
-		{
-			//returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg'], $row['username'],$row['contacs']);
-		    $user = returnWithInfo( $row['Name'], $row['ID'], $row['leads'],$row['closed'], $row['sales'], $row['hours'],$row['phone'],$row['email']);
-
-            $userDataJSON= json_encode($user);
-			header("Location: menu.php?user=" . urlencode($userDataJSON));
-            exit();
-		}	
-
-		else
-		{
-			returnWithError("No Records Found");
+			}
+			else if ($user->verify_password($inData["password"]) == 0){
+				returnWithError('{"status":"error", "error":"Password does not match"}');
+			}
 		}
-	}*/
+		else {
+			returnWithError('{"status": "No User"}');
+		}
 
-
-
-
-
-
-    
-
+	}
+	catch (Exception $e) {
+		returnWithError('{"status": "error", "error" :' + $e +'}');
+	}
+}
 
 ?>

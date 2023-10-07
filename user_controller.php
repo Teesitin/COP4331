@@ -1,20 +1,25 @@
 <?php
+	require('User.php');
+	require('db.php');
 
-	include('User.php');
-	include('db.php');
-	
-	// creates new user and stores it in db
+	//creates new user and stores it in db
 	function create($user)
-	{
-		$user->set_password($user->password);
+	{	
+		global $db;
+
+		if (read($user->userName)) {
+			return 0;
+		}
 
 		$stmt = $db->prepare("INSERT INTO User (firstName, lastName, userName, 
-						profileImg, dateLastLoggedIn, 'password') VALUES (?,?,?,?,?,?)");
+						profileImg, dateLastLoggedIn, password) VALUES (?,?,?,?,?,?)");
 
 		$stmt->bind_param("ssssss", $user->firstName, $user->lastName, $user->userName, $user->profileImg, 
 						 $user->dateLastLoggedIn, $user->password);
 
-		$stmt->execute();	
+		$stmt->execute();
+
+		return 1;
 	}
 
 	// deletes user from db, user is selected through their username
@@ -22,7 +27,7 @@
 	function delete($userName)
 	{
 		$sql = "DELETE FROM User WHERE userName = $userName";
-
+		global $db;
 		if ($db->query($sql) === TRUE) {
 			echo "User deleted successfully";
 			return 1;
@@ -36,14 +41,20 @@
 	// gets the info from user and stores it in user object to send to API
 	function read($userName)
 	{
+		global $db;
 		$user = new User;
 
-		$sql = "SELECT * FROM User WHERE userName = $userName";
+		$stmt = $db->prepare("SELECT * FROM User WHERE userName=?");
+		$stmt->bind_param("s", $userName);
+		$stmt->execute();
+		$result = $stmt->get_result();
 
-		$result = $db->query($sql);
+		if (mysqli_num_rows($result) == 0) {
+			return null;
+		}
 
 		$lst = $result->fetch_assoc();
-
+	
 		$user->ID = $lst["ID"];
   		$user->firstName = $lst["firstName"];
   		$user->lastName = $lst["lastName"];
@@ -60,18 +71,17 @@
 	// returns 1 if updated succesfully, returns 0 otherwise
 	function update($user)
 	{
-		$user->set_password($user->password);
+		global $db;
+		// $user->set_password($user->password);
 		
-		$sql = "UPDATE User 
-				SET firstName = $user->firstName, lastName = $user->lastName, userName = $user->userName, 
-				profileImg = $user->profileImg, dateLastLoggedIn = $user->dateLastLoggedIn, 'password' = $user->password			
-				WHERE ID = $user->ID";
-
-		if ($db->query($sql) === TRUE) {
+		$stmt = $db->prepare("UPDATE User SET firstName=?, lastName=?, userName=?, profileImg=?, dateLastLoggedIn=CURRENT_TIMESTAMP	WHERE ID=?");
+		$stmt->bind_param("ssssi", $user->firstName, $user->lastName, $user->userName, $user->profileImg, $user->ID);
+		
+		
+		if ($stmt->execute() === TRUE) {
 			echo "User updated successfully";
 			return 1;
   		} else {
-			echo "Error: " . $sql . "<br>" . $db->error;
 			return 0;
   		}
 	}
