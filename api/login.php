@@ -1,8 +1,8 @@
 <?php
 require('handlers/request_handler.php');
-require('../user_controller.php');
-require('../User.php');
-require('../db.php');
+require('../../user_controller.php');
+require('../../User.php');
+require('../../db.php');
 $inData=getRequestInfo();
 
 
@@ -13,7 +13,7 @@ $inData=getRequestInfo();
 	  if($user)
 	  {
 		if(verify_password($user->password)==1){
-			$user->dateLastLoggedIn = update();
+			
 			return returnWithInfo($user);
 		}
 

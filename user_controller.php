@@ -6,6 +6,7 @@
 	// creates new user and stores it in db
 	function create($user)
 	{
+        global $db;
 		$user->set_password($user->password);
 
 		$stmt = $db->prepare("INSERT INTO User (firstName, lastName, userName, 
@@ -15,12 +16,14 @@
 						 $user->dateLastLoggedIn, $user->password);
 
 		$stmt->execute();	
+        return 1;
 	}
 
 	// deletes user from db, user is selected through their username
 	// returns 1 if deleted succesfully, returns 0 otherwise
 	function delete($userName)
 	{
+        global $db;
 		$sql = "DELETE FROM User WHERE userName = $userName";
 
 		if ($db->query($sql) === TRUE) {
@@ -36,6 +39,7 @@
 	// gets the info from user and stores it in user object to send to API
 	function read($userName)
 	{
+        global $db;
 		$user = new User;
 
 		$sql = "SELECT * FROM User WHERE userName = $userName";
@@ -60,6 +64,7 @@
 	// returns 1 if updated succesfully, returns 0 otherwise
 	function update($user)
 	{
+        global $db;
 		$user->set_password($user->password);
 		
 		$sql = "UPDATE User 
