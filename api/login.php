@@ -1,62 +1,67 @@
 <?php
+require('handlers/request_handler.php');
+require('../user_controller.php');
+<<<<<<< HEAD
+require('../User.php');
+require('../db.php');
 $inData=getRequestInfo();
 
-$connection=new mysqli("hostname","user","password","database");
-if( $connection->connect_error )
+
+ if ($inData) {
+    try
 	{
-		 returnWithError( $connection->connect_error );
-	}
-    else{
-        //option one
+      $user = read($inData->username);
+	  if($user)
+	  {
+		if($user->verify_password($inData["username"])==1){
+			
+			return returnWithInfo($user);
+=======
 
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $stmt = $connection->prepare("SELECT ID,firstName,lastName FROM User WHERE Login=? AND Password =?");// this is a hold
-        $stmt->bind_param("ss", $inData["login"], $inData["password"]);
-		$stmt->execute();
-		$result = $stmt->get_result();
-        //If statement  where the user log in exist
-		if( $row = $result->fetch_assoc()  )
-		{
-			//returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'], $row['profilelmg'], $row['username'],$row['contacs']);
-		    $user = returnWithInfo( $row['Name'], $row['ID'], $row['leads'],$row['closed'], $row['sales'], $row['hours'],$row['phone'],$row['email']);
+$inData=getRequestInfo();
 
-            $userDataJSON= json_encode($user);
-			header("Location: menu.php?user=" . urlencode($userDataJSON));
-            exit();
-		}	
+if ($inData) {
+	try {
+		$user = read($inData["userName"]);
 
-		else
-		{
-			returnWithError("No Records Found");
+		if ($user) {
+			if ($user->verify_password($inData["password"]) == 1) {
+				$user->dateLastLoggedIn = date('Y-m-d H:i:s');
+				update($user);
+				returnWithInfo($user);
+
+			}
+			else if ($user->verify_password($inData["password"]) == 0){
+				returnWithError('{"status":"error", "error":"Password does not match"}');
+			}
 		}
+		else {
+			returnWithError('{"status": "No User"}');
+>>>>>>> 32b99b27cac73570795eeaa348b0c82cfd13d997
+		}
+
+	  }
+	  else
+	  {
+		returnWithError('{"status"; "error"}');
+	  }
 	}
-
-
-
-
-
-
-    function getRequestInfo()
+<<<<<<< HEAD
+	catch(Exception $e)
 	{
-		return json_decode(file_get_contents('php://input'), true);
+		returnWithError('{"status": "error", "error" : '+ $e +'}');
 	}
-    function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
+	
+}
+
+
+
+
+=======
+	catch (Exception $e) {
+		returnWithError('{"status": "error", "error" :' + $e +'}');
 	}
+}
 
-	function sendResultInfoAsJson($obj) {
-		header('Content-type: application/json');
-		echo $obj; // Echo the JSON data to send it as the HTTP response
-	}
-
-	function returnWithInfo($Name,$id,$leads, $closed,$sales,$hours,$phone,$email) {
-		$retValue = '{"id":' . $id . ',"firstName":"' . $Name . '","leads":"' . $leads . '","closed":"' . $closed . '","sales":"' . $sales . '","hours":"' . $hours . '","phone":"' . $phone . '","email":"' . $email .'","error":""}';
-		return $retValue; // Return the JSON data
-	}
-
-
-
+>>>>>>> 32b99b27cac73570795eeaa348b0c82cfd13d997
 ?>
