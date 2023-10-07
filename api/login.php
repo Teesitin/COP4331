@@ -13,31 +13,21 @@ $inData=getRequestInfo();
 	  if($user)
 	  {
 		if(verify_password($user->password)==1){
-			return sendResultInfoAsJson($user);
+			$user->dateLastLoggedIn = update();
+			return returnWithInfo($user);
 		}
 
 	  }
 	  else
 	  {
-		return 	"status" ; "error";
+		returnWithError('{"status"; "error"}');
 	  }
 	}
-	catch( error)
+	catch(Exception $e)
 	{
-
+		returnWithError('{"status": "error", "error" : '+ $e +'}');
 	}
-	/*if(verify_password($userData["password"])==1)
-	{
-
-	}
- } 
- else {
-    echo 'the user name typed does not exits.Sign up please.';
-	$user = new User();
-    $user = create($user);
-	echo 'User created';
-
- }*/
+	
 }
 
 
