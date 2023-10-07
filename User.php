@@ -23,10 +23,9 @@ class User
   // returns 1 if both passwords are equal, returns 0 otherwise
   function verify_password($string)//$password
   {
-    $hashed_string = password_hash($string, PASSWORD_DEFAULT);
-
-    if ($hashed_string == $password){
-      return 1;
+    if($hashed_string = password_hash($string, $this->password))
+    {
+        return 1;
     }
     else{
       return 0;

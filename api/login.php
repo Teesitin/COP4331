@@ -1,8 +1,8 @@
 <?php
 require('handlers/request_handler.php');
-require('../../user_controller.php');
-require('../../User.php');
-require('../../db.php');
+require('../user_controller.php');
+require('../User.php');
+require('../db.php');
 $inData=getRequestInfo();
 
 
@@ -12,7 +12,7 @@ $inData=getRequestInfo();
       $user = read($inData->username);
 	  if($user)
 	  {
-		if(verify_password($user->password)==1){
+		if($user->verify_password($inData["username"])==1){
 			
 			return returnWithInfo($user);
 		}
