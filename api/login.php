@@ -1,8 +1,8 @@
 <?php
-include('request_handler.php');
-include('user_controller.php');
-include('User.php');
-include('db.php');
+require('handlers/request_handler.php');
+require('../user_controller.php');
+require('../User.php');
+require('../db.php');
 $inData=getRequestInfo();
 
 
@@ -12,7 +12,7 @@ $inData=getRequestInfo();
       $user = read($inData->username);
 	  if($user)
 	  {
-		if(verify($user->password)==1){
+		if(verify_password($user->password)==1){
 			return sendResultInfoAsJson($user);
 		}
 
