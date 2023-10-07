@@ -15,7 +15,7 @@ class User
   // hashes a password and stores it in the user object
   function set_password($string)//add $password
   {
-    $password = password_hash($string, PASSWORD_DEFAULT);
+    $thi->$password = password_hash($string, PASSWORD_DEFAULT);
     //return $password;
   }
 
