@@ -4,18 +4,12 @@
 
 	//creates new user and stores it in db
 	function create($user)
-<<<<<<< HEAD
-	{
-        global $db;
-		$user->set_password($user->password);
-=======
 	{	
 		global $db;
 
 		if (read($user->userName)) {
 			return 0;
 		}
->>>>>>> 32b99b27cac73570795eeaa348b0c82cfd13d997
 
 		$stmt = $db->prepare("INSERT INTO User (firstName, lastName, userName, 
 						profileImg, dateLastLoggedIn, password) VALUES (?,?,?,?,?,?)");
@@ -23,14 +17,9 @@
 		$stmt->bind_param("ssssss", $user->firstName, $user->lastName, $user->userName, $user->profileImg, 
 						 $user->dateLastLoggedIn, $user->password);
 
-<<<<<<< HEAD
-		$stmt->execute();	
-        return 1;
-=======
 		$stmt->execute();
 
 		return 1;
->>>>>>> 32b99b27cac73570795eeaa348b0c82cfd13d997
 	}
 
 	// deletes user from db, user is selected through their username
@@ -53,11 +42,7 @@
 	// gets the info from user and stores it in user object to send to API
 	function read($userName)
 	{
-<<<<<<< HEAD
-        global $db;
-=======
 		global $db;
->>>>>>> 32b99b27cac73570795eeaa348b0c82cfd13d997
 		$user = new User;
 
 		$stmt = $db->prepare("SELECT * FROM User WHERE userName=?");
@@ -87,13 +72,8 @@
 	// returns 1 if updated succesfully, returns 0 otherwise
 	function update($user)
 	{
-<<<<<<< HEAD
-        global $db;
-		$user->set_password($user->password);
-=======
 		global $db;
 		// $user->set_password($user->password);
->>>>>>> 32b99b27cac73570795eeaa348b0c82cfd13d997
 		
 		$stmt = $db->prepare("UPDATE User SET firstName=?, lastName=?, userName=?, profileImg=?, dateLastLoggedIn=CURRENT_TIMESTAMP	WHERE ID=?");
 		$stmt->bind_param("ssssi", $user->firstName, $user->lastName, $user->userName, $user->profileImg, $user->ID);
