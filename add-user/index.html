@@ -124,24 +124,26 @@
 
 
     <div class="add-user-container">
+        <div class="profile-image-container">
+            <img class="profile-image-modify" src="../assets/default.webp">
+            <button class="round-button profile-image-button" onclick="document.getElementById('file-upload').click();">
+                <span class="material-symbols-outlined">add_a_photo</span>
+            </button>
+        </div>
 
-            <div>
-                <input type="text" name="first" placeholder="First Name" required>
-                <input type="text" name="last" placeholder="Last Name" required>
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <input type="text" name="phone" placeholder="Phone" required>
-            </div>
+        <div>
+            <input type="text" name="firstName" placeholder="First Name" required>
+            <input type="text" name="lastName" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="phone" placeholder="Phone" required>
+        </div>
 
-            <div class="custom-file-upload">
-                <input type="file" id="file-upload" name="fileupload" />
-                <button onclick="document.getElementById('file-upload').click();">Upload Picture</button>
-            </div>
+        <div class="custom-file-upload">
+            <input type="file" id="file-upload" name="fileupload" />
+        </div>
 
-            <button class="button" onclick="window.location.href='/contacts';">Cancel</button>
-            <button class="submit-button">Submit</button>
-
-
-
+        <button class="button" onclick="window.location.href='/contacts';">Cancel</button>
+        <button class="submit-button">Submit</button>
     </div>
 
 </div>
