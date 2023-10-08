@@ -22,6 +22,7 @@ include('Contact.php');
     // Returns array of contact objects
     function retrieveContacts(mysqli $db, $userID)
     {
+        //global $db;
         $contacts = [];
 
         // Get contacts by ID of user that created them
@@ -42,7 +43,7 @@ include('Contact.php');
                 );
             }
 
-            $contacts[] = $contact;
+            $contacts[] = $contact;//
         }
 
         return $contacts;
@@ -99,7 +100,7 @@ include('Contact.php');
                     $row['email']
                 );
 
-                $contacts[] = $contact;
+                $contacts[] = $contact;//
             }
         }
 
