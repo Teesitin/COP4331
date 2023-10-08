@@ -73,7 +73,7 @@
             }
 
             .add-user-container{
-                width: 70%;
+                width: 90%;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
@@ -140,9 +140,16 @@
             </div>
             
             <div>
-                <button onclick="window.location.href='/contacts';">Cancel</button>
-                <button id="deleteButton">Remove User</button>
-                <button class="submit-button">Update</button>
+                <button class="round-button" onclick="window.location.href='/contacts';">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <button class="round-button" id="deleteButton">
+                    <span class="material-symbols-outlined">delete_forever</span>
+                </button>
+
+                <button class="round-button" id="submitButton">
+                    <span class="material-symbols-outlined">upgrade</span>
+                </button>
             </div>
     </div>
 </div>
