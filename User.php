@@ -19,8 +19,6 @@ class User
       'cost' => 12,
     ];
     $this->password = password_hash($string, PASSWORD_BCRYPT, $options);
-    echo $this->password;
-    //return $password;
   }
 
   // verifies if password passed is equal to password stored in db
