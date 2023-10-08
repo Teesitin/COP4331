@@ -29,4 +29,23 @@
   } else {
     echo "Error creating table: " . $db->error;
   }
+
+  // Contact table
+  $sql = "CREATE TABLE IF NOT EXISTS Contact(
+    ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    firstName VARCHAR(50),
+    lastName VARCHAR(50),
+    mobilePhone VARCHAR(20),
+    homePhone VARCHAR(20),
+    email VARCHAR(50),
+    dateCreated DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userID) REFERENCES User(ID)
+    )";
+  
+    if ($db->query($sql) === TRUE) {
+      //echo "Table User created successfully";
+    } else {
+      echo "Error creating table: " . $db->error;
+    }
 ?>

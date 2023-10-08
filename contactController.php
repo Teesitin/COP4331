@@ -1,36 +1,42 @@
 <?php
-
-include('Contact.php');
-    function createContact(mysqli $db, $userID, $firstName, $lastName, $mobilePhone, $homePhone, $email)
+require('contact.php');
+require('db.php');
+    function createContact($userID, $firstName, $lastName, $mobilePhone, $homePhone, $email)
     {
+        global $db;
+       
         $userID = $db->real_escape_string($userID);
         $firstName = $db->real_escape_string($firstName);
         $lastName = $db->real_escape_string($lastName);
         $mobilePhone = $db->real_escape_string($mobilePhone);
         $homePhone = $db->real_escape_string($homePhone);
         $email = $db->real_escape_string($email);
+        
+        $stmt = $db->prepare("INSERT INTO Contact (userID, firstName, lastName, mobilePhone, homePhone, email) VALUES (?,?,?,?,?,?)");
+        $stmt->bind_param("isssss", $userID, $firstName, $lastName, $mobilePhone, $homePhone, $email);
+        //$sql = "INSERT INTO CONTACTS (userID, firstName, lastName, mobilePhone, homePhone, email) VALUES ('$userID', '$firstName', '$lastName', '$mobilePhone', '$homePhone', '$email')";
 
-        $sql = "INSERT INTO CONTACTS (userID, firstName, lastName, mobilePhone, homePhone, email) VALUES ('$userID', '$firstName', '$lastName', '$mobilePhone', '$homePhone', '$email')";
-
-        if ($db->query($sql) === TRUE) {
-            echo "Contact created successfully";
+        if ($stmt->execute()) {
+            return 1;
         } else {
-            echo "Error creating contact: " . $db->error;
+            return 0;
         }
     }
 
     // Returns array of contact objects
-    function retrieveContacts(mysqli $db, $userID)
+    function retrieveContacts($userID)
     {
-        $contacts = [];
+        global $db;
+        $contacts = array();
 
         // Get contacts by ID of user that created them
-        $sql = "SELECT * FROM CONTACTS WHERE userID = $userID";
-
-        $result = $db->query($sql);
+        $stmt = $db->prepare("SELECT * FROM Contact WHERE userID = ?");
+        $stmt->bind_param("i", $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result) {
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_array(MYSQLI_NUM)) {
                 $contact = new Contact(
                     $row['ID'],
                     $row['userID'],
@@ -40,51 +46,56 @@ include('Contact.php');
                     $row['homePhone'],
                     $row['email']
                 );
+                array_push($contacts, $contact);
             }
 
-            $contacts[] = $contact;
         }
 
         return $contacts;
     }
 
-    function deleteContact(mysqli $db, $userID, $ID)
-    {
-        $sql = "DELETE FROM CONTACTS WHERE userID = $userID AND ID = $ID";
-
-        if ($db->query($sql) === TRUE) {
-            echo "Contact deleted successfully";
+    function deleteContact($userID, $contactID)
+    {   
+        global $db;
+        $stmt = $db->prepare("DELETE FROM Contact WHERE userID = ? AND ID = ?");
+        $stmt->bind_param("ii", $userID, $contactID);
+    
+        if ($stmt->execute()) {
+            return 1;
         } else {
-            echo "Error deleting contact: " . $db->error;
+            return 0;
         }
     }
 
-    function updateContact(mysqli $db, $userID, $ID, $firstName, $lastName, $mobilePhone, $homePhone, $email)
-    {
+    function updateContact($userID, $ID, $firstName, $lastName, $mobilePhone, $homePhone, $email)
+    {   
+        global $db;
         $firstName = $db->real_escape_string($firstName);
         $lastName = $db->real_escape_string($lastName);
         $mobilePhone = $db->real_escape_string($mobilePhone);
         $homePhone = $db->real_escape_string($homePhone);
         $email = $db->real_escape_string($email);
 
-        $sql = "UPDATE CONTACTS SET firstName = '$firstName', lastName = '$lastName', mobilePhone = '$mobilePhone', homePhone = '$homePhone', email = '$email' WHERE userID = $userID AND ID = $ID";
+        $stmt = $db->prepare("UPDATE Contact SET firstName = ?, lastName = ?, mobilePhone = ?, homePhone = ?, email = ? WHERE userID = ? AND ID = ?");
+        $stmt->bind_param("sssssii", $firstName, $lastName, $mobilePhone, $homePhone, $email, $userID, $ID);
 
-        if ($db->query($sql) === TRUE) {
-            echo "Contact updated successfully";
+        if ($stmt->execute()) {
+            return 1;
         } else {
-            echo "Error updating contact: " . $db->error;
+            return 0;
         }
     }
 
     // Search by name
     // Returns array of contact objects
-    function searchContacts(mysqli $db, $userID, $substring)
-    {
+    function searchContacts($userID, $substring)
+    {   
+        global $db;
         $contacts = array();
         $substring = $db->real_escape_string($substring);
 
         // Search for firstName or lastName that contains the substring
-        $sql = "SELECT * FROM CONTACTS WHERE userID = $userID AND firstName LIKE '%$substring%' OR lastName LIKE '%$substring%'";
+        $sql = "SELECT * FROM Contact WHERE userID = $userID AND firstName LIKE '%$substring%' OR lastName LIKE '%$substring%'";
         $result = $db->query($sql);
 
         if ($result->num_rows > 0) {
@@ -99,7 +110,7 @@ include('Contact.php');
                     $row['email']
                 );
 
-                $contacts[] = $contact;
+                array_push($contacts, $contact);
             }
         }
 
