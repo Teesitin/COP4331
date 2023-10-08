@@ -123,7 +123,7 @@
     <img class="logo" id="logo" src='../assets/branding2/co-color-rectangle.webp'>
 
 
-    <div class="add-user-container">
+    <div class="sub-container">
         <div class="profile-image-container">
             <img class="profile-image-modify" src="../assets/default.webp">
             <button class="round-button profile-image-button" onclick="document.getElementById('file-upload').click();">
@@ -142,13 +142,16 @@
             <input type="file" id="file-upload" name="fileupload" />
         </div>
 
-        <button class="round-button" onclick="window.location.href='/contacts';">
-            <span class="material-symbols-outlined">close</span>
-        </button>
+        <div>
+            <button class="round-button" onclick="window.location.href='/contacts';">
+                <span class="material-symbols-outlined">close</span>
+            </button>
 
-        <button class="round-button" id="submitButton">
-            <span class="material-symbols-outlined">person_add</span>
-        </button>
+            <button class="round-button" id="submitButton">
+                <span class="material-symbols-outlined">person_add</span>
+            </button>
+        </div>
+
     </div>
 
 </div>
