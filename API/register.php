@@ -18,6 +18,14 @@ $user->set_password($inData["password"]);
 try {
     if (create($user) == 1) {
         returnWithInfo('{"status": "created"}');
+        
+        echo json_encode([
+            "status" => "created",
+            "firstName" => $user->firstName,
+            "lastName" => $user->lastName,
+            "userName" => $user->userName,
+        ]);
+
     }
     else {
         returnWithError('{"status": "error", "error": "Could not create user."}');
