@@ -1,6 +1,7 @@
 <?php
 require('handlers/request_handler.php');
 require('../user_controller.php');
+require('../User.php');
 $Update_info =getRequestInfo();
 //checks if data was inputed correctly
 if($Updated_info)
