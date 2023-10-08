@@ -64,6 +64,7 @@
   		$user->dateCreated = $lst["dateCreated"];
   		$user->dateLastLoggedIn = $lst["dateLastLoggedIn"];
   		$user->password = $lst["password"];
+		  
 
 		return $user;
 	}
