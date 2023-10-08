@@ -1,5 +1,4 @@
-//const urlBase = 'http://contactsonline.xyz';
-const urlBase = 'http://172.23.8.154';
+const urlBase = 'http://contactsonline.xyz';
 const extension = 'php';
 
 let userId = 0;
