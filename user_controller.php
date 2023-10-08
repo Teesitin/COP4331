@@ -80,7 +80,7 @@
 		
 		
 		if ($stmt->execute() === TRUE) {
-			echo "User updated successfully";
+			//echo "User updated successfully";
 			return 1;
   		} else {
 			return 0;

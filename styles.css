@@ -178,7 +178,7 @@
     bottom: 100px;
     right: 0;
     width: 500px;
-    height: 500px;
+    height: 550px;
     padding: 20px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -255,7 +255,7 @@
       bottom: 100px;
       right: 0;
       width: 80%;
-      height: 500px;
+      height: 560px;
       padding: 20px;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
@@ -284,6 +284,27 @@
   
     .contacts-search-bar {
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 670px) {
+    .menu-container {
+      position: fixed;
+      bottom: 15%;
+      right: 0;
+      width: 80%;
+      height: 75%;
+      padding: 20px;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      background-color: var(--containers);
+      
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    button {
+      margin: 15px;
     }
   }
   
