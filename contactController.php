@@ -92,10 +92,11 @@ require('db.php');
     {   
         global $db;
         $contacts = array();
+        $userID = $db->real_escape_string($userID);
         $substring = $db->real_escape_string($substring);
 
         // Search for firstName or lastName that contains the substring
-        $sql = "SELECT * FROM Contact WHERE userID = $userID AND firstName LIKE '%$substring%' OR lastName LIKE '%$substring%'";
+        $sql = "SELECT * FROM Contact WHERE userID=$userID AND (firstName LIKE '%$substring%' OR lastName LIKE '%$substring%')";
         $result = $db->query($sql);
 
         if ($result->num_rows > 0) {
