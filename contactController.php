@@ -30,13 +30,12 @@ require('db.php');
         $contacts = array();
 
         // Get contacts by ID of user that created them
-        $stmt = $db->prepare("SELECT * FROM Contact WHERE userID = ?");
-        $stmt->bind_param("i", $userID);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        // Search for firstName or lastName that contains the substring
+        $sql = "SELECT * FROM Contact WHERE userID = $userID";
+        $result = $db->query($sql);
 
-        if ($result) {
-            while ($row = $result->fetch_array(MYSQLI_NUM)) {
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $contact = new Contact(
                     $row['ID'],
                     $row['userID'],
@@ -46,9 +45,9 @@ require('db.php');
                     $row['homePhone'],
                     $row['email']
                 );
+
                 array_push($contacts, $contact);
             }
-
         }
 
         return $contacts;
