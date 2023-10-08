@@ -5,9 +5,9 @@ require('handlers/request_handler.php');
 
 $inData = getRequestInfo();
 
-// if ($inData) {
-// 	returnWithInfo($inData);
-// }
+if ($inData) {
+	returnWithInfo($inData);
+}
 
 $user = new User;
 $user->firstName = $inData["firstName"];
