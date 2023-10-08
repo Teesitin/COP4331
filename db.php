@@ -25,7 +25,7 @@
   )";
 
   if ($db->query($sql) === TRUE) {
-    echo "Table User created successfully";
+    //echo "Table User created successfully";
   } else {
     echo "Error creating table: " . $db->error;
   }

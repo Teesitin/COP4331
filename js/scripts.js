@@ -1,10 +1,11 @@
-const urlBase = 'http://contactsonline.xyz/API';
+const urlBase = 'http://contactsonline.xyz';
 const extension = 'php';
 
 let userId = 0;
 let firstName = "";
 let lastName = "";
 
+// Login Function
 function doLogin()
 {
 	userId = 0;
@@ -21,11 +22,12 @@ function doLogin()
 
 	let jsonPayload = JSON.stringify( tmp );
 	
-	let url = urlBase + '/login.' + extension;
+	let url = urlBase + '/API/login.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
 	try
 	{
 		xhr.onreadystatechange = function() 
@@ -33,7 +35,7 @@ function doLogin()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
+				userId = jsonObject.ID;
 		
 				if( userId < 1 )
 				{		
@@ -63,7 +65,7 @@ function saveCookie()
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString() + "; path=/";
 }
 
 function readCookie()
@@ -90,12 +92,17 @@ function readCookie()
 	}
 	
 	if( userId < 0 )
-	{
-		window.location.href = "index.html";
+	{	
+		console.log(window.location.href);
+		if (window.location.href != urlBase + "/index.html") {
+			window.location.href = "/index.html";
+		}
 	}
 	else
-	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+	{	
+		if (window.location.href != urlBase + "/contacts/index.html") {
+			window.location.href = "/contacts/index.html";
+		}
 	}
 }
 
@@ -104,6 +111,7 @@ function doLogout()
 	userId = 0;
 	firstName = "";
 	lastName = "";
-	document.cookie = "firstName= ; expires = Thu, 01 Jan 2025 00:00:00 GMT";
+	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
 	window.location.href = "index.html";
+
 }
