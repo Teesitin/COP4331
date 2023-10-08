@@ -78,6 +78,15 @@
     background-color: var(--containers);
     outline: 2px solid var(--container-border);
   }
+
+  .profile-image-container {
+    position: relative; 
+    width: 150px;
+    height: 150px;
+
+    padding: 25px;
+    display: inline-block;
+  }
   
   .profile-image {
     width: 100px;
@@ -85,6 +94,22 @@
     border-radius: 50%;
     margin-top: 15px;
     margin-bottom: 15px;
+
+
+  }
+
+  .profile-image-modify {
+    width: 100%; 
+    height: 100%; 
+    border-radius: 50%;
+
+    display: block; 
+  }
+
+  .profile-image-button {
+    position: absolute; 
+    bottom: 0;
+    right: 0;
   }
   
   .profile-details {
@@ -115,6 +140,12 @@
     transition: transform .15s ease;
     cursor: pointer;
     color: var(--button-text);
+  }
+
+  .round-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 9999px;
   }
   
   button:hover,
@@ -229,6 +260,7 @@
   @media screen and (max-width: 770px) {
     .main-container {
       width: 100%;
+      padding: 0;
     }
 
     .logo {
@@ -247,6 +279,8 @@
       padding: 15px;
       margin: 15px;
     }
+
+
 
     
   
