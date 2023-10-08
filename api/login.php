@@ -1,22 +1,6 @@
 <?php
 require('handlers/request_handler.php');
 require('../user_controller.php');
-<<<<<<< HEAD
-require('../User.php');
-require('../db.php');
-$inData=getRequestInfo();
-
-
- if ($inData) {
-    try
-	{
-      $user = read($inData->username);
-	  if($user)
-	  {
-		if($user->verify_password($inData["username"])==1){
-			
-			return returnWithInfo($user);
-=======
 
 $inData=getRequestInfo();
 
@@ -37,31 +21,14 @@ if ($inData) {
 		}
 		else {
 			returnWithError('{"status": "No User"}');
->>>>>>> 32b99b27cac73570795eeaa348b0c82cfd13d997
 		}
 
-	  }
-	  else
-	  {
-		returnWithError('{"status"; "error"}');
-	  }
-	}
-<<<<<<< HEAD
-	catch(Exception $e)
-	{
-		returnWithError('{"status": "error", "error" : '+ $e +'}');
-	}
-	
-}
-
-
-
-
-=======
+	  }  
 	catch (Exception $e) {
 		returnWithError('{"status": "error", "error" :' + $e +'}');
 	}
-}
+	  
+	}
 
->>>>>>> 32b99b27cac73570795eeaa348b0c82cfd13d997
+
 ?>
