@@ -236,7 +236,7 @@
         document.querySelector('input[name="first"]').value = data.firstName;
         document.querySelector('input[name="last"]').value = data.lastName;
         document.querySelector('input[name="email"]').value = data.email;
-        document.querySelector('input[name="phone"]').value = data.phone;
+        document.querySelector('input[name="phone"]').value = data.mobilePhone;
 
         const deleteButton = document.getElementById('deleteButton');
         deleteButton.setAttribute('onclick', `openDeleteConfirmationModal('${data.id}', '${data.firstName} ${data.lastName}')`);
