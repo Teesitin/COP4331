@@ -412,9 +412,9 @@ window.onload = function() {
 
 
 function modifyContactData() {
-    // 1. Collect data from fields
+
     const updatedData = {
-        userID: readCookie(),  // Assuming you want to pass the userID as well.
+        userID: readCookie(),
         ID: contactId,
         firstname: document.querySelector('input[name="first"]').value,
         lastName: document.querySelector('input[name="last"]').value,
