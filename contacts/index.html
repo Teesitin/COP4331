@@ -397,7 +397,6 @@
                             <h3 id="name-${person.ID}">${person.firstName} ${person.lastName}</h3>
                             <p id="email-${person.ID}"><a href="mailto:${person.email}">${person.email}</a></p>
                             <p id="phone-${person.ID}"><a href="tel:${person.mobilePhone}">${person.mobilePhone}</a></p>
-                            <p id="phone-${person.ID}"><a href="tel:${person.homePhone}">${person.homePhone}</a></p>
                             <div class="user-control-container">
                                 <button class="user-control-button" onclick="callPerson('${person.mobilePhone}')"><span class="material-symbols-outlined">call</span></button>
                                 <button class="user-control-button" onclick="window.location.href='/modify-user?userID=${person.ID}';"><span class="material-symbols-outlined">edit</span></button>
