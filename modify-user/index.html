@@ -135,7 +135,8 @@
                 <input type="text" name="first" placeholder="First Name" required>
                 <input type="text" name="last" placeholder="Last Name">
                 <input type="email" name="email" placeholder="Enter your email">
-                <input type="text" name="phone" placeholder="Phone">
+                <input type="text" name="phone" placeholder="Mobile Phone">
+                <input type="text" name="h-phone" placeholder="Home Phone">
             </div>
 
             <div class="custom-file-upload">
@@ -150,7 +151,7 @@
                     <span class="material-symbols-outlined">delete_forever</span>
                 </button>
 
-                <button class="round-button" id="submitButton">
+                <button class="round-button" id="submitButton" onclick="modifyContactData();">
                     <span class="material-symbols-outlined">upgrade</span>
                 </button>
             </div>
@@ -408,6 +409,52 @@ window.onload = function() {
     
     checkAndSwitchAccessibility();
 }
+
+
+function modifyContactData() {
+    console.log("fire");
+
+    const updatedData = {
+        userID: readCookie(),
+        ID: contactId,
+        firstname: document.querySelector('input[name="first"]').value,
+        lastName: document.querySelector('input[name="last"]').value,
+        email: document.querySelector('input[name="email"]').value,
+        mobilephone: document.querySelector('input[name="phone"]').value,
+        homephone: document.querySelector('input[name="h-phone"]').value
+    };
+
+    fetch('../API/updateContact.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'updated') {
+            console.log('Contact modified successfully');
+            
+        } else {
+            console.error(data.Status);
+        }
+    })
+    .catch(error => {
+        console.error('There was an error:', error);
+    });
+}
+
+document.getElementById('submitButton').addEventListener('click', modifyContactData);
+
+
+
+
+
+
+
+
+
 
 </script>
 
