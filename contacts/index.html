@@ -30,7 +30,7 @@
         <div class="controls-container">
 
             <!-- Search -->
-            <input class="contacts-search-bar" type="text" placeholder="Search User" onkeyup="filterProfiles()">
+            <input class="contacts-search-bar" id="searchQuery" type="text" placeholder="Search User" onkeyup="searchContacts()">
 
             <!-- Add Contact -->
             <button class="control-button" onclick="window.location.href='/add-contact';">
@@ -286,17 +286,17 @@
         
 
     // Filter People
-    function filterProfiles() {
+    //function filterProfiles() {
 
 
 
         
-        const searchInput = document.querySelector('.contacts-search-bar').value.toLowerCase();
-        const filteredProfiles = peopleData.filter(person => {
-            return person.firstName.toLowerCase().startsWith(searchInput) || person.lastName.toLowerCase().startsWith(searchInput);
-        });
-        displayProfiles(filteredProfiles);
-    }
+        //const searchInput = document.querySelector('.contacts-search-bar').value.toLowerCase();
+        //const filteredProfiles = peopleData.filter(person => {
+            //return person.firstName.toLowerCase().startsWith(searchInput) || person.lastName.toLowerCase().startsWith(searchInput);
+        //});
+        //displayProfiles(filteredProfiles);
+    //}
 
 // Table and Card Toggle //
 
@@ -413,6 +413,32 @@
 
 function callPerson(phoneNumber) {
   window.location.href = "tel:" + phoneNumber;
+}
+
+// Search with substring on key input
+async function searchContacts() {
+    let query = document.getElementById("searchQuery").value;
+    try {
+        const response = await fetch('../API/search.php', {
+            method: 'POST',
+            body: JSON.stringify({
+                userID: readCookie(),
+                query: query
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        displayProfiles(data);
+    } catch (error) {
+        console.error("There was a problem with the fetch operation:", error.message);
+    }
 }
 
 // Adjust view on page load and whenever the window is resized
