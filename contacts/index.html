@@ -16,7 +16,7 @@
 
     <!-- JS -->
     <script type="text/javascript" src="../js/scripts.js"></script>
-    <script> readCookie(); </script>
+    <script> isLoggedIn(); </script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="../styles.css">
@@ -32,8 +32,8 @@
             <!-- Search -->
             <input class="contacts-search-bar" type="text" placeholder="Search User" onkeyup="filterProfiles()">
 
-            <!-- Add User -->
-            <button class="control-button" onclick="window.location.href='/add-user';">
+            <!-- Add Contact -->
+            <button class="control-button" onclick="window.location.href='/add-contact';">
                 <span class="material-symbols-outlined">person_add</span>
             </button>
 

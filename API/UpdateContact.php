@@ -6,7 +6,7 @@ if($inData)
 {
     if(updateContact($inData["userID"],$inData["ID"],$inData["firstname"],$inData["lastName"],$inData["mobilephone"],$inData["homephone"],$inData["email"]))
     {
-        returnWithInfo('{"Status":"Updated the Contact"}');
+        returnWithInfo(array("status" => "updated"));
     }
     else{
         returnWithError('{"Status":"Unable to Update"}');
