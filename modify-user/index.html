@@ -409,7 +409,7 @@ function modifyContactData() {
 
     const updatedData = {
         userID: readCookie(),
-        ID: contactId,
+        ID: parseInt(contactId),
         firstnName: document.querySelector('input[name="first"]').value,
         lastName: document.querySelector('input[name="last"]').value,
         email: document.querySelector('input[name="email"]').value,
