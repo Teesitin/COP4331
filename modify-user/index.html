@@ -430,6 +430,7 @@ function modifyContactData() {
     .then(data => {
         if (data.status === 'updated') {
             console.log('Contact modified successfully');
+            window.location.href = '../contacts';
             
         } else {
             console.error(data.Status);
