@@ -204,7 +204,7 @@ function addContact() {
 
 function deleteContact(id) {
 	let userId = readCookie();
-	let tmp = {userId:userId,ID:id};
+	let tmp = {userID:userId,ID:id};
 	let jsonPayload = JSON.stringify( tmp );
 	let url = urlBase + '/API/DeleteContact.' + extension;
 
