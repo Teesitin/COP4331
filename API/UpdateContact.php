@@ -4,7 +4,7 @@ require('../contactController.php');
 $inData=getRequestInfo();
 if($inData)
 {
-    if(updateContact($inData["userID"],$inData["ID"],$inData["firstname"],$inData["lastName"],$inData["mobilephone"],$inData["homephone"],$inData["email"]))
+    if(updateContact($inData["userID"],$inData["ID"],$inData["firstName"],$inData["lastName"],$inData["mobilePhone"],$inData["homePhone"],$inData["email"]))
     {
         returnWithInfo(array("status" => "updated"));
     }
