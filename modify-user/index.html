@@ -412,6 +412,7 @@ window.onload = function() {
 
 
 function modifyContactData() {
+    console.log("fire");
 
     const updatedData = {
         userID: readCookie(),
@@ -444,7 +445,6 @@ function modifyContactData() {
     });
 }
 
-// Attach function to the submit button
 document.getElementById('submitButton').addEventListener('click', modifyContactData);
 
 
