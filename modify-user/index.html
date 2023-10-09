@@ -424,7 +424,7 @@ function modifyContactData() {
         homephone: document.querySelector('input[name="h-phone"]').value
     };
 
-    fetch('../API/updateContact.php', {
+    fetch('../API/UpdateContact.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -444,17 +444,6 @@ function modifyContactData() {
         console.error('There was an error:', error);
     });
 }
-
-document.getElementById('submitButton').addEventListener('click', modifyContactData);
-
-
-
-
-
-
-
-
-
 
 </script>
 
