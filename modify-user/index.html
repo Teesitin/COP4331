@@ -243,13 +243,6 @@
         deleteButton.setAttribute('onclick', `openDeleteConfirmationModal('${data.id}', '${data.firstName} ${data.lastName}')`);
     }
 
-    // Call getUserData function if userId is available
-    if (contactId) {
-        getUserData(contactId);
-    } else {
-        console.error('No userID parameter in the URL');
-    }
-
 // Set User
     document.getElementById('submitButton').addEventListener('click', () => {
         const updatedData = {
@@ -416,12 +409,12 @@ function modifyContactData() {
 
     const updatedData = {
         userID: readCookie(),
-        ID: contactId,
-        firstname: document.querySelector('input[name="first"]').value,
+        ID: parseInt(contactId),
+        firstName: document.querySelector('input[name="first"]').value,
         lastName: document.querySelector('input[name="last"]').value,
         email: document.querySelector('input[name="email"]').value,
-        mobilephone: document.querySelector('input[name="phone"]').value,
-        homephone: document.querySelector('input[name="h-phone"]').value
+        mobilePhone: document.querySelector('input[name="phone"]').value,
+        homePhone: document.querySelector('input[name="h-phone"]').value
     };
 
     console.log(updatedData);
@@ -437,6 +430,7 @@ function modifyContactData() {
     .then(data => {
         if (data.status === 'updated') {
             console.log('Contact modified successfully');
+            window.location.href = '../contacts';
             
         } else {
             console.error(data.Status);
