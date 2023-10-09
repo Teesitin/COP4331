@@ -243,13 +243,6 @@
         deleteButton.setAttribute('onclick', `openDeleteConfirmationModal('${data.id}', '${data.firstName} ${data.lastName}')`);
     }
 
-    // Call getUserData function if userId is available
-    if (contactId) {
-        getUserData(contactId);
-    } else {
-        console.error('No userID parameter in the URL');
-    }
-
 // Set User
     document.getElementById('submitButton').addEventListener('click', () => {
         const updatedData = {
