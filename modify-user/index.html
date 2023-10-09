@@ -278,19 +278,23 @@
     const root = document.documentElement;
     let themeArray = [];
 
-    fetch('../data/theme.json')
-        .then(response => {
+    async function fetchTheme() {
+        try {
+            const response = await fetch('../data/theme.json');
+
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
-            return response.json();
-        })
-        .then(data => {
+
+            const data = await response.json();
             themeArray = data;
-        })
-        .catch(error => {
+
+        } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
-        });
+        }
+    }
+
+    fetchTheme();
 
     // Check Theme
     function checkAndSwitchTheme() {
