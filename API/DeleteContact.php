@@ -1,5 +1,5 @@
 <?php
-require('../handlers/request_handler.php');
+require('handlers/request_handler.php');
 require('../contactController.php');
 $inData= getRequestInfo();
 if($inData)

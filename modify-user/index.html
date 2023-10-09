@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+    <!-- JS -->
+    <script type="text/javascript" src="../js/scripts.js"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="../styles.css">
 
@@ -130,9 +133,9 @@
 
             <div>
                 <input type="text" name="first" placeholder="First Name" required>
-                <input type="text" name="last" placeholder="Last Name" required>
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <input type="text" name="phone" placeholder="Phone" required>
+                <input type="text" name="last" placeholder="Last Name">
+                <input type="email" name="email" placeholder="Enter your email">
+                <input type="text" name="phone" placeholder="Phone">
             </div>
 
             <div class="custom-file-upload">
@@ -151,6 +154,9 @@
                     <span class="material-symbols-outlined">upgrade</span>
                 </button>
             </div>
+            <div>
+                <span id="error"></span>
+            </div>
     </div>
 </div>
 
@@ -161,7 +167,7 @@
                 <span>Are you sure you want to delete
                     <span id="userNameToDelete"></span>?
                 </span>
-                <button onclick="confirmDelete()">Delete User</button>
+                <button onclick="confirmDelete()">Delete Contact</button>
                 <button onclick="closeDeleteConfirmationModal()">Cancel</button>
             </div>
         </div>
@@ -176,7 +182,7 @@
 // Get User
     // Extract userId from the URL parameters
     let urlParams = new URLSearchParams(window.location.search);
-    let userId = urlParams.get('userID');
+    let contactId = urlParams.get('userID');
 
     // Function to fetch user data based on userId
     function getUserData(userId) {
@@ -214,8 +220,8 @@
     }
 
     // Call getUserData function if userId is available
-    if (userId) {
-        getUserData(userId);
+    if (contactId) {
+        getUserData(contactId);
     } else {
         console.error('No userID parameter in the URL');
     }
@@ -363,7 +369,7 @@
     }
 
     function confirmDelete() {
-        // Your delete logic here
+        deleteContact(contactId)
         closeDeleteConfirmationModal();
     }
 

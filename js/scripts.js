@@ -1,5 +1,5 @@
-const urlBase = 'http://contactsonline.xyz';
-//const urlBase = 'http://172.23.8.154';
+//const urlBase = 'http://contactsonline.xyz';
+const urlBase = 'http://172.23.8.154';
 const extension = 'php';
 
 let userId = 0;
@@ -182,13 +182,46 @@ function addContact() {
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				console.log(xhr.responseText);
 				let jsonObject = JSON.parse( xhr.responseText );
 				if (jsonObject.status == "created") {
 					document.getElementById('error').innerHTML = ("Contact " + jsonObject.status );
 					setTimeout(function() {
 						window.location.href = "/contacts";
 					}, 1500);
+				}
+				else if (jsonObject.status == "error") {
+					document.getElementById('error').innerHTML = jsonObject.error;
+				}
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("error").innerHTML = err.message;
+	}
+}
+
+function deleteContact(id) {
+	let userId = readCookie();
+	let tmp = {userId:userId,ID:id};
+	let jsonPayload = JSON.stringify( tmp );
+	let url = urlBase + '/API/deleteContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse( xhr.responseText );
+				if (jsonObject.status == "deleted") {
+					document.getElementById('error').innerHTML = ("Contact " + jsonObject.status );
+					window.location.href = "/contacts";
 				}
 				else if (jsonObject.status == "error") {
 					document.getElementById('error').innerHTML = jsonObject.error;
