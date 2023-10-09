@@ -10,7 +10,8 @@
       "button-text": "#000000",
       "logo": "co-color-rectangle.webp",
       "search-bar": "white",
-      "search-bar-border": "transparent"
+      "search-bar-border": "transparent",
+      "search-text":"#000000"
     },
 
     {
@@ -24,7 +25,9 @@
       "button-text": "#000000",
       "logo": "co-white-rectangle.webp",
       "search-bar": "white",
-      "search-bar-border": "transparent"
+      "search-bar-border": "transparent",
+      "search-text":"#000000"
+      
     },
 
     {
@@ -38,7 +41,8 @@
       "button-text": "#000000",
       "logo": "co-white-rectangle.webp",
       "search-bar": "#ededed",
-      "search-bar-border": "transparent"
+      "search-bar-border": "transparent",
+      "search-text":"#000000"
     },
 
     {
@@ -52,7 +56,8 @@
       "button-text": "#c300ff",
       "logo": "co-white-rectangle.webp",
       "search-bar": "transparent",
-      "search-bar-border": "#c300ff"
+      "search-bar-border": "#c300ff",
+      "search-text":"#000000"
     }
 ]
   
