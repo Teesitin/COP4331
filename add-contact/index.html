@@ -132,10 +132,11 @@
         </div>
 
         <div>
-            <input type="text" name="firstName" placeholder="First Name" required>
-            <input type="text" name="lastName" placeholder="Last Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="text" name="phone" placeholder="Phone" required>
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="text" id="mobilePhone" name="phone" placeholder="Phone" required>
+            <input type="text" id="homePhone" name="homePhone" placeholder="Home Phone">
         </div>
 
         <div class="custom-file-upload">
@@ -147,13 +148,14 @@
                 <span class="material-symbols-outlined">close</span>
             </button>
 
-            <button class="round-button" id="submitButton">
+            <button class="round-button" id="submitButton" onclick="addContact();">
                 <span class="material-symbols-outlined">person_add</span>
             </button>
+
+            <span id="error"></span>
         </div>
 
     </div>
-
 </div>
 
 
