@@ -74,6 +74,7 @@ function readCookie()
 	userId = -1;
 	let data = document.cookie;
 	let splits = data.split(",");
+
 	for(var i = 0; i < splits.length; i++) 
 	{
 		let thisOne = splits[i].trim();
@@ -92,14 +93,18 @@ function readCookie()
 		}
 	}
 	
-	if( userId < 0 )
-	{	
+	return userId;
+
+}
+
+function isLoggedIn() {
+	userId = readCookie();
+	if( userId < 0 ) {
 		if (window.location.href != urlBase + "/index.html") {
 			window.location.href = "/index.html";
 		}
 	}
-	else
-	{	
+	else {
 		if (window.location.href != urlBase + "/contacts/index.html") {
 			window.location.href = "/contacts/index.html";
 		}
@@ -151,6 +156,49 @@ function register() {
 	}
 	catch(err)
 	{
-		document.getElementById("loginResult").innerHTML = err.message;
+		document.getElementById("error").innerHTML = err.message;
+	}
+}
+
+function addContact() {
+	let userId = readCookie();
+	let firstName = document.getElementById("firstName").value;
+	let lastName = document.getElementById("lastName").value;
+	let email = document.getElementById("email").value;
+	let mobilePhone = document.getElementById("mobilePhone").value;
+	let homePhone = document.getElementById("homePhone").value;
+	
+	let tmp = {userId:userId,firstName:firstName,lastName:lastName,email:email,mobilePhone:mobilePhone,homePhone:homePhone};
+	let jsonPayload = JSON.stringify( tmp );
+	let url = urlBase + '/API/createContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				console.log(xhr.responseText);
+				let jsonObject = JSON.parse( xhr.responseText );
+				if (jsonObject.status == "created") {
+					document.getElementById('error').innerHTML = ("Contact " + jsonObject.status );
+					setTimeout(function() {
+						window.location.href = "/contacts";
+					}, 1500);
+				}
+				else if (jsonObject.status == "error") {
+					document.getElementById('error').innerHTML = jsonObject.error;
+				}
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("error").innerHTML = err.message;
 	}
 }

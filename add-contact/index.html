@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Title and Favicon -->
-    <title>User Database</title>
+    <title>Add User</title>
     <link rel="icon" type="image/webp" href='../assets/branding2/co-white-fav.webp'/>
 
     <!-- Google Fonts and Icons -->
@@ -22,39 +22,19 @@
 
     <!-- CSS -->
     <style>
-        :root {
-            /* Colors */
-            --background: #579BB1;
-            --containers: #ECE8DD;
-            --container-border: transparent;
-            --text: #000000;
-            --buttons: #E1D7C6;
-            --button-border: transparent;
-            --button-text: #000000;
-
-            /* Sizes */
-            --global-font-size: 1rem;
-            --button-font-size: 1.02rem;
-            --profile-box-width: 300px;
-        }
-
-
-
         .main-container {
-            width: auto;
+            width: 1200px;
             display: block;
             padding: 25px;
             margin: auto;
             text-align: center;
         }
 
-
-        .user-login-container{
+        .add-user-container{
             width: auto;
             height: auto;
 
-            display: flex;
-            flex-direction: column;
+            display: block;
             align-items: center;
 
             border-radius: 20px; 
@@ -115,9 +95,10 @@
             transform: scale(1.1);
         }
 
+
         @media screen and (max-width: 1096px) {
             input {
-                width: 70%;
+                width: auto;
             }
 
             .main-container {
@@ -128,32 +109,47 @@
                 width: 70%;
             }
 
-            .user-login-container{
+            .add-user-container{
                 width: 70%;
+                display: flex;
+                flex-wrap: wrap;
                 justify-content: center;
             }
         }
 
     </style>
-    
 </head>
 <body>
 <div class="main-container">
     <!-- Logo -->
     <img class="logo" id="logo" src='../assets/branding2/co-color-rectangle.webp'>
 
-    <!-- Login -->
-    <div class="sub-container">
 
-        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
-        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
-        <input type="text" id="userName" name="username" placeholder="Username" required>
-        <input type="password" id="password" name="password" placeholder="Password" required>
-        <div>
-            <button type="button" id="login-button" onclick="window.location.href='/'">Login</button>
-            <button type="button" id="register-button" onclick="register();">Register</button>
+    <div class="sub-container">
+        <div class="profile-image-container">
+            <img class="profile-image-modify" src="../assets/default.webp">
+            <button class="round-button profile-image-button" onclick="document.getElementById('file-upload').click();">
+                <span class="material-symbols-outlined">add_a_photo</span>
+            </button>
         </div>
-        <span id="error"></span>
+
+            <div>
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+                <input type="email" id="email" name="email" placeholder="E-mail">
+                <input type="text" id="mobilePhone" name="mobilePhone" placeholder="Mobile Phone">
+                <input type="text" id="homePhone" name="homePhone" placeholder="Home Phone">
+            </div>
+
+        <div class="custom-file-upload">
+            <input type="file" id="file-upload" name="fileupload" />
+        </div>
+
+            <button class="button" onclick="window.location.href='/contacts';">Cancel</button>
+            <button class="submit-button" onclick="addContact();">Submit</button>
+            <span id="error"></span>
+
+
     </div>
 </div>
 
@@ -161,6 +157,9 @@
 
 <!-- JS -->
 <script>
+
+
+
 
 
 // Themes //
@@ -256,6 +255,8 @@ window.onload = function() {
     
     checkAndSwitchAccessibility();
 }
+
+
 
 
 </script>

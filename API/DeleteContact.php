@@ -8,7 +8,7 @@ if($inData)
     {
         if(deleteContact($inData["userID"],$inData["ID"])==1)
         {
-            returnWithInfo('{"Status" : "Deleted contact"}');
+            returnWithInfo(array("status" => "deleted"));
         }
     }
     else{
