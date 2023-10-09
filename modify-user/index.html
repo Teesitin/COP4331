@@ -46,7 +46,7 @@
         input{
             border: 2px solid var(--search-bar-border);
             background-color: var(--search-bar);
-            color: var(--text);
+            color: var(--search-text);
 
             width: 500px;
             height: 25px;
@@ -73,7 +73,7 @@
             }
 
             .add-user-container{
-                width: 70%;
+                width: 90%;
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
@@ -118,7 +118,16 @@
     <!-- Logo -->
     <img class="logo" id="logo" src='../assets/branding2/co-color-rectangle.webp'>
 
-    <div class="add-user-container">
+    <div class="sub-container">
+
+            <div class="profile-image-container">
+                <img id="profileImage" class="profile-image-modify" src="../assets/default.webp">
+                <button class="round-button profile-image-button" onclick="document.getElementById('file-upload').click();">
+                    <span class="material-symbols-outlined">add_a_photo</span>
+                </button>
+            </div>
+
+
             <div>
                 <input type="text" name="first" placeholder="First Name" required>
                 <input type="text" name="last" placeholder="Last Name" required>
@@ -128,14 +137,19 @@
 
             <div class="custom-file-upload">
                 <input type="file" id="file-upload" name="fileupload" />
-                <button onclick="document.getElementById('file-upload').click();">Upload Picture</button>
-
             </div>
             
             <div>
-                <button onclick="window.location.href='/contacts';">Cancel</button>
-                <button id="deleteButton">Remove User</button>
-                <button class="submit-button">Update</button>
+                <button class="round-button" onclick="window.location.href='/contacts';">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <button class="round-button" id="deleteButton">
+                    <span class="material-symbols-outlined">delete_forever</span>
+                </button>
+
+                <button class="round-button" id="submitButton">
+                    <span class="material-symbols-outlined">upgrade</span>
+                </button>
             </div>
     </div>
 </div>
@@ -188,6 +202,8 @@
 
     // Function to display user info in the input fields
     function displayInfo(data) {
+        document.getElementById('profileImage').src = '../assets/headshots/hs-' + data.id + '.webp';
+
         document.querySelector('input[name="first"]').value = data.firstName;
         document.querySelector('input[name="last"]').value = data.lastName;
         document.querySelector('input[name="email"]').value = data.email;
@@ -205,7 +221,7 @@
     }
 
 // Set User
-    document.querySelector('.submit-button').addEventListener('click', () => {
+    document.getElementById('submitButton').addEventListener('click', () => {
         const updatedData = {
             firstName: document.querySelector('input[name="first"]').value,
             lastName: document.querySelector('input[name="last"]').value,
@@ -215,7 +231,7 @@
 
         console.log(updatedData);
 
-        fetch('http://localhost:8000/data/people.json', {
+        fetch('../data/people.json', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -282,6 +298,7 @@
         root.style.setProperty('--button-text', theme['button-text']);
         root.style.setProperty('--search-bar', theme['search-bar']);
         root.style.setProperty('--search-bar-border', theme['search-bar-border']);
+        root.style.setProperty('--search-text', theme['search-text']);
 
         logo.src = '../assets/branding2/' + theme['logo'];
     }

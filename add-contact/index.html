@@ -49,7 +49,7 @@
         input{
             border: 2px solid var(--search-bar-border);
             background-color: var(--search-bar);
-            color: var(--text);
+            color: var(--search-text);
 
             border-radius: 9999px;
 
@@ -125,7 +125,13 @@
     <img class="logo" id="logo" src='../assets/branding2/co-color-rectangle.webp'>
 
 
-    <div class="add-user-container">
+    <div class="sub-container">
+        <div class="profile-image-container">
+            <img class="profile-image-modify" src="../assets/default.webp">
+            <button class="round-button profile-image-button" onclick="document.getElementById('file-upload').click();">
+                <span class="material-symbols-outlined">add_a_photo</span>
+            </button>
+        </div>
 
             <div>
                 <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
@@ -135,10 +141,9 @@
                 <input type="text" id="homePhone" name="homePhone" placeholder="Home Phone">
             </div>
 
-            <div class="custom-file-upload">
-                <input type="file" id="file-upload" name="fileupload" />
-                <button onclick="document.getElementById('file-upload').click();">Upload Picture</button>
-            </div>
+        <div class="custom-file-upload">
+            <input type="file" id="file-upload" name="fileupload" />
+        </div>
 
             <button class="button" onclick="window.location.href='/contacts';">Cancel</button>
             <button class="submit-button" onclick="addContact();">Submit</button>
@@ -146,7 +151,6 @@
 
 
     </div>
-
 </div>
 
 
@@ -206,6 +210,7 @@
         root.style.setProperty('--button-text', theme['button-text']);
         root.style.setProperty('--search-bar', theme['search-bar']);
         root.style.setProperty('--search-bar-border', theme['search-bar-border']);
+        root.style.setProperty('--search-text', theme['search-text']);
 
         logo.src = '../assets/branding2/' + theme['logo'];
     }
