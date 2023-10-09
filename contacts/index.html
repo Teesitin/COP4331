@@ -260,7 +260,7 @@
     fetch('../API/getContacts.php', {
         method: 'POST',
         body: JSON.stringify({
-            userID: '17'
+            userID: readCookie()
         }),
         headers: {
             'Content-Type': 'application/json'
